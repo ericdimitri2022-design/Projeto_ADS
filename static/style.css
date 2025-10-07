@@ -1,1 +1,93 @@
+/* static/style.css */
 
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+    --primary-color: #5e72e4;
+    --success-color: #2dce89;
+    --background-color: #f4f5f7;
+    --card-background: #ffffff;
+    --text-color: #525f7f;
+    --light-text-color: #8898aa;
+}
+
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.container {
+    text-align: center;
+    padding: 2rem 2.5rem;
+    background-color: var(--card-background);
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+    max-width: 800px;
+    width: 90%;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.ad-placeholder {
+    width: 100%;
+    min-height: 90px;
+    background-color: #e9ecef;
+    border: 2px dashed #dee2e6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0;
+    font-size: 1rem;
+    color: var(--light-text-color);
+    border-radius: 8px;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+#mensagem-espera {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+#contador {
+    font-weight: bold;
+    font-size: 1.8rem;
+    color: var(--primary-color);
+}
+
+#botao-continuar {
+    display: none; /* Começa escondido */
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: var(--success-color);
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+#botao-continuar:hover {
+    background-color: #28b87a;
+    transform: translateY(-2px);
+}
+
+.footer {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: var(--light-text-color);
+}
