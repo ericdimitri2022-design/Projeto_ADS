@@ -2,52 +2,108 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Aguarde...</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Ajustes adicionais para mobile */
+        body {
+            font-size: 16px;
+            padding: 0;
+            margin: 0;
+            background-color: #f8f9fb;
+        }
+        .container {
+            width: 95%;
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        h1 {
+            font-size: 1.8rem;
+            color: var(--primary-color, #5e72e4);
+        }
+        .botao-continuar {
+            font-size: 1.1rem;
+            padding: 1rem 2rem;
+        }
+        .ad-placeholder {
+            min-height: 80px;
+            border-radius: 8px;
+            background-color: #eceff1;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.9rem;
+        }
+        .footer {
+            font-size: 0.8rem;
+            margin-top: 1.5rem;
+            color: #888;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
 
-        <div class="ad-placeholder" 
-        style="margin-bottom: 1.5rem;">
-           <script>(function(s){s.dataset.zone='10007624',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-            
-            </div>
-
-        <h1>Quase lá!</h1>
-        <p>O seu link está a ser preparado. Por favor, aguarde.</p>
-        
-        <div id="mensagem-espera">
-            O seu link aparecerá em <span id="contador">10</span> segundos...
+        <div class="ad-placeholder">
+            <p>Publicidade</p>
         </div>
 
-        <a href="#" class="botao-continuar" id="link-final" style="display: none;">CONTINUAR</a>
+        <h1>Preparando seu link...</h1>
+        <p>Por favor, aguarde um instante.</p>
+
+        <div id="mensagem-espera">
+            Seu link aparecerá em <span id="contador">10</span> segundos.
+        </div>
+
+        <a id="botao-continuar" class="botao-continuar" style="display:none;" href="{{ destino_url | safe }}">
+            CONTINUAR
+        </a>
+
+        <div class="footer">
+            <p>© 2025 Seu Site. Todos os direitos reservados.</p>
+        </div>
     </div>
 
-    <div class="footer">
-        <p>© 2025 Seu Site. Todos os direitos reservados.</p>
-    </div>
-
+    <!-- SCRIPT DO CONTADOR -->
     <script>
-        const contadorElemento = document.getElementById('contador');
-        const botaoContinuar = document.getElementById('link-final'); 
-        const mensagemEspera = document.getElementById('mensagem-espera');
-        const urlDestino = "{{ destino_url | safe }}";
-        let tempoRestante = 10;
+        let segundos = 10;
+        const contador = document.getElementById('contador');
+        const botao = document.getElementById('botao-continuar');
+        const mensagem = document.getElementById('mensagem-espera');
 
-        const intervalo = setInterval(() => {
-            tempoRestante--;
-            contadorElemento.textContent = tempoRestante;
-            if (tempoRestante <= 0) {
-                clearInterval(intervalo);
-                mensagemEspera.style.display = 'none';
-                botaoContinuar.style.display = 'inline-block'; 
-                botaoContinuar.href = urlDestino;
+        const timer = setInterval(() => {
+            segundos--;
+            contador.textContent = segundos;
+
+            if (segundos <= 0) {
+                clearInterval(timer);
+                mensagem.style.display = 'none';
+                botao.style.display = 'inline-block';
             }
         }, 1000);
     </script>
-    
-    <script src="https://fpyf8.com/88/tag.min.js" data-zone="176571" async data-cfasync="false"></script>
-    </body>
-</html>
+
+    <!-- ======================= -->
+<!--  MONETAG MOBILE COMBO   -->
+<!-- ======================= -->
+
+<!-- Banner / native ads -->
+<script async src="https://fpyf8.com/88/tag.min.js"
+    data-zone="176571"
+    data-cfasync="false"></script>
+
+<!-- Interstitial secundário (carrega após 3s para não travar contador) -->
+<script>
+    setTimeout(() => {
+        const s = document.createElement('script');
+        s.src = "https://fenoofaussut.net/act/files/tag.min.js?z=10008048";
+        s.async = true;
+        s.setAttribute('data-cfasync', 'false');
+        document.body.appendChild(s);
+    }, 3000);
+</script>
