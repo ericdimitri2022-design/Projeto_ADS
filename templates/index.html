@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Inicial</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Página de Testes</h1>
+        <p>Use os links abaixo para testar o funcionamento da sua página de espera com anúncios.</p>
+        
+        <ul style="list-style: none; padding: 0; margin-top: 2rem;">
+            <li style="margin-bottom: 1rem;">
+                <a href="/espera?destino=https://www.google.com.br" class="botao-continuar" style="display: inline-block; background-color: #5e72e4;">
+                    Ir para o Google (com espera)
+                </a>
+            </li>
+            <li>
+                <a href="/espera?destino=https://www.youtube.com" class="botao-continuar" style="display: inline-block; background-color: #c4302b;">
+                    Ir para o YouTube (com espera)
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>© 2025 Seu Site. Todos os direitos reservados.</p>
+    </div>
+</body>
+</html>
