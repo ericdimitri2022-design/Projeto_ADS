@@ -12,8 +12,7 @@
         <p>O seu link está a ser preparado. Por favor, aguarde.</p>
         
         <div class="ad-placeholder">
-            Espaço para Propaganda
-        </div>
+            </div>
 
         <div id="mensagem-espera">
             O seu link aparecerá em <span id="contador">10</span> segundos...
@@ -28,7 +27,6 @@
 
     <script>
         const contadorElemento = document.getElementById('contador');
-        // MUDANÇA AQUI: O JavaScript agora procura por 'link-final'
         const botaoContinuar = document.getElementById('link-final'); 
         const mensagemEspera = document.getElementById('mensagem-espera');
         const urlDestino = "{{ destino_url | safe }}";
@@ -40,11 +38,13 @@
             if (tempoRestante <= 0) {
                 clearInterval(intervalo);
                 mensagemEspera.style.display = 'none';
-                // Apenas mudamos o display, o estilo principal vem do CSS
                 botaoContinuar.style.display = 'inline-block'; 
                 botaoContinuar.href = urlDestino;
             }
         }, 1000);
     </script>
-</body>
+
+    <div class="sticky-footer-ad">
+        </div>
+    </body>
 </html>
