@@ -9,7 +9,7 @@
 <body>
     <div class="container">
         <h1>Quase lá!</h1>
-        <p>Seu link está sendo preparado. Por favor, aguarde.</p>
+        <p>O seu link está a ser preparado. Por favor, aguarde.</p>
         
         <div class="ad-placeholder">
             Espaço para Propaganda
@@ -19,7 +19,7 @@
             O seu link aparecerá em <span id="contador">10</span> segundos...
         </div>
 
-        <a href="#" id="botao-continuar">PEGAR LINK</a>
+        <a href="#" class="botao-continuar" id="link-final" style="display: none;">CONTINUAR</a>
     </div>
 
     <div class="footer">
@@ -28,7 +28,8 @@
 
     <script>
         const contadorElemento = document.getElementById('contador');
-        const botaoContinuar = document.getElementById('botao-continuar');
+        // MUDANÇA AQUI: O JavaScript agora procura por 'link-final'
+        const botaoContinuar = document.getElementById('link-final'); 
         const mensagemEspera = document.getElementById('mensagem-espera');
         const urlDestino = "{{ destino_url | safe }}";
         let tempoRestante = 10;
@@ -39,7 +40,8 @@
             if (tempoRestante <= 0) {
                 clearInterval(intervalo);
                 mensagemEspera.style.display = 'none';
-                botaoContinuar.style.display = 'inline-block';
+                // Apenas mudamos o display, o estilo principal vem do CSS
+                botaoContinuar.style.display = 'inline-block'; 
                 botaoContinuar.href = urlDestino;
             }
         }, 1000);
