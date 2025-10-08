@@ -6,7 +6,6 @@
     <title>Aguarde...</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-        /* Ajustes adicionais para mobile */
         body {
             font-size: 16px;
             padding: 0;
@@ -27,6 +26,15 @@
         .botao-continuar {
             font-size: 1.1rem;
             padding: 1rem 2rem;
+            background-color: #28c76f;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        .botao-continuar:hover {
+            background-color: #22b563;
         }
         .ad-placeholder {
             min-height: 80px;
@@ -48,13 +56,12 @@
 </head>
 <body>
     <div class="container">
-
         <div class="ad-placeholder">
             <p>Publicidade</p>
         </div>
 
-        <h1>Preparando seu link...</h1>
-        <p>Por favor, aguarde um instante.</p>
+        <h1 id="titulo">Preparando seu link...</h1>
+        <p id="subtitulo">Por favor, aguarde um instante.</p>
 
         <div id="mensagem-espera">
             Seu link aparecerá em <span id="contador">10</span> segundos.
@@ -75,6 +82,8 @@
         const contador = document.getElementById('contador');
         const botao = document.getElementById('botao-continuar');
         const mensagem = document.getElementById('mensagem-espera');
+        const titulo = document.getElementById('titulo');
+        const subtitulo = document.getElementById('subtitulo');
 
         const timer = setInterval(() => {
             segundos--;
@@ -84,26 +93,15 @@
                 clearInterval(timer);
                 mensagem.style.display = 'none';
                 botao.style.display = 'inline-block';
+                titulo.textContent = "Seu link está pronto!";
+                subtitulo.textContent = "Clique no botão abaixo para continuar.";
             }
         }, 1000);
     </script>
 
-    <!-- ======================= -->
-<!--  MONETAG MOBILE COMBO   -->
-<!-- ======================= -->
+    <!-- MONETAG MOBILE COMBO -->
+    <script async src="https://fpyf8.com/88/tag.min.js"
+        data-zone="176571"
+        data-cfasync="false"></script>
 
-<!-- Banner / native ads -->
-<script async src="https://fpyf8.com/88/tag.min.js"
-    data-zone="176571"
-    data-cfasync="false"></script>
-
-<!-- Interstitial secundário (carrega após 3s para não travar contador) -->
-<script>
-    setTimeout(() => {
-        const s = document.createElement('script');
-        s.src = "https://fenoofaussut.net/act/files/tag.min.js?z=10008048";
-        s.async = true;
-        s.setAttribute('data-cfasync', 'false');
-        document.body.appendChild(s);
-    }, 3000);
-</script>
+    <script
