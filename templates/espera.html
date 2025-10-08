@@ -37,7 +37,6 @@
             background-color: #22b563;
         }
         .ad-placeholder {
-            min-height: 80px;
             border-radius: 8px;
             background-color: #eceff1;
             margin-bottom: 1.2rem;
@@ -47,6 +46,31 @@
             color: #999;
             font-size: 0.9rem;
         }
+
+        /* 🟩 Banner 4:1 responsivo */
+        .ad-4x1 {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 1;
+            max-width: 480px;
+            margin: 0 auto 1.2rem auto;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Garante que o conteúdo do script se ajuste corretamente */
+        .ad-4x1 iframe,
+        .ad-4x1 div,
+        .ad-4x1 img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
+
         .footer {
             font-size: 0.8rem;
             margin-top: 1.5rem;
@@ -60,8 +84,8 @@
         <h1 id="titulo">Preparando seu link...</h1>
         <p id="subtitulo">Por favor, aguarde um instante.</p>
 
-        <!-- 🟩 Anúncio 1: RevenueCPMGate (fixo, exibe no topo) -->
-        <div class="ad-placeholder">
+        <!-- 🟩 Anúncio 1: RevenueCPMGate (agora 4:1 responsivo) -->
+        <div class="ad-4x1">
             <script async="async" data-cfasync="false" src="//pl27806509.revenuecpmgate.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
             <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
         </div>
