@@ -57,14 +57,14 @@
 <body>
     <div class="container">
 
-        <!-- 🟩 Banner 1: Topo -->
+        <h1 id="titulo">Preparando seu link...</h1>
+        <p id="subtitulo">Por favor, aguarde um instante.</p>
+
+        <!-- 🟩 Anúncio 1: RevenueCPMGate (fixo, exibe no topo) -->
         <div class="ad-placeholder">
             <script async="async" data-cfasync="false" src="//pl27806509.revenuecpmgate.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
             <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
         </div>
-
-        <h1 id="titulo">Preparando seu link...</h1>
-        <p id="subtitulo">Por favor, aguarde um instante.</p>
 
         <div id="mensagem-espera">
             Seu link aparecerá em <span id="contador">10</span> segundos.
@@ -74,10 +74,14 @@
             CONTINUAR
         </a>
 
-        <!-- 🟩 Banner 2: Abaixo do botão CONTINUAR -->
+        <!-- 🟩 Anúncio 2: al5sm.com (ativa ao clicar, ideal logo abaixo do botão) -->
         <div class="ad-placeholder">
-            <script async="async" data-cfasync="false" src="//pl27806509.revenuecpmgate.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
-            <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
+            <script>
+                (function(s){
+                    s.dataset.zone='10010889';
+                    s.src='https://al5sm.com/tag.min.js';
+                })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
+            </script>
         </div>
 
         <div class="footer">
@@ -106,21 +110,6 @@
                 subtitulo.textContent = "Clique no botão abaixo para continuar.";
             }
         }, 1000);
-    </script>
-
-    <!-- MONETAG MOBILE COMBO -->
-    <script async src="https://fpyf8.com/88/tag.min.js"
-        data-zone="176571"
-        data-cfasync="false"></script>
-
-    <script>
-        setTimeout(() => {
-            const s = document.createElement('script');
-            s.src = "https://fenoofaussut.net/act/files/tag.min.js?z=10008048";
-            s.async = true;
-            s.setAttribute('data-cfasync', 'false');
-            document.body.appendChild(s);
-        }, 3000);
     </script>
 </body>
 </html>
