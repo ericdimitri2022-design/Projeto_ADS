@@ -53,8 +53,8 @@
             <p>Publicidade</p>
         </div>
 
-        <h1>Preparando seu link...</h1>
-        <p>Por favor, aguarde um instante.</p>
+        <h1 id="titulo-principal">Preparando seu link...</h1>
+        <p id="subtitulo">Por favor, aguarde um instante.</p>
 
         <div id="mensagem-espera">
             Seu link aparecerá em <span id="contador">10</span> segundos.
@@ -69,13 +69,18 @@
         </div>
     </div>
 
-    <!-- SCRIPT DO CONTADOR -->
     <script>
         let segundos = 10;
         const contador = document.getElementById('contador');
         const botao = document.getElementById('botao-continuar');
         const mensagem = document.getElementById('mensagem-espera');
+        
+        // Adicionamos referências para o título e subtítulo
+        const titulo = document.getElementById('titulo-principal');
+        const subtitulo = document.getElementById('subtitulo');
 
+        // Adicionei IDs aos elementos h1 e p no HTML para que o JS possa encontrá-los
+        
         const timer = setInterval(() => {
             segundos--;
             contador.textContent = segundos;
@@ -84,26 +89,28 @@
                 clearInterval(timer);
                 mensagem.style.display = 'none';
                 botao.style.display = 'inline-block';
+
+                // --- AQUI ESTÁ A MÁGICA ---
+                // Altera o texto do título
+                titulo.textContent = 'Seu link está pronto!';
+                // Remove o texto do subtítulo
+                subtitulo.style.display = 'none'; 
             }
         }, 1000);
     </script>
+    
+    <script async src="https://fpyf8.com/88/tag.min.js"
+        data-zone="176571"
+        data-cfasync="false"></script>
+    <script>
+        setTimeout(() => {
+            const s = document.createElement('script');
+            s.src = "https://fenoofaussut.net/act/files/tag.min.js?z=10008048";
+            s.async = true;
+            s.setAttribute('data-cfasync', 'false');
+            document.body.appendChild(s);
+        }, 3000);
+    </script>
 
-    <!-- ======================= -->
-<!--  MONETAG MOBILE COMBO   -->
-<!-- ======================= -->
-
-<!-- Banner / native ads -->
-<script async src="https://fpyf8.com/88/tag.min.js"
-    data-zone="176571"
-    data-cfasync="false"></script>
-
-<!-- Interstitial secundário (carrega após 3s para não travar contador) -->
-<script>
-    setTimeout(() => {
-        const s = document.createElement('script');
-        s.src = "https://fenoofaussut.net/act/files/tag.min.js?z=10008048";
-        s.async = true;
-        s.setAttribute('data-cfasync', 'false');
-        document.body.appendChild(s);
-    }, 3000);
-</script>
+</body>
+</html>
