@@ -64,6 +64,13 @@
       font-size: 13px;
       color: #aaa;
     }
+
+    /* reforço visual quando desabilitado */
+    .btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -103,6 +110,9 @@
     const elementoContador = document.getElementById("contador");
     const botao = document.getElementById("botao");
 
+    // reforça que começa desabilitado
+    botao.disabled = true;
+
     const intervalo = setInterval(() => {
       contador--;
       elementoContador.textContent = contador;
@@ -110,10 +120,10 @@
       if (contador === 0) {
         clearInterval(intervalo);
         document.querySelector("h1").textContent = "Seu link está pronto!";
-        document.querySelector("p").textContent = "Clique no botão abaixo para continuar.";
+        document.querySelectorAll("p")[1].textContent = "Clique no botão abaixo para continuar.";
         botao.disabled = false;
 
-        // Redireciona para o destino definido
+        // 👉 só aqui o botão ganha função de clique
         botao.onclick = () => {
           if (destino) {
             window.location.href = destino;
