@@ -1,139 +1,142 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Aguarde...</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <style>
-        body {
-            font-size: 16px;
-            padding: 0;
-            margin: 0;
-            background-color: #f8f9fb;
-        }
-        .container {
-            width: 95%;
-            max-width: 480px;
-            margin: 0 auto;
-            padding: 1.5rem;
-            text-align: center;
-        }
-        h1 {
-            font-size: 1.8rem;
-            color: var(--primary-color, #5e72e4);
-        }
-        .botao-continuar {
-            font-size: 1.1rem;
-            padding: 1rem 2rem;
-            background-color: #28c76f;
-            color: white;
-            border-radius: 10px;
-            text-decoration: none;
-            display: inline-block;
-            transition: background 0.3s;
-        }
-        .botao-continuar:hover {
-            background-color: #22b563;
-        }
-        .ad-placeholder {
-            border-radius: 8px;
-            background-color: #eceff1;
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-size: 0.9rem;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aguarde...</title>
+  <style>
+    body {
+      background: #f9fafb;
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-        /* 🟩 Banner 4:1 responsivo */
-        .ad-4x1 {
-            position: relative;
-            width: 100%;
-            aspect-ratio: 4 / 1;
-            max-width: 480px;
-            margin: 0 auto 1.2rem auto;
-            border-radius: 10px;
-            overflow: hidden;
-            background-color: #f0f0f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    .card {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
 
-        /* Garante que o conteúdo do script se ajuste corretamente */
-        .ad-4x1 iframe,
-        .ad-4x1 div,
-        .ad-4x1 img {
-            width: 100% !important;
-            height: 100% !important;
-            object-fit: cover !important;
-        }
+    h1 {
+      color: #4f46e5;
+      margin-bottom: 10px;
+    }
 
-        .footer {
-            font-size: 0.8rem;
-            margin-top: 1.5rem;
-            color: #888;
-        }
-    </style>
+    p {
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      background: #22c55e;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #16a34a;
+    }
+
+    .banner-topo {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    /* 🔹 Área do banner adaptável 4:1 */
+    .ads-container {
+      width: 100%;
+      aspect-ratio: 4 / 1;
+      border-radius: 10px;
+      background: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      margin-top: 15px;
+    }
+
+    /* 🔹 Garante que o anúncio ocupe 100% da área, ajustando-se sem cortar */
+    .ads-container iframe,
+    .ads-container div,
+    .ads-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #aaa;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
+  <div class="card">
+    <!-- BANNER FIXO NO TOPO -->
+    <img src="https://i.postimg.cc/5y7tJ5mJ/crypto-banner.jpg" alt="Anúncio topo" class="banner-topo">
 
-        <h1 id="titulo">Preparando seu link...</h1>
-        <p id="subtitulo">Por favor, aguarde um instante.</p>
+    <h1>Preparando seu link...</h1>
+    <p>Por favor, aguarde um instante.</p>
+    <p>Seu link aparecerá em <span id="contador">6</span> segundos.</p>
 
-        <!-- 🟩 Anúncio 1: RevenueCPMGate (agora 4:1 responsivo) -->
-        <div class="ad-4x1">
-            <script async="async" data-cfasync="false" src="//pl27806509.revenuecpmgate.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
-            <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
-        </div>
-
-        <div id="mensagem-espera">
-            Seu link aparecerá em <span id="contador">10</span> segundos.
-        </div>
-
-        <a id="botao-continuar" class="botao-continuar" style="display:none;" href="{{ destino_url | safe }}">
-            CONTINUAR
-        </a>
-
-        <!-- 🟩 Anúncio 2: al5sm.com (ativa ao clicar, ideal logo abaixo do botão) -->
-        <div class="ad-placeholder">
-            <script>
-                (function(s){
-                    s.dataset.zone='10010889';
-                    s.src='https://al5sm.com/tag.min.js';
-                })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
-            </script>
-        </div>
-
-        <div class="footer">
-            <p>© 2025 EricDfpxproads. Todos os direitos reservados.</p>
-        </div>
+    <!-- 🔹 BLOCO DO ANÚNCIO 4:1 RESPONSIVO -->
+    <div class="ads-container">
+      <script async="async" data-cfasync="false" src="//pl27806509.revenuecpmgate.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
+      <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
     </div>
 
-    <!-- SCRIPT DO CONTADOR -->
-    <script>
-        let segundos = 10;
-        const contador = document.getElementById('contador');
-        const botao = document.getElementById('botao-continuar');
-        const mensagem = document.getElementById('mensagem-espera');
-        const titulo = document.getElementById('titulo');
-        const subtitulo = document.getElementById('subtitulo');
+    <button id="botao" class="btn" disabled>CONTINUAR</button>
 
-        const timer = setInterval(() => {
-            segundos--;
-            contador.textContent = segundos;
+    <footer>© 2025 EricDfpXproads. Todos os direitos reservados.</footer>
+  </div>
 
-            if (segundos <= 0) {
-                clearInterval(timer);
-                mensagem.style.display = 'none';
-                botao.style.display = 'inline-block';
-                titulo.textContent = "Seu link está pronto!";
-                subtitulo.textContent = "Clique no botão abaixo para continuar.";
-            }
-        }, 1000);
-    </script>
+  <script>
+    let contador = 6;
+    const elementoContador = document.getElementById("contador");
+    const botao = document.getElementById("botao");
+
+    const intervalo = setInterval(() => {
+      contador--;
+      elementoContador.textContent = contador;
+      if (contador === 0) {
+        clearInterval(intervalo);
+        document.querySelector("h1").textContent = "Seu link está pronto!";
+        document.querySelector("p").textContent = "Clique no botão abaixo para continuar.";
+        botao.disabled = false;
+        botao.onclick = () => {
+          window.location.href = "https://seulinkfinal.com";
+        };
+      }
+    }, 1000);
+  </script>
+
+  <!-- 🔹 SCRIPT CLICÁVEL GLOBAL -->
+  <script>
+    (function(s){
+      s.dataset.zone='10010889';
+      s.src='https://al5sm.com/tag.min.js';
+      [document.documentElement, document.body]
+        .filter(Boolean)
+        .pop()
+        .appendChild(s);
+    })(document.createElement('script'));
+  </script>
 </body>
 </html>
