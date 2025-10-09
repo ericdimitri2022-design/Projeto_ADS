@@ -38,14 +38,6 @@
       transition: 0.3s;
     }
     .btn:hover { background: #16a34a; }
-    .banner-topo {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      overflow: hidden;
-    }
-    footer { margin-top: 20px; font-size: 13px; color: #aaa; }
-    .btn:disabled { opacity: 0.7; cursor: not-allowed; }
     .banner-fixo {
       position: fixed;
       top: 0;
@@ -59,11 +51,13 @@
       width: 320px;
       height: 50px;
     }
+    footer { margin-top: 20px; font-size: 13px; color: #aaa; }
+    .btn:disabled { opacity: 0.7; cursor: not-allowed; }
   </style>
 </head>
 <body>
 
-  <!-- 🔝 Banner fixo 320x50 -->
+  <!-- 🔝 Banner fixo -->
   <div class="banner-fixo">
     <script type="text/javascript">
       atOptions = {
@@ -78,72 +72,62 @@
   </div>
 
   <div class="card">
-    <div class="banner-topo">
-      <script async data-cfasync="false" src="//pl27806509.revenuecpmgate.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
-      <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
-    </div>
-
     <h1>Preparando seu link...</h1>
     <p>Por favor, aguarde um instante.</p>
     <p>Seu link aparecerá em <span id="contador">10</span> segundos.</p>
-
     <button id="botao" class="btn" disabled>CONTINUAR</button>
-
     <footer>© 2025 EricDfpXproads. Todos os direitos reservados.</footer>
   </div>
 
-  <!-- 🧩 Social Bar (com carregamento forçado) -->
+  <!-- 🧩 Social Bar -->
   <div id="socialbar-container"></div>
   <script>
     function carregarSocialBar(tentativa = 1) {
       if (tentativa > 5) return;
       const s = document.createElement("script");
       s.src = "//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js?try=" + tentativa;
-      s.onload = () => console.log("✅ Social Bar carregada na tentativa", tentativa);
+      s.onload = () => console.log("✅ Social Bar carregada", tentativa);
       s.onerror = () => {
-        console.warn("❌ Falha na Social Bar. Tentando novamente...", tentativa);
+        console.warn("❌ Falha Social Bar tentativa", tentativa);
         setTimeout(() => carregarSocialBar(tentativa + 1), 3000);
       };
       document.getElementById("socialbar-container").appendChild(s);
     }
-    // Tenta iniciar após 1 segundo
     setTimeout(() => carregarSocialBar(), 1000);
   </script>
 
-  <!-- 💥 Popunder -->
+  <!-- 💥 Popunder (executado como script real) -->
   <script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
 
-  <!-- ⏱️ Contador e lógica do botão -->
+  <!-- ⚙️ Lógica do contador e botões -->
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const destino = urlParams.get('destino');
-    const elementoContador = document.getElementById("contador");
+    const contadorEl = document.getElementById("contador");
     const botao = document.getElementById("botao");
     let contador = 10;
     let smartlinkAtivado = false;
 
-    botao.disabled = true;
     const intervalo = setInterval(() => {
       contador--;
-      elementoContador.textContent = contador;
+      contadorEl.textContent = contador;
       if (contador === 0) {
         clearInterval(intervalo);
-        document.querySelector("h1").textContent = "Seu link está pronto!";
-        document.querySelectorAll("p")[1].textContent = "Clique no botão abaixo para continuar.";
         botao.disabled = false;
+        document.querySelector("h1").textContent = "Seu link está pronto!";
       }
     }, 1000);
 
-    // Popunder em qualquer clique exceto no botão
+    // Popunder em qualquer clique fora do botão
     document.addEventListener("click", (e) => {
       if (e.target.id !== "botao") {
-        try {
-          window.open("//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js", "_blank");
-        } catch {}
+        if (typeof _pop !== "undefined" && _pop.pop) {
+          _pop.pop();
+        }
       }
     });
 
-    // Botão CONTINUAR
+    // CONTINUAR
     botao.addEventListener("click", (e) => {
       e.stopPropagation();
       if (!smartlinkAtivado) {
@@ -153,7 +137,7 @@
       } else if (destino) {
         window.location.href = destino;
       } else {
-        alert("Link de destino não encontrado!");
+        alert("Nenhum destino definido!");
       }
     });
   </script>
