@@ -15,9 +15,8 @@
       margin: 0;
       padding-top: 70px;
     }
-
     .card {
-      background: #ffffff;
+      background: #fff;
       padding: 30px;
       border-radius: 16px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.08);
@@ -25,20 +24,11 @@
       max-width: 400px;
       width: 100%;
     }
-
-    h1 {
-      color: #4f46e5;
-      margin-bottom: 10px;
-    }
-
-    p {
-      color: #555;
-      margin-bottom: 20px;
-    }
-
+    h1 { color: #4f46e5; margin-bottom: 10px; }
+    p { color: #555; margin-bottom: 20px; }
     .btn {
       background: #22c55e;
-      color: white;
+      color: #fff;
       border: none;
       padding: 12px 30px;
       font-size: 16px;
@@ -47,41 +37,15 @@
       cursor: pointer;
       transition: 0.3s;
     }
-
-    .btn:hover {
-      background: #16a34a;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(1); box-shadow: 0 0 0 rgba(34,197,94, 0.4); }
-      70% { transform: scale(1.07); box-shadow: 0 0 20px rgba(34,197,94, 0.6); }
-      100% { transform: scale(1); box-shadow: 0 0 0 rgba(34,197,94, 0.4); }
-    }
-
-    .btn.pulse {
-      animation: pulse 1.5s infinite;
-    }
-
+    .btn:hover { background: #16a34a; }
     .banner-topo {
       width: 100%;
-      height: auto;
       border-radius: 10px;
       margin-bottom: 20px;
       overflow: hidden;
     }
-
-    footer {
-      margin-top: 20px;
-      font-size: 13px;
-      color: #aaa;
-    }
-
-    .btn:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-
+    footer { margin-top: 20px; font-size: 13px; color: #aaa; }
+    .btn:disabled { opacity: 0.7; cursor: not-allowed; }
     .banner-fixo {
       position: fixed;
       top: 0;
@@ -99,24 +63,23 @@
 </head>
 <body>
 
-  <!-- 🔝 BANNER FIXO -->
+  <!-- 🔝 Banner fixo 320x50 -->
   <div class="banner-fixo">
     <script type="text/javascript">
       atOptions = {
-        'key' : '5aed398ecdebf38696b5a0131d685b5b',
-        'format' : 'iframe',
-        'height' : 50,
-        'width' : 320,
-        'params' : {}
+        'key': '5aed398ecdebf38696b5a0131d685b5b',
+        'format': 'iframe',
+        'height': 50,
+        'width': 320,
+        'params': {}
       };
     </script>
     <script type="text/javascript" src="//www.highperformanceformat.com/5aed398ecdebf38696b5a0131d685b5b/invoke.js"></script>
   </div>
 
   <div class="card">
-    <!-- 🖼️ BANNER 1:1 -->
     <div class="banner-topo">
-      <script async="async" data-cfasync="false" src="//pl27806509.revenuecpmgate.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
+      <script async data-cfasync="false" src="//pl27806509.revenuecpmgate.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
       <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
     </div>
 
@@ -129,62 +92,70 @@
     <footer>© 2025 EricDfpXproads. Todos os direitos reservados.</footer>
   </div>
 
-  <!-- ⏱️ CONTADOR + SMARTLINK + DESTINO -->
+  <!-- 🧩 Social Bar (com carregamento forçado) -->
+  <div id="socialbar-container"></div>
+  <script>
+    function carregarSocialBar(tentativa = 1) {
+      if (tentativa > 5) return;
+      const s = document.createElement("script");
+      s.src = "//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js?try=" + tentativa;
+      s.onload = () => console.log("✅ Social Bar carregada na tentativa", tentativa);
+      s.onerror = () => {
+        console.warn("❌ Falha na Social Bar. Tentando novamente...", tentativa);
+        setTimeout(() => carregarSocialBar(tentativa + 1), 3000);
+      };
+      document.getElementById("socialbar-container").appendChild(s);
+    }
+    // Tenta iniciar após 1 segundo
+    setTimeout(() => carregarSocialBar(), 1000);
+  </script>
+
+  <!-- 💥 Popunder -->
+  <script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
+
+  <!-- ⏱️ Contador e lógica do botão -->
   <script>
     const urlParams = new URLSearchParams(window.location.search);
     const destino = urlParams.get('destino');
-
-    let contador = 10;
     const elementoContador = document.getElementById("contador");
     const botao = document.getElementById("botao");
-
+    let contador = 10;
     let smartlinkAtivado = false;
-    let adsAtivos = false; // controle para ativar popunder/social bar uma vez
 
     botao.disabled = true;
-
-    // 🧩 Ativa SocialBar + Popunder no primeiro clique
-    document.body.addEventListener("click", (e) => {
-      if (!adsAtivos && e.target.id !== "botao") {
-        adsAtivos = true;
-
-        // Social Bar
-        const socialScript = document.createElement("script");
-        socialScript.src = "//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js";
-        document.body.appendChild(socialScript);
-
-        // Popunder
-        const popScript = document.createElement("script");
-        popScript.src = "//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js";
-        document.body.appendChild(popScript);
-      }
-    });
-
     const intervalo = setInterval(() => {
       contador--;
       elementoContador.textContent = contador;
-
       if (contador === 0) {
         clearInterval(intervalo);
         document.querySelector("h1").textContent = "Seu link está pronto!";
         document.querySelectorAll("p")[1].textContent = "Clique no botão abaixo para continuar.";
         botao.disabled = false;
-        botao.classList.add("pulse");
-
-        botao.onclick = () => {
-          if (!smartlinkAtivado) {
-            smartlinkAtivado = true;
-            window.open("https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81", "_blank");
-          } else {
-            if (destino) {
-              window.location.href = destino;
-            } else {
-              alert("Link de destino não encontrado!");
-            }
-          }
-        };
       }
     }, 1000);
+
+    // Popunder em qualquer clique exceto no botão
+    document.addEventListener("click", (e) => {
+      if (e.target.id !== "botao") {
+        try {
+          window.open("//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js", "_blank");
+        } catch {}
+      }
+    });
+
+    // Botão CONTINUAR
+    botao.addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (!smartlinkAtivado) {
+        smartlinkAtivado = true;
+        window.open("https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81", "_blank");
+        botao.textContent = "IR PARA O DESTINO";
+      } else if (destino) {
+        window.location.href = destino;
+      } else {
+        alert("Link de destino não encontrado!");
+      }
+    });
   </script>
 
 </body>
