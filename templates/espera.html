@@ -13,7 +13,7 @@
       justify-content: center;
       height: 100vh;
       margin: 0;
-      padding-top: 70px; /* Espaço para o banner fixo */
+      padding-top: 70px;
     }
 
     .card {
@@ -72,7 +72,6 @@
       pointer-events: none;
     }
 
-    /* Banner fixo no topo da tela */
     .banner-fixo {
       position: fixed;
       top: 0;
@@ -90,7 +89,7 @@
 </head>
 <body>
 
-  <!-- 🔝 BANNER FIXO NO TOPO (320x50) -->
+  <!-- 🔝 Banner fixo -->
   <div class="banner-fixo">
     <script type="text/javascript">
       atOptions = {
@@ -105,7 +104,6 @@
   </div>
 
   <div class="card">
-    <!-- 🖼️ BANNER ADS TERRA 1:1 -->
     <div class="banner-topo">
       <script async="async" data-cfasync="false" src="//pl27806509.revenuecpmgate.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
       <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
@@ -123,9 +121,17 @@
   <!-- 🧩 SOCIAL BAR -->
   <script type='text/javascript' src='//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js'></script>
 
-  <!-- 🚫 (REMOVIDO MONETAG) -->
+  <!-- 💥 POPUNDER -->
+  <script type="text/javascript">
+    document.addEventListener("click", function popunderOnce(e) {
+      if (!e.target.closest("#botao")) { // evita conflito com o botão
+        window.open("https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81", "_blank");
+        document.removeEventListener("click", popunderOnce); // só dispara 1x
+      }
+    });
+  </script>
 
-  <!-- ⏱️ CONTADOR E REDIRECIONAMENTO -->
+  <!-- ⏱️ CONTADOR -->
   <script>
     let contador = 10;
     const elementoContador = document.getElementById("contador");
@@ -142,11 +148,9 @@
         document.querySelectorAll("p")[1].textContent = "Clique no botão abaixo para continuar.";
         botao.disabled = false;
 
-        // 🔗 Redireciona pro Smartlink quando clicar
+        // Redireciona pro Smartlink
         botao.onclick = () => {
-          setTimeout(() => {
-            window.location.href = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
-          }, 300);
+          window.location.href = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
         };
       }
     }, 1000);
