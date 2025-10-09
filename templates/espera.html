@@ -1,126 +1,118 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Aguarde...</title>
-<style>
-  body {
-    background: #f9fafb;
-    font-family: "Poppins", sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    height: 100vh;
-    margin: 0;
-    padding-top: 80px;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aguarde...</title>
+  <style>
+    body {
+      background: #f9fafb;
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 100vh;
+      margin: 0;
+      padding-top: 80px;
+    }
 
-  .card {
-    background: #fff;
-    padding: 30px 25px;
-    border-radius: 16px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-    text-align: center;
-    max-width: 400px;
-    width: 100%;
-  }
+    .card {
+      background: #ffffff;
+      padding: 30px 25px;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
 
-  h1 {
-    color: #4f46e5;
-    margin-bottom: 10px;
-    font-size: 22px;
-  }
+    h1 {
+      color: #4f46e5;
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
 
-  p {
-    color: #333;
-    margin-bottom: 15px;
-    font-size: 15px;
-  }
+    p {
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
 
-  .btn {
-    background: #22c55e;
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    display: none; /* escondido até o contador terminar */
-  }
+    .btn {
+      background: #22c55e;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: none;
+    }
 
-  .btn:hover {
-    background: #16a34a;
-  }
+    .btn:hover {
+      background: #16a34a;
+    }
 
-  .banner-fixo {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 9999;
-    background: #fff;
-    border-radius: 10px;
-    padding: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    width: 320px;
-    height: 50px;
-  }
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
 
-  .banner-native {
-    margin-top: 20px;
-    width: 100%;
-    text-align: center;
-  }
+    .banner-fixo {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      background: #fff;
+      border-radius: 10px;
+      padding: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      width: 320px;
+      height: 50px;
+    }
 
-  .info {
-    color: #2563eb;
-    font-size: 14px;
-    margin-top: 20px;
-    font-weight: 500;
-    text-align: center;
-  }
+    .banner-native {
+      margin-top: 20px;
+      width: 100%;
+      text-align: center;
+    }
 
-  footer {
-    margin-top: 15px;
-    font-size: 13px;
-    color: #aaa;
-    text-align: center;
-  }
+    .info {
+      color: #2563eb;
+      font-size: 14px;
+      margin-top: 20px;
+      font-weight: 500;
+      text-align: center;
+    }
 
-  /* 🕒 Contador Circular */
-  .contador-circular {
-    position: relative;
-    width: 120px;
-    height: 120px;
-    margin: 20px auto;
-  }
+    footer {
+      margin-top: 15px;
+      font-size: 13px;
+      color: #aaa;
+      text-align: center;
+    }
 
-  .circulo {
-    fill: none;
-    stroke: #4f46e5;
-    stroke-width: 8;
-    stroke-dasharray: 314;
-    stroke-dashoffset: 0;
-    transition: stroke-dashoffset 1s linear;
-    transform: rotate(-90deg);
-    transform-origin: 50% 50%;
-  }
-
-  .numero {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 28px;
-    font-weight: 600;
-    color: #4f46e5;
-  }
-</style>
+    /* 🔵 Contador Circular */
+    .circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: conic-gradient(#4f46e5 calc(var(--progress)*1%), #e5e7eb 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      font-weight: 600;
+      color: #4f46e5;
+      margin: 20px auto;
+      transition: background 0.5s linear;
+    }
+  </style>
 </head>
 <body>
 
@@ -141,20 +133,14 @@
   <!-- 🎯 Conteúdo Principal -->
   <div class="card">
     <h1>Preparando seu link...</h1>
-    <p>Aguarde enquanto tudo é configurado.</p>
+    <p>Por favor, aguarde um instante.</p>
 
-    <!-- ⏱️ Contador Circular -->
-    <div class="contador-circular" id="contadorBox">
-      <svg width="120" height="120">
-        <circle cx="60" cy="60" r="50" stroke="#e5e7eb" stroke-width="8" fill="none"/>
-        <circle class="circulo" cx="60" cy="60" r="50"/>
-      </svg>
-      <div class="numero" id="numero">10</div>
-    </div>
+    <!-- Contador Circular -->
+    <div id="circle" class="circle" style="--progress:0">10</div>
 
-    <button id="botao" class="btn">CONTINUAR PARA O DOWNLOAD</button>
+    <button id="botao" class="btn" disabled>CONTINUAR PARA O DOWNLOAD</button>
 
-    <!-- 🖼️ Banner Native 1:1 -->
+    <!-- 🖼️ Banner Native -->
     <div class="banner-native">
       <script async="async" data-cfasync="false" src="//pl27806509.effectivegatecpm.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
       <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
@@ -172,6 +158,15 @@
   <script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
 
   <script>
+    // 🔧 Força Social Bar carregar até no Chrome
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        const s = document.createElement("script");
+        s.src = "//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js";
+        document.body.appendChild(s);
+      }, 500);
+    });
+
     // 💥 Popunder ao clicar fora do botão
     document.addEventListener("click", (e) => {
       if (!e.target.closest("#botao")) {
@@ -181,28 +176,29 @@
       }
     });
 
-    // 🔁 Contador Circular e botão
+    // ⏱️ Contador Circular e ativação do botão
     const urlParams = new URLSearchParams(window.location.search);
     const destino = urlParams.get('destino');
     const smartlink = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
 
-    let tempo = 10;
-    const numero = document.getElementById("numero");
-    const circulo = document.querySelector(".circulo");
+    let contador = 10;
+    const circle = document.getElementById("circle");
     const botao = document.getElementById("botao");
-    const contadorBox = document.getElementById("contadorBox");
     let smartlinkAtivo = false;
 
-    const totalCirc = 314; // comprimento do círculo
     const intervalo = setInterval(() => {
-      tempo--;
-      numero.textContent = tempo;
-      circulo.style.strokeDashoffset = ((10 - tempo) / 10) * totalCirc;
+      contador--;
+      const progresso = (100 - (contador * 10));
+      circle.style.setProperty("--progress", progresso);
+      circle.textContent = contador;
 
-      if (tempo <= 0) {
+      if (contador <= 0) {
         clearInterval(intervalo);
-        contadorBox.style.display = "none";
+        circle.style.display = "none";
         botao.style.display = "inline-block";
+        botao.disabled = false;
+        document.querySelector("h1").textContent = "Seu link está pronto!";
+        document.querySelectorAll("p")[0].textContent = "Clique abaixo para continuar.";
       }
     }, 1000);
 
