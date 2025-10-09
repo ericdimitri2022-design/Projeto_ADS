@@ -1,146 +1,100 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aguarde...</title>
-  <style>
-    body {
-      background: #f9fafb;
-      font-family: "Poppins", sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      padding-top: 70px;
-    }
-    .card {
-      background: #fff;
-      padding: 30px;
-      border-radius: 16px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      text-align: center;
-      max-width: 400px;
-      width: 100%;
-    }
-    h1 { color: #4f46e5; margin-bottom: 10px; }
-    p { color: #555; margin-bottom: 20px; }
-    .btn {
-      background: #22c55e;
-      color: #fff;
-      border: none;
-      padding: 12px 30px;
-      font-size: 16px;
-      font-weight: 600;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .btn:hover { background: #16a34a; }
-    .banner-fixo {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 9999;
-      background: #fff;
-      border-radius: 10px;
-      padding: 4px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      width: 320px;
-      height: 50px;
-    }
-    footer { margin-top: 20px; font-size: 13px; color: #aaa; }
-    .btn:disabled { opacity: 0.7; cursor: not-allowed; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador de Link</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #fff;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    margin-top: 100px;
+  }
+  button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  button:disabled {
+    background: #ccc;
+  }
+  #banner {
+    width: 300px;
+    height: 300px;
+    margin: 20px auto;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+  }
+</style>
 </head>
 <body>
 
-  <!-- 🔝 Banner fixo -->
-  <div class="banner-fixo">
-    <script type="text/javascript">
-      atOptions = {
-        'key': '5aed398ecdebf38696b5a0131d685b5b',
-        'format': 'iframe',
-        'height': 50,
-        'width': 320,
-        'params': {}
-      };
-    </script>
-    <script type="text/javascript" src="//www.highperformanceformat.com/5aed398ecdebf38696b5a0131d685b5b/invoke.js"></script>
-  </div>
+<!-- Banner fixo 1:1 -->
+<div id="banner">
+  <script async src="//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js"></script>
+</div>
 
-  <div class="card">
-    <h1>Preparando seu link...</h1>
-    <p>Por favor, aguarde um instante.</p>
-    <p>Seu link aparecerá em <span id="contador">10</span> segundos.</p>
-    <button id="botao" class="btn" disabled>CONTINUAR</button>
-    <footer>© 2025 EricDfpXproads. Todos os direitos reservados.</footer>
-  </div>
+<div class="container">
+  <h1>Seu link está pronto!</h1>
+  <p>Por favor, aguarde um instante.</p>
+  <p>Seu link aparecerá em <span id="timer">3</span> segundos.</p>
+  <button id="continueBtn" disabled>CONTINUAR</button>
+</div>
 
-  <!-- 🧩 Social Bar -->
-  <div id="socialbar-container"></div>
-  <script>
-    function carregarSocialBar(tentativa = 1) {
-      if (tentativa > 5) return;
-      const s = document.createElement("script");
-      s.src = "//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js?try=" + tentativa;
-      s.onload = () => console.log("✅ Social Bar carregada", tentativa);
-      s.onerror = () => {
-        console.warn("❌ Falha Social Bar tentativa", tentativa);
-        setTimeout(() => carregarSocialBar(tentativa + 1), 3000);
-      };
-      document.getElementById("socialbar-container").appendChild(s);
+<script>
+  // Timer do botão continuar
+  let timeLeft = 3;
+  const timerEl = document.getElementById('timer');
+  const btn = document.getElementById('continueBtn');
+  const destino = new URLSearchParams(window.location.search).get('destino');
+  const smartLink = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
+
+  const countdown = setInterval(() => {
+    timeLeft--;
+    timerEl.textContent = timeLeft;
+    if (timeLeft <= 0) {
+      clearInterval(countdown);
+      btn.disabled = false;
     }
-    setTimeout(() => carregarSocialBar(), 1000);
-  </script>
+  }, 1000);
 
-  <!-- 💥 Popunder (executado como script real) -->
-  <script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
+  let smartTriggered = false;
+  btn.addEventListener('click', () => {
+    if (!smartTriggered) {
+      window.open(smartLink, "_blank");
+      smartTriggered = true;
+      btn.textContent = "CONTINUAR PARA O DOWNLOAD";
+    } else {
+      if (destino) window.location.href = destino;
+    }
+  });
 
-  <!-- ⚙️ Lógica do contador e botões -->
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const destino = urlParams.get('destino');
-    const contadorEl = document.getElementById("contador");
-    const botao = document.getElementById("botao");
-    let contador = 10;
-    let smartlinkAtivado = false;
+  // Popunder em qualquer clique fora do botão
+  document.body.addEventListener('click', (e) => {
+    if (e.target.id !== "continueBtn") {
+      window.open("https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81", "_blank");
+    }
+  });
+</script>
 
-    const intervalo = setInterval(() => {
-      contador--;
-      contadorEl.textContent = contador;
-      if (contador === 0) {
-        clearInterval(intervalo);
-        botao.disabled = false;
-        document.querySelector("h1").textContent = "Seu link está pronto!";
-      }
-    }, 1000);
-
-    // Popunder em qualquer clique fora do botão
-    document.addEventListener("click", (e) => {
-      if (e.target.id !== "botao") {
-        if (typeof _pop !== "undefined" && _pop.pop) {
-          _pop.pop();
-        }
-      }
-    });
-
-    // CONTINUAR
-    botao.addEventListener("click", (e) => {
-      e.stopPropagation();
-      if (!smartlinkAtivado) {
-        smartlinkAtivado = true;
-        window.open("https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81", "_blank");
-        botao.textContent = "IR PARA O DESTINO";
-      } else if (destino) {
-        window.location.href = destino;
-      } else {
-        alert("Nenhum destino definido!");
-      }
-    });
-  </script>
+<!-- Forçar o Social Bar a carregar cedo -->
+<script>
+  window.addEventListener('DOMContentLoaded', function(){
+    const s = document.createElement('script');
+    s.src = '//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js';
+    s.async = true;
+    document.body.appendChild(s);
+  });
+</script>
 
 </body>
 </html>
