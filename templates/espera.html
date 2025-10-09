@@ -1,101 +1,126 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aguarde...</title>
-  <style>
-    body {
-      background: #f9fafb;
-      font-family: "Poppins", sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      height: 100vh;
-      margin: 0;
-      padding-top: 80px;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aguarde...</title>
+<style>
+  body {
+    background: #f9fafb;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+    margin: 0;
+    padding-top: 80px;
+  }
 
-    .card {
-      background: #ffffff;
-      padding: 30px 25px;
-      border-radius: 16px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-      text-align: center;
-      max-width: 400px;
-      width: 100%;
-    }
+  .card {
+    background: #fff;
+    padding: 30px 25px;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+  }
 
-    h1 {
-      color: #4f46e5;
-      margin-bottom: 10px;
-      font-size: 22px;
-    }
+  h1 {
+    color: #4f46e5;
+    margin-bottom: 10px;
+    font-size: 22px;
+  }
 
-    p {
-      color: #333;
-      margin-bottom: 15px;
-      font-size: 15px;
-    }
+  p {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 15px;
+  }
 
-    .btn {
-      background: #22c55e;
-      color: white;
-      border: none;
-      padding: 12px 30px;
-      font-size: 16px;
-      font-weight: 600;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+  .btn {
+    background: #22c55e;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: none; /* escondido até o contador terminar */
+  }
 
-    .btn:hover {
-      background: #16a34a;
-    }
+  .btn:hover {
+    background: #16a34a;
+  }
 
-    .btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
+  .banner-fixo {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background: #fff;
+    border-radius: 10px;
+    padding: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    width: 320px;
+    height: 50px;
+  }
 
-    .banner-fixo {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 9999;
-      background: #fff;
-      border-radius: 10px;
-      padding: 4px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      width: 320px;
-      height: 50px;
-    }
+  .banner-native {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+  }
 
-    .banner-native {
-      margin-top: 20px;
-      width: 100%;
-      text-align: center;
-    }
+  .info {
+    color: #2563eb;
+    font-size: 14px;
+    margin-top: 20px;
+    font-weight: 500;
+    text-align: center;
+  }
 
-    .info {
-      color: #2563eb;
-      font-size: 14px;
-      margin-top: 20px;
-      font-weight: 500;
-      text-align: center;
-    }
+  footer {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #aaa;
+    text-align: center;
+  }
 
-    footer {
-      margin-top: 15px;
-      font-size: 13px;
-      color: #aaa;
-      text-align: center;
-    }
-  </style>
+  /* 🕒 Contador Circular */
+  .contador-circular {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 20px auto;
+  }
+
+  .circulo {
+    fill: none;
+    stroke: #4f46e5;
+    stroke-width: 8;
+    stroke-dasharray: 314;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1s linear;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
+
+  .numero {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+    font-weight: 600;
+    color: #4f46e5;
+  }
+</style>
 </head>
 <body>
 
@@ -116,10 +141,18 @@
   <!-- 🎯 Conteúdo Principal -->
   <div class="card">
     <h1>Preparando seu link...</h1>
-    <p>Por favor, aguarde um instante.</p>
-    <p>Seu link aparecerá em <span id="contador">10</span> segundos.</p>
+    <p>Aguarde enquanto tudo é configurado.</p>
 
-    <button id="botao" class="btn" disabled>CONTINUAR PARA O DOWNLOAD</button>
+    <!-- ⏱️ Contador Circular -->
+    <div class="contador-circular" id="contadorBox">
+      <svg width="120" height="120">
+        <circle cx="60" cy="60" r="50" stroke="#e5e7eb" stroke-width="8" fill="none"/>
+        <circle class="circulo" cx="60" cy="60" r="50"/>
+      </svg>
+      <div class="numero" id="numero">10</div>
+    </div>
+
+    <button id="botao" class="btn">CONTINUAR PARA O DOWNLOAD</button>
 
     <!-- 🖼️ Banner Native 1:1 -->
     <div class="banner-native">
@@ -148,25 +181,28 @@
       }
     });
 
-    // ⏱️ Contador e redirecionamento
+    // 🔁 Contador Circular e botão
     const urlParams = new URLSearchParams(window.location.search);
     const destino = urlParams.get('destino');
     const smartlink = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
 
-    let contador = 10;
-    const elementoContador = document.getElementById("contador");
+    let tempo = 10;
+    const numero = document.getElementById("numero");
+    const circulo = document.querySelector(".circulo");
     const botao = document.getElementById("botao");
+    const contadorBox = document.getElementById("contadorBox");
     let smartlinkAtivo = false;
 
+    const totalCirc = 314; // comprimento do círculo
     const intervalo = setInterval(() => {
-      contador--;
-      elementoContador.textContent = contador;
+      tempo--;
+      numero.textContent = tempo;
+      circulo.style.strokeDashoffset = ((10 - tempo) / 10) * totalCirc;
 
-      if (contador === 0) {
+      if (tempo <= 0) {
         clearInterval(intervalo);
-        document.querySelector("h1").textContent = "Seu link está pronto!";
-        document.querySelectorAll("p")[1].textContent = "Clique abaixo para continuar.";
-        botao.disabled = false;
+        contadorBox.style.display = "none";
+        botao.style.display = "inline-block";
       }
     }, 1000);
 
