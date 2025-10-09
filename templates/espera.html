@@ -16,29 +16,41 @@
   }
 
   h1 {
-    color: #3b3bff;
+    color: #3b3bf7;
+    font-size: 24px;
     margin-top: 40px;
   }
 
-  p {
-    font-size: 18px;
+  #countdown {
+    margin-top: 40px;
   }
 
-  #countdown {
-    margin: 30px auto;
+  .circle-container {
     position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 20px auto;
+  }
+
+  svg {
+    transform: rotate(-90deg);
     width: 120px;
     height: 120px;
   }
 
+  circle {
+    fill: none;
+    stroke-width: 10;
+  }
+
+  #bg {
+    stroke: #e6e6e6;
+  }
+
   #circle {
+    stroke: #3b3bf7;
     stroke-dasharray: 314;
     stroke-dashoffset: 0;
-    stroke-width: 10;
-    stroke: #3b3bff;
-    fill: none;
-    transform: rotate(-90deg);
-    transform-origin: 50% 50%;
     transition: stroke-dashoffset 1s linear;
   }
 
@@ -47,105 +59,83 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 26px;
-    font-weight: bold;
+    font-size: 28px;
+    color: #333;
   }
 
   #continueButton {
     display: none;
+    margin-top: 25px;
     background-color: #28a745;
     color: white;
-    border: none;
     padding: 15px 25px;
-    font-size: 18px;
-    border-radius: 10px;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    margin-top: 20px;
-    opacity: 0;
-    transition: opacity 1s ease;
+    font-size: 16px;
   }
 
   #continueButton.mostrar {
     display: inline-block;
-    opacity: 1;
-  }
-
-  #continueButton:hover {
-    background-color: #218838;
   }
 
   footer {
-    margin-top: 30px;
     font-size: 14px;
-    color: #666;
-  }
-
-  iframe, script {
-    display: block;
-    margin: 10px auto;
+    color: #777;
+    margin-top: 50px;
+    margin-bottom: 15px;
   }
 </style>
 </head>
+
 <body>
+  <h1>⚠️ Clique em qualquer lugar da página para liberar seu link</h1>
 
-<!-- Banner superior -->
-<iframe data-aa="2293052" src="//ad.a-ads.com/2293052?size=728x90" style="width:728px; height:90px; border:0; padding:0; overflow:hidden; background-color:transparent;"></iframe>
+  <div id="countdown">
+    <div class="circle-container">
+      <svg>
+        <circle id="bg" cx="60" cy="60" r="50"></circle>
+        <circle id="circle" cx="60" cy="60" r="50"></circle>
+      </svg>
+      <div id="count">10</div>
+    </div>
+  </div>
 
-<h1>Seu link está pronto!</h1>
-<p>Por favor, aguarde um instante.</p>
-<p>O botão será liberado em breve.</p>
+  <button id="continueButton" onclick="continuar()">CONTINUAR PARA O DOWNLOAD</button>
 
-<div id="countdown">
-  <svg width="120" height="120">
-    <circle id="circle" r="50" cx="60" cy="60"></circle>
-  </svg>
-  <div id="count">10</div>
-</div>
+  <footer>© 2025 Todos os direitos reservados.</footer>
 
-<button id="continueButton" onclick="continuar()">CONTINUAR PARA O DOWNLOAD</button>
+  <script>
+    let tempo = 10;
+    const count = document.getElementById("count");
+    const circle = document.getElementById("circle");
+    const button = document.getElementById("continueButton");
+    const totalLength = 314;
 
-<!-- Banner inferior -->
-<iframe data-aa="2293053" src="//ad.a-ads.com/2293053?size=300x250" style="width:300px; height:250px; border:0; padding:0; overflow:hidden; background-color:transparent;"></iframe>
+    const timer = setInterval(() => {
+      tempo--;
+      count.textContent = tempo;
 
-<p>⚠️ Clique em qualquer lugar da página para liberar seu link</p>
+      const offset = (tempo / 10) * totalLength;
+      circle.style.strokeDashoffset = offset;
 
-<!-- Script de anúncio -->
-<script type="text/javascript" src="//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js"></script>
+      if (tempo <= 0) {
+        clearInterval(timer);
+        document.getElementById("countdown").style.display = "none";
+        button.classList.add("mostrar");
+      }
+    }, 1000);
 
-<!-- Script principal (corrigido) -->
-<script>
-  let tempo = 10;
-  const count = document.getElementById("count");
-  const circle = document.getElementById("circle");
-  const button = document.getElementById("continueButton");
-  const totalLength = 314;
-
-  const timer = setInterval(() => {
-    tempo--;
-    count.textContent = tempo;
-    const offset = totalLength - (tempo / 10) * totalLength;
-    circle.style.strokeDashoffset = offset;
-
-    if (tempo <= 0) {
-      clearInterval(timer);
-      document.getElementById("countdown").style.display = "none";
-      button.classList.add("mostrar");
+    function continuar() {
+      const destino = new URLSearchParams(window.location.search).get("destino");
+      if (destino) {
+        window.location.href = destino;
+      } else {
+        alert("Nenhum destino definido.");
+      }
     }
-  }, 1000);
+  </script>
 
-  function continuar() {
-    const destino = new URLSearchParams(window.location.search).get("destino");
-    if (destino) {
-      window.location.href = destino;
-    } else {
-      alert("Nenhum destino definido.");
-    }
-  }
-</script>
-
-<footer>
-  <p>© 2025 Todos os direitos reservados.</p>
-</footer>
-
+  <script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
 </body>
 </html>
