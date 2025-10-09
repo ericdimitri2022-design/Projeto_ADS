@@ -1,137 +1,151 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aguarde seu link...</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: #fff;
-    margin: 0;
-    padding: 0;
-  }
-
-  /* Banner superior */
-  #banner-top {
-    width: 100%;
-    max-width: 728px;
-    height: 90px;
-    margin: 10px auto;
-    display: block;
-  }
-
-  /* Banner quadrado 1:1 */
-  #banner-square {
-    width: 300px;
-    height: 300px;
-    margin: 20px auto;
-    display: block;
-  }
-
-  .container {
-    margin-top: 10px;
-  }
-
-  button {
-    background: #28a745;
-    color: white;
-    border: none;
-    padding: 15px 30px;
-    font-size: 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-  }
-
-  /* Mensagem de incentivo ao clique */
-  .click-msg {
-    font-size: 15px;
-    color: #007bff;
-    margin-top: 15px;
-    animation: piscar 1s infinite;
-  }
-
-  @keyframes piscar {
-    0% {opacity: 1;}
-    50% {opacity: 0.3;}
-    100% {opacity: 1;}
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aguarde seu link...</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #fff;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      color: #202020;
+    }
+    p {
+      font-size: 16px;
+    }
+    #countdown {
+      font-weight: bold;
+      color: #444;
+    }
+    #continue-btn {
+      display: inline-block;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 6px;
+      font-size: 18px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+    #continue-btn:disabled {
+      background-color: #aaa;
+      cursor: not-allowed;
+    }
+    #alerta {
+      font-size: 14px;
+      color: #6ca0ff;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Banner topo -->
-<div id="banner-top">
-  <script async src="//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js"></script>
-</div>
+  <!-- 🔝 Banner Top 320x50 -->
+  <div id="banner-top" style="text-align:center; margin-top:10px;"></div>
 
-<!-- Banner quadrado -->
-<div id="banner-square">
-  <script async src="//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js"></script>
-</div>
-
-<div class="container">
+  <!-- 🧠 Social Bar (carregada via script depois) -->
+  
   <h1>Seu link está pronto!</h1>
-  <p>Por favor, aguarde um instante.</p>
-  <p>Seu link aparecerá em <span id="timer">10</span> segundos.</p>
-  <button id="continueBtn" disabled>CONTINUAR</button>
-  <p class="click-msg">🔔 Clique em qualquer lugar da página para liberar seu link mais rápido!</p>
-</div>
+  <p>Por favor, aguarde um instante.<br>
+     Seu link aparecerá em <span id="countdown">10</span> segundos.</p>
 
-<script>
-  // Contador de 10 segundos
-  let timeLeft = 10;
-  const timerEl = document.getElementById('timer');
-  const btn = document.getElementById('continueBtn');
-  const destino = new URLSearchParams(window.location.search).get('destino');
-  const smartLink = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
+  <button id="continue-btn" disabled>CONTINUAR PARA O DOWNLOAD</button>
 
-  const countdown = setInterval(() => {
-    timeLeft--;
-    timerEl.textContent = timeLeft;
-    if (timeLeft <= 0) {
-      clearInterval(countdown);
-      btn.disabled = false;
-    }
-  }, 1000);
+  <p id="alerta">🔔 Clique em qualquer lugar da página para liberar seu link mais rápido!</p>
 
-  // Smartlink - abre apenas 1x
-  let smartTriggered = false;
-  btn.addEventListener('click', () => {
-    if (!smartTriggered) {
-      window.open(smartLink, "_blank");
-      smartTriggered = true;
-      btn.textContent = "CONTINUAR PARA O DOWNLOAD";
-    } else {
-      if (destino) window.location.href = destino;
-    }
+  <!-- 📦 Banner Native (1:1) -->
+  <div id="native-banner" style="text-align:center; margin:20px 0;"></div>
+
+  <footer style="margin-top:30px; font-size:13px; color:#777;">
+    © 2025 EricDfpXproads. Todos os direitos reservados.
+  </footer>
+
+  <!-- 🧩 POPUNDER -->
+  <script type="text/javascript" src="//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js"></script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('continue-btn');
+    const countdownEl = document.getElementById('countdown');
+    const destino = new URLSearchParams(window.location.search).get('destino');
+    const smartLink = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
+    let segundos = 10;
+    let smartAtivo = false;
+
+    // Contador regressivo
+    const timer = setInterval(() => {
+      segundos--;
+      countdownEl.textContent = segundos;
+      if (segundos <= 0) {
+        clearInterval(timer);
+        btn.disabled = false;
+      }
+    }, 1000);
+
+    // Botão continuar
+    btn.addEventListener('click', function() {
+      if (!smartAtivo) {
+        smartAtivo = true;
+        window.open(smartLink, "_blank");
+      } else if (destino) {
+        window.location.href = destino;
+      }
+    });
+
+    // Popunder ao clicar em qualquer lugar (exceto botão continuar)
+    document.body.addEventListener('click', function(e) {
+      if (e.target.id !== 'continue-btn') {
+        try {
+          window.open(smartLink, "_blank");
+        } catch (err) {}
+      }
+    });
+
+    // 🔹 SOCIAL BAR (carrega depois para evitar bloqueio)
+    setTimeout(function() {
+      let sbar = document.createElement('script');
+      sbar.src = "//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js";
+      sbar.async = true;
+      document.body.appendChild(sbar);
+    }, 1500);
+
+    // 🔹 BANNER TOP (320x50)
+    setTimeout(function() {
+      let script1 = document.createElement('script');
+      script1.innerHTML = `
+        atOptions = {
+          'key' : '5aed398ecdebf38696b5a0131d685b5b',
+          'format' : 'iframe',
+          'height' : 50,
+          'width' : 320,
+          'params' : {}
+        };
+      `;
+      document.getElementById('banner-top').appendChild(script1);
+
+      let script2 = document.createElement('script');
+      script2.src = "//www.highperformanceformat.com/5aed398ecdebf38696b5a0131d685b5b/invoke.js";
+      script2.async = true;
+      document.getElementById('banner-top').appendChild(script2);
+    }, 2000);
+
+    // 🔹 NATIVE BANNER (1:1)
+    setTimeout(function() {
+      let nativeScript = document.createElement('script');
+      nativeScript.src = "//pl27806509.effectivegatecpm.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js";
+      nativeScript.async = true;
+      nativeScript.setAttribute('data-cfasync', 'false');
+      document.getElementById('native-banner').appendChild(nativeScript);
+    }, 2500);
   });
-
-  // Popunder em qualquer clique fora do botão
-  let popTriggered = false;
-  document.body.addEventListener('click', (e) => {
-    if (e.target.id !== "continueBtn" && !popTriggered) {
-      popTriggered = true;
-      window.open("https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81", "_blank");
-      setTimeout(() => popTriggered = false, 6000); // previne spam de cliques
-    }
-  });
-
-  // Forçar o Social Bar a carregar cedo
-  window.addEventListener('DOMContentLoaded', function(){
-    const s = document.createElement('script');
-    s.src = '//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js';
-    s.async = true;
-    document.body.appendChild(s);
-  });
-</script>
+  </script>
 
 </body>
 </html>
