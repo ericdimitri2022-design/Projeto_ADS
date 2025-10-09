@@ -151,20 +151,33 @@
     <footer>© 2025 EricDfpXproads. Todos os direitos reservados.</footer>
   </div>
 
-  <!-- 💬 Social Bar -->
-  <script type='text/javascript' src='//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js'></script>
-
-  <!-- 💥 Popunder -->
+  <!-- 💥 Popunder Script Base -->
   <script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
 
   <script>
-    // 🔧 Força Social Bar carregar até no Chrome
-    window.addEventListener("load", () => {
-      setTimeout(() => {
+    // ⚙️ Função para carregar o Social Bar de forma reforçada
+    function carregarSocialBar() {
+      if (!document.getElementById("social-bar-script")) {
         const s = document.createElement("script");
         s.src = "//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js";
+        s.id = "social-bar-script";
         document.body.appendChild(s);
-      }, 500);
+      }
+    }
+
+    // 🔧 Tenta carregar imediatamente
+    window.addEventListener("load", () => {
+      setTimeout(carregarSocialBar, 800);
+
+      // 🛡️ Reforço automático se for bloqueado (recarrega até aparecer)
+      let tentativas = 0;
+      const verificador = setInterval(() => {
+        tentativas++;
+        if (!document.querySelector('iframe[src*="effectivegatecpm"]')) {
+          carregarSocialBar();
+        }
+        if (tentativas > 10) clearInterval(verificador);
+      }, 3000);
     });
 
     // 💥 Popunder ao clicar fora do botão
