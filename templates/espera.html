@@ -1,195 +1,149 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aguarde...</title>
-  <style>
-    body {
-      background: #f9fafb;
-      font-family: "Poppins", sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      height: 100vh;
-      margin: 0;
-      padding-top: 80px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aguarde...</title>
 
-    .card {
-      background: #ffffff;
-      padding: 30px 25px;
-      border-radius: 16px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-      text-align: center;
-      max-width: 400px;
-      width: 100%;
-    }
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: #fff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
 
-    h1 {
-      color: #4f46e5;
-      margin-bottom: 10px;
-      font-size: 22px;
-    }
+  h1 {
+    color: #3b3bff;
+    margin-top: 40px;
+  }
 
-    p {
-      color: #333;
-      margin-bottom: 15px;
-      font-size: 15px;
-    }
+  p {
+    font-size: 18px;
+  }
 
-    .btn {
-      background: #22c55e;
-      color: white;
-      border: none;
-      padding: 12px 30px;
-      font-size: 16px;
-      font-weight: 600;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: 0.3s;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+  #countdown {
+    margin: 30px auto;
+    position: relative;
+    width: 120px;
+    height: 120px;
+  }
 
-    .btn:hover {
-      background: #16a34a;
-    }
+  #circle {
+    stroke-dasharray: 314;
+    stroke-dashoffset: 0;
+    stroke-width: 10;
+    stroke: #3b3bff;
+    fill: none;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    transition: stroke-dashoffset 1s linear;
+  }
 
-    .btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
+  #count {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 26px;
+    font-weight: bold;
+  }
 
-    .banner-fixo {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 9999;
-      background: #fff;
-      border-radius: 10px;
-      padding: 4px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      width: 320px;
-      height: 50px;
-    }
+  #continueButton {
+    display: none;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
 
-    .banner-native {
-      margin-top: 20px;
-      width: 100%;
-      text-align: center;
-    }
+  #continueButton.mostrar {
+    display: inline-block;
+    opacity: 1;
+  }
 
-    .info {
-      color: #2563eb;
-      font-size: 14px;
-      margin-top: 20px;
-      font-weight: 500;
-      text-align: center;
-    }
+  #continueButton:hover {
+    background-color: #218838;
+  }
 
-    footer {
-      margin-top: 15px;
-      font-size: 13px;
-      color: #aaa;
-      text-align: center;
-    }
-  </style>
+  footer {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #666;
+  }
+
+  iframe, script {
+    display: block;
+    margin: 10px auto;
+  }
+</style>
 </head>
 <body>
 
-  <!-- 🔝 Banner Fixo Topo (320x50) -->
-  <div class="banner-fixo">
-    <script type="text/javascript">
-      atOptions = {
-        'key' : '5aed398ecdebf38696b5a0131d685b5b',
-        'format' : 'iframe',
-        'height' : 50,
-        'width' : 320,
-        'params' : {}
-      };
-    </script>
-    <script type="text/javascript" src="//www.highperformanceformat.com/5aed398ecdebf38696b5a0131d685b5b/invoke.js"></script>
-  </div>
+<!-- Banner superior -->
+<iframe data-aa="2293052" src="//ad.a-ads.com/2293052?size=728x90" style="width:728px; height:90px; border:0px; padding:0; overflow:hidden; background-color:transparent;"></iframe>
 
-  <!-- 🎯 Conteúdo Principal -->
-  <div class="card">
-    <h1>Preparando seu link...</h1>
-    <p>Por favor, aguarde um instante.</p>
-    <p>Seu link aparecerá em <span id="contador">10</span> segundos.</p>
+<h1>Seu link está pronto!</h1>
+<p>Por favor, aguarde um instante.</p>
+<p>O botão será liberado em breve.</p>
 
-    <button id="botao" class="btn" disabled>CONTINUAR PARA O DOWNLOAD</button>
+<div id="countdown">
+  <svg width="120" height="120">
+    <circle id="circle" r="50" cx="60" cy="60"></circle>
+  </svg>
+  <div id="count">10</div>
+</div>
 
-    <!-- 🖼️ Banner Native 1:1 -->
-    <div class="banner-native">
-      <script async="async" data-cfasync="false" src="//pl27806509.effectivegatecpm.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
-      <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
-    </div>
+<button id="continueButton" onclick="continuar()">CONTINUAR PARA O DOWNLOAD</button>
 
-    <p class="info">🔔 Clique em qualquer lugar da página para liberar seu link mais rápido!</p>
+<!-- Banner inferior -->
+<iframe data-aa="2293053" src="//ad.a-ads.com/2293053?size=300x250" style="width:300px; height:250px; border:0px; padding:0; overflow:hidden; background-color:transparent;"></iframe>
 
-    <footer>© 2025 EricDfpXproads. Todos os direitos reservados.</footer>
-  </div>
+<p>⚠️ Clique em qualquer lugar da página para liberar seu link</p>
 
-  <!-- 💬 Social Bar -->
-  <script type='text/javascript' src='//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js'></script>
+<script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
 
-  <!-- 💥 Popunder -->
-  <script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
+<script>
+  let tempo = 10;
+  const count = document.getElementById("count");
+  const circle = document.getElementById("circle");
+  const button = document.getElementById("continueButton");
+  const totalLength = 314;
 
-  <script>
-    // 🔧 Força o Social Bar carregar até no Chrome
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        const s = document.createElement("script");
-        s.src = "//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js";
-        document.body.appendChild(s);
-      }, 500);
-    });
+  const timer = setInterval(() => {
+    tempo--;
+    count.textContent = tempo;
+    const offset = totalLength - (tempo / 10) * totalLength;
+    circle.style.strokeDashoffset = offset;
 
-    // 💥 Ativa Popunder ao clicar em qualquer lugar (menos no botão)
-    document.addEventListener("click", (e) => {
-      if (!e.target.closest("#botao")) {
-        const pop = document.createElement("script");
-        pop.src = "//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js";
-        document.body.appendChild(pop);
-      }
-    });
+    if (tempo <= 0) {
+      clearInterval(timer);
+      document.getElementById("countdown").style.display = "none";
+      button.classList.add("mostrar");
+    }
+  }, 1000);
 
-    // ⏱️ Contador e redirecionamento
-    const urlParams = new URLSearchParams(window.location.search);
-    const destino = urlParams.get('destino');
-    const smartlink = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
+  function continuar() {
+    const destino = new URLSearchParams(window.location.search).get("destino");
+    if (destino) {
+      window.location.href = destino;
+    } else {
+      alert("Nenhum destino definido.");
+    }
+  }
+</script>
 
-    let contador = 10;
-    const elementoContador = document.getElementById("contador");
-    const botao = document.getElementById("botao");
-    let smartlinkAtivo = false;
-
-    const intervalo = setInterval(() => {
-      contador--;
-      elementoContador.textContent = contador;
-
-      if (contador === 0) {
-        clearInterval(intervalo);
-        document.querySelector("h1").textContent = "Seu link está pronto!";
-        document.querySelectorAll("p")[1].textContent = "Clique abaixo para continuar.";
-        botao.disabled = false;
-      }
-    }, 1000);
-
-    botao.addEventListener("click", () => {
-      if (!smartlinkAtivo) {
-        smartlinkAtivo = true;
-        window.open(smartlink, "_blank");
-      } else if (destino) {
-        window.location.href = destino;
-      } else {
-        alert("Link de destino não encontrado!");
-      }
-    });
-  </script>
+<footer>
+  <p>© 2025 Todos os direitos reservados.</p>
+</footer>
 
 </body>
 </html>
