@@ -90,7 +90,7 @@
 </head>
 <body>
 
-  <!-- 🔝 NOVO BANNER FIXO NO TOPO (320x50) -->
+  <!-- 🔝 BANNER FIXO NO TOPO (320x50) -->
   <div class="banner-fixo">
     <script type="text/javascript">
       atOptions = {
@@ -105,7 +105,7 @@
   </div>
 
   <div class="card">
-    <!-- BANNER ADS TERRA 1:1 -->
+    <!-- 🖼️ BANNER ADS TERRA 1:1 -->
     <div class="banner-topo">
       <script async="async" data-cfasync="false" src="//pl27806509.revenuecpmgate.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
       <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
@@ -120,18 +120,16 @@
     <footer>© 2025 EricDfpXproads. Todos os direitos reservados.</footer>
   </div>
 
-  <!-- 🔁 SCRIPT POPUNDER ADS TERRA -->
-  <script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
+  <!-- 🧩 SOCIAL BAR -->
+  <script type='text/javascript' src='//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js'></script>
 
-  <!-- CONTADOR E REDIRECIONAMENTO -->
+  <!-- 🚫 (REMOVIDO MONETAG) -->
+
+  <!-- ⏱️ CONTADOR E REDIRECIONAMENTO -->
   <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const destino = urlParams.get('destino');
-
     let contador = 10;
     const elementoContador = document.getElementById("contador");
     const botao = document.getElementById("botao");
-
     botao.disabled = true;
 
     const intervalo = setInterval(() => {
@@ -144,12 +142,11 @@
         document.querySelectorAll("p")[1].textContent = "Clique no botão abaixo para continuar.";
         botao.disabled = false;
 
+        // 🔗 Redireciona pro Smartlink quando clicar
         botao.onclick = () => {
-          if (destino) {
-            window.location.href = destino;
-          } else {
-            alert("Link de destino não encontrado!");
-          }
+          setTimeout(() => {
+            window.location.href = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
+          }, 300);
         };
       }
     }, 1000);
