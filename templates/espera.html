@@ -1,134 +1,123 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aguarde...</title>
   <style>
-    body{background:#f9fafb;font-family:"Poppins",sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;padding-top:70px}
-    .card{background:#fff;padding:30px;border-radius:16px;box-shadow:0 2px 10px rgba(0,0,0,.08);text-align:center;max-width:400px;width:100%}
-    h1{color:#4f46e5;margin-bottom:10px}
-    p{color:#555;margin-bottom:20px}
-    .btn{background:#22c55e;color:#fff;border:none;padding:12px 30px;font-size:16px;font-weight:600;border-radius:10px;cursor:pointer;transition:.3s}
-    .btn:hover{background:#16a34a}
-    .banner-topo{width:100%;height:auto;border-radius:10px;margin-bottom:20px;overflow:hidden}
-    footer{margin-top:20px;font-size:13px;color:#aaa}
-    .btn:disabled{opacity:.7;cursor:not-allowed;pointer-events:none}
-    .banner-fixo{position:fixed;top:0;left:50%;transform:translateX(-50%);z-index:9999;background:#fff;border-radius:10px;padding:4px;box-shadow:0 2px 10px rgba(0,0,0,.1);width:320px;height:50px}
+    body {
+      background: #f9fafb;
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding-top: 70px;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    h1 {
+      color: #4f46e5;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .btn {
+      background: #22c55e;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #16a34a;
+    }
+
+    /* ✨ EFEITO DE PULSAR QUANDO LIBERADO */
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 0 0 rgba(34,197,94, 0.4); }
+      70% { transform: scale(1.07); box-shadow: 0 0 20px rgba(34,197,94, 0.6); }
+      100% { transform: scale(1); box-shadow: 0 0 0 rgba(34,197,94, 0.4); }
+    }
+
+    .btn.pulse {
+      animation: pulse 1.5s infinite;
+    }
+
+    .banner-topo {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    footer {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #aaa;
+    }
+
+    .btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .banner-fixo {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      background: #fff;
+      border-radius: 10px;
+      padding: 4px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      width: 320px;
+      height: 50px;
+    }
   </style>
-
-  <!-- === HANDLERS PRIORITÁRIOS (colocar no head para rodar antes dos scripts de ads) === -->
-  <script>
-    (function(){
-      // ===== CONFIGURE AQUI =====
-      const SMARTLINK = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
-      const POPUNDER_SCRIPT = "//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js";
-      const SOCIALBAR_SCRIPT = "//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js";
-
-      // função utilitária: retorna true se o clique aconteceu dentro do botão #botao
-      function clickedInsideButton(e){
-        // usa composedPath quando disponível (mais robusto)
-        const path = (e.composedPath && e.composedPath()) || (function(){
-          const arr=[]; let n=e.target;
-          while(n){ arr.push(n); n=n.parentNode; }
-          return arr;
-        })();
-        for(const node of path){
-          if(node && node.id === "botao") return true;
-        }
-        return false;
-      }
-
-      // CAPTURE HANDLER: intercepta clique no botão e abre o link limpo em nova aba
-      document.addEventListener("click", function captureHandler(e){
-        try {
-          if (!clickedInsideButton(e)) return;
-          const btn = document.getElementById("botao");
-          if (!btn) return;
-          if (btn.disabled) return; // só age quando botão já habilitado
-          // evita que outros listeners de ads executem neste mesmo clique
-          try{ e.preventDefault(); }catch(e){}
-          try{ e.stopImmediatePropagation(); }catch(e){}
-          try{ e.stopPropagation(); }catch(e){}
-
-          // decide destino: se houver ?destino=xxx usa ele, senão usa SMARTLINK
-          const params = new URLSearchParams(window.location.search);
-          const destinoParam = params.get("destino");
-          const targetUrl = destinoParam && destinoParam.trim() ? destinoParam : SMARTLINK;
-
-          // cria um <a> e dispara um click real (user gesture) para burlar bloqueios e evitar loop
-          const a = document.createElement("a");
-          a.href = targetUrl;
-          a.target = "_blank";
-          a.rel = "noopener noreferrer";
-          a.style.display = "none";
-          document.documentElement.appendChild(a);
-          a.click();
-          a.remove();
-
-          // marca que abriu pro mesmo site (evita reabrir em algumas lógicas)
-          try { sessionStorage.setItem("smartlink_opened", "1"); } catch(e){}
-
-        } catch(err) {
-          // se der erro, não bloqueia o restante
-          console.error("captureHandler error:", err);
-        }
-      }, true); // capture = true (prioridade)
-
-      // POPUNDER: injetar o script do popunder no primeiro clique FORA do botão (uma vez)
-      (function(){
-        let popActivated = false;
-        document.addEventListener("click", function popHandler(e){
-          if (popActivated) return;
-          if (clickedInsideButton(e)) return; // ignora clique no botão
-          popActivated = true;
-          // injeta com pequeno delay para não competir com o clique do botão
-          setTimeout(function(){
-            try{
-              const s = document.createElement("script");
-              s.src = POPUNDER_SCRIPT;
-              s.async = true;
-              document.body.appendChild(s);
-            }catch(err){
-              console.error("popunder inject err", err);
-            }
-          }, 120);
-        }, { once: true });
-      })();
-
-      // SOCIAL BAR: injetar com delay após DOM carregado (melhora exibição no Chrome)
-      document.addEventListener("DOMContentLoaded", function(){
-        setTimeout(function(){
-          try{
-            const sb = document.createElement("script");
-            sb.src = SOCIALBAR_SCRIPT;
-            sb.async = true;
-            document.body.appendChild(sb);
-          }catch(err){
-            console.error("socialbar inject err", err);
-          }
-        }, 2000);
-      });
-
-    })();
-  </script>
-  <!-- === fim handlers === -->
-
 </head>
 <body>
 
-  <!-- Banner fixo -->
+  <!-- 🔝 BANNER FIXO NO TOPO -->
   <div class="banner-fixo">
-    <script>
-      atOptions = { 'key':'5aed398ecdebf38696b5a0131d685b5b', 'format':'iframe', 'height':50, 'width':320, 'params':{} };
+    <script type="text/javascript">
+      atOptions = {
+        'key' : '5aed398ecdebf38696b5a0131d685b5b',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
     </script>
-    <script src="//www.highperformanceformat.com/5aed398ecdebf38696b5a0131d685b5b/invoke.js"></script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/5aed398ecdebf38696b5a0131d685b5b/invoke.js"></script>
   </div>
 
   <div class="card">
+    <!-- 🖼️ BANNER 1:1 -->
     <div class="banner-topo">
-      <!-- banner 1:1 mantido -->
-      <script async data-cfasync="false" src="//pl27806509.revenuecpmgate.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
+      <script async="async" data-cfasync="false" src="//pl27806509.revenuecpmgate.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
       <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
     </div>
 
@@ -141,26 +130,51 @@
     <footer>© 2025 EricDfpXproads. Todos os direitos reservados.</footer>
   </div>
 
-  <!-- ===== Contador (habilita o botão) ===== -->
-  <script>
-    (function(){
-      const botao = document.getElementById("botao");
-      const elCont = document.getElementById("contador");
-      let t = 10;
-      elCont.textContent = t;
-      botao.disabled = true;
+  <!-- 🧩 SOCIAL BAR (ativa em todos navegadores) -->
+  <script type='text/javascript' src='//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js'></script>
 
-      const id = setInterval(()=> {
-        t--; elCont.textContent = t>0? t: 0;
-        if (t <= 0) {
-          clearInterval(id);
-          document.querySelector("h1").textContent = "Seu link está pronto!";
-          const ps = document.querySelectorAll("p");
-          if (ps[1]) ps[1].textContent = "Clique no botão abaixo para continuar.";
-          botao.disabled = false;
-        }
-      }, 1000);
-    })();
+  <!-- 💥 POPUNDER -->
+  <script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
+
+  <!-- ⏱️ CONTADOR + SMARTLINK + DESTINO -->
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const destino = urlParams.get('destino');
+
+    let contador = 10;
+    const elementoContador = document.getElementById("contador");
+    const botao = document.getElementById("botao");
+
+    let smartlinkAtivado = false;
+    botao.disabled = true;
+
+    const intervalo = setInterval(() => {
+      contador--;
+      elementoContador.textContent = contador;
+
+      if (contador === 0) {
+        clearInterval(intervalo);
+        document.querySelector("h1").textContent = "Seu link está pronto!";
+        document.querySelectorAll("p")[1].textContent = "Clique no botão abaixo para continuar.";
+        botao.disabled = false;
+
+        // 🌟 Ativa efeito pulsante no botão
+        botao.classList.add("pulse");
+
+        botao.onclick = () => {
+          if (!smartlinkAtivado) {
+            smartlinkAtivado = true;
+            window.open("https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81", "_blank");
+          } else {
+            if (destino) {
+              window.location.href = destino;
+            } else {
+              alert("Link de destino não encontrado!");
+            }
+          }
+        };
+      }
+    }, 1000);
   </script>
 
 </body>
