@@ -15,7 +15,6 @@
       margin: 0;
       padding-top: 70px;
     }
-
     .card {
       background: #ffffff;
       padding: 30px;
@@ -25,17 +24,8 @@
       max-width: 400px;
       width: 100%;
     }
-
-    h1 {
-      color: #4f46e5;
-      margin-bottom: 10px;
-    }
-
-    p {
-      color: #555;
-      margin-bottom: 20px;
-    }
-
+    h1 { color: #4f46e5; margin-bottom: 10px; }
+    p { color: #555; margin-bottom: 20px; }
     .btn {
       background: #22c55e;
       color: white;
@@ -45,13 +35,9 @@
       font-weight: 600;
       border-radius: 10px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: .3s;
     }
-
-    .btn:hover {
-      background: #16a34a;
-    }
-
+    .btn:hover { background: #16a34a; }
     .banner-topo {
       width: 100%;
       height: auto;
@@ -59,37 +45,18 @@
       margin-bottom: 20px;
       overflow: hidden;
     }
-
-    footer {
-      margin-top: 20px;
-      font-size: 13px;
-      color: #aaa;
-    }
-
-    .btn:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-
+    footer { margin-top: 20px; font-size: 13px; color: #aaa; }
+    .btn:disabled { opacity: 0.7; cursor: not-allowed; pointer-events: none; }
     .banner-fixo {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 9999;
-      background: #fff;
-      border-radius: 10px;
-      padding: 4px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      width: 320px;
-      height: 50px;
+      position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+      z-index: 9999; background: #fff; border-radius: 10px; padding: 4px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 320px; height: 50px;
     }
   </style>
 </head>
 <body>
 
-  <!-- 🔝 Banner fixo -->
+  <!-- Banner fixo -->
   <div class="banner-fixo">
     <script type="text/javascript">
       atOptions = {
@@ -104,8 +71,9 @@
   </div>
 
   <div class="card">
+    <!-- Banner 1:1 (mantido igual) -->
     <div class="banner-topo">
-      <script async="async" data-cfasync="false" src="//pl27806509.revenuecpmgate.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
+      <script async data-cfasync="false" src="//pl27806509.revenuecpmgate.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
       <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
     </div>
 
@@ -118,42 +86,84 @@
     <footer>© 2025 EricDfpXproads. Todos os direitos reservados.</footer>
   </div>
 
-  <!-- 🧩 SOCIAL BAR -->
-  <script type='text/javascript' src='//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js'></script>
+  <!-- NÃO COLOQUE AQUI SCRIPTS DE ANÚNCIO ANTES DO NOSSO HANDLER -->
 
-  <!-- 💥 POPUNDER -->
-  <script type="text/javascript">
-    document.addEventListener("click", function popunderOnce(e) {
-      if (!e.target.closest("#botao")) { // evita conflito com o botão
-        window.open("https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81", "_blank");
-        document.removeEventListener("click", popunderOnce); // só dispara 1x
-      }
-    });
-  </script>
-
-  <!-- ⏱️ CONTADOR -->
+  <!-- SCRIPTS/LOGIC PRINCIPAL -->
   <script>
-    let contador = 10;
-    const elementoContador = document.getElementById("contador");
-    const botao = document.getElementById("botao");
-    botao.disabled = true;
+    // ===== CONFIGURAÇÕES =====
+    const SMARTLINK = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
+    const POPUNDER_SCRIPT = "//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js";
+    const SOCIALBAR_SCRIPT = "//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js";
 
-    const intervalo = setInterval(() => {
-      contador--;
+    document.addEventListener("DOMContentLoaded", function() {
+      const botao = document.getElementById("botao");
+      const elementoContador = document.getElementById("contador");
+
+      // ===== 1) Handler EM CAPTURE para priorizar clique no botão =====
+      document.addEventListener("click", function captureHandler(e) {
+        const clickedButton = e.target && e.target.closest && e.target.closest("#botao");
+        if (clickedButton) {
+          // se botão ainda estiver desabilitado, ignora
+          if (botao.disabled) return;
+          // impede outros listeners de anúncios de rodarem neste clique
+          try { e.preventDefault(); } catch(err){}
+          try { e.stopImmediatePropagation(); } catch(err){}
+          try { e.stopPropagation(); } catch(err){}
+
+          // Abre o Smartlink em uma nova aba nomeada (evita bloqueio/reloop)
+          window.open(SMARTLINK, "smartlink_window");
+
+          // marca que abriu
+          sessionStorage.setItem("smartlink_opened", "1");
+          return;
+        }
+      }, true); // <-- capture = true
+
+      // ===== 2) Popunder: carrega SÓ no primeiro clique FORA do botão =====
+      let popActivated = false;
+      document.addEventListener("click", function(e) {
+        if (popActivated) return;
+        // ignora clique no botão
+        if (e.target && e.target.closest && e.target.closest("#botao")) return;
+        popActivated = true;
+        // injeta o script com pequeno delay para evitar corrida com o clique
+        setTimeout(() => {
+          const s = document.createElement("script");
+          s.src = POPUNDER_SCRIPT;
+          s.async = true;
+          document.body.appendChild(s);
+        }, 120);
+      }, { once: true });
+
+      // ===== 3) Social Bar: carregar com delay (ajuda no Chrome) =====
+      setTimeout(() => {
+        const sb = document.createElement("script");
+        sb.src = SOCIALBAR_SCRIPT;
+        sb.async = true;
+        document.body.appendChild(sb);
+      }, 2000);
+
+      // ===== 4) Contador (mantém comportamento original) =====
+      let contador = 10;
+      botao.disabled = true;
       elementoContador.textContent = contador;
 
-      if (contador === 0) {
-        clearInterval(intervalo);
-        document.querySelector("h1").textContent = "Seu link está pronto!";
-        document.querySelectorAll("p")[1].textContent = "Clique no botão abaixo para continuar.";
-        botao.disabled = false;
+      const intervalo = setInterval(() => {
+        contador--;
+        elementoContador.textContent = contador > 0 ? contador : 0;
 
-        // Redireciona pro Smartlink
-        botao.onclick = () => {
-          window.location.href = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
-        };
-      }
-    }, 1000);
+        if (contador <= 0) {
+          clearInterval(intervalo);
+          document.querySelector("h1").textContent = "Seu link está pronto!";
+          // o segundo <p> (index 1) é a frase de instrução
+          const ps = document.querySelectorAll("p");
+          if (ps[1]) ps[1].textContent = "Clique no botão abaixo para continuar.";
+          botao.disabled = false;
+        }
+      }, 1000);
+
+      // Observação: o clique no botão é tratado pelo handler em capture acima.
+    });
   </script>
 
 </body>
