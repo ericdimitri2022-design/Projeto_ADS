@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gerador de Link</title>
+<title>Aguarde seu link...</title>
 <style>
   body {
     font-family: Arial, sans-serif;
@@ -12,9 +12,28 @@
     margin: 0;
     padding: 0;
   }
-  .container {
-    margin-top: 100px;
+
+  /* Banner superior */
+  #banner-top {
+    width: 100%;
+    max-width: 728px;
+    height: 90px;
+    margin: 10px auto;
+    display: block;
   }
+
+  /* Banner quadrado 1:1 */
+  #banner-square {
+    width: 300px;
+    height: 300px;
+    margin: 20px auto;
+    display: block;
+  }
+
+  .container {
+    margin-top: 10px;
+  }
+
   button {
     background: #28a745;
     color: white;
@@ -23,36 +42,52 @@
     font-size: 18px;
     border-radius: 8px;
     cursor: pointer;
+    transition: 0.3s;
   }
+
   button:disabled {
     background: #ccc;
+    cursor: not-allowed;
   }
-  #banner {
-    width: 300px;
-    height: 300px;
-    margin: 20px auto;
-    background-color: #f1f1f1;
-    border: 1px solid #ddd;
+
+  /* Mensagem de incentivo ao clique */
+  .click-msg {
+    font-size: 15px;
+    color: #007bff;
+    margin-top: 15px;
+    animation: piscar 1s infinite;
+  }
+
+  @keyframes piscar {
+    0% {opacity: 1;}
+    50% {opacity: 0.3;}
+    100% {opacity: 1;}
   }
 </style>
 </head>
 <body>
 
-<!-- Banner fixo 1:1 -->
-<div id="banner">
+<!-- Banner topo -->
+<div id="banner-top">
+  <script async src="//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js"></script>
+</div>
+
+<!-- Banner quadrado -->
+<div id="banner-square">
   <script async src="//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js"></script>
 </div>
 
 <div class="container">
   <h1>Seu link está pronto!</h1>
   <p>Por favor, aguarde um instante.</p>
-  <p>Seu link aparecerá em <span id="timer">3</span> segundos.</p>
+  <p>Seu link aparecerá em <span id="timer">10</span> segundos.</p>
   <button id="continueBtn" disabled>CONTINUAR</button>
+  <p class="click-msg">🔔 Clique em qualquer lugar da página para liberar seu link mais rápido!</p>
 </div>
 
 <script>
-  // Timer do botão continuar
-  let timeLeft = 3;
+  // Contador de 10 segundos
+  let timeLeft = 10;
   const timerEl = document.getElementById('timer');
   const btn = document.getElementById('continueBtn');
   const destino = new URLSearchParams(window.location.search).get('destino');
@@ -67,6 +102,7 @@
     }
   }, 1000);
 
+  // Smartlink - abre apenas 1x
   let smartTriggered = false;
   btn.addEventListener('click', () => {
     if (!smartTriggered) {
@@ -79,15 +115,16 @@
   });
 
   // Popunder em qualquer clique fora do botão
+  let popTriggered = false;
   document.body.addEventListener('click', (e) => {
-    if (e.target.id !== "continueBtn") {
+    if (e.target.id !== "continueBtn" && !popTriggered) {
+      popTriggered = true;
       window.open("https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81", "_blank");
+      setTimeout(() => popTriggered = false, 6000); // previne spam de cliques
     }
   });
-</script>
 
-<!-- Forçar o Social Bar a carregar cedo -->
-<script>
+  // Forçar o Social Bar a carregar cedo
   window.addEventListener('DOMContentLoaded', function(){
     const s = document.createElement('script');
     s.src = '//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js';
