@@ -1,4 +1,4 @@
-# app.py (VERSÃO COMPLETA E FUNCIONAL)
+# app.py (VERSÃO FINAL COM CORREÇÃO PARA ANÚNCIOS)
 
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 
@@ -30,7 +30,7 @@ def pagina_espera():
     return render_template('espera.html', destino_url=destino_url)
 
 
-# 🆕 Rota '/bonus' — página secundária com anúncios extras
+# Rota '/bonus' — página secundária com anúncios extras
 @app.route('/bonus')
 def pagina_bonus():
     destino = request.args.get('destino')
@@ -38,6 +38,40 @@ def pagina_bonus():
         return redirect(url_for('home'))
     
     return render_template('bonus.html', destino=destino)
+
+# ############# INÍCIO DA NOVA ALTERAÇÃO #############
+# Adiciona cabeçalhos de segurança para permitir os scripts de anúncios
+
+@app.after_request
+def add_security_headers(response):
+    # Define os domínios permitidos para os scripts
+    script_sources = [
+        "'self'",  # Permite scripts do próprio domínio
+        "'unsafe-inline'",  # Necessário para os scripts inline dos seus anúncios
+        "www.highperformanceformat.com",
+        "pl27813082.effectivegatecpm.com",
+        "pl27806509.effectivegatecpm.com",
+        "pl27806574.effectivegatecpm.com"
+    ]
+    # Define os domínios permitidos para iframes e conexões
+    frame_sources = [
+        "'self'",
+        "www.highperformanceformat.com",
+        "effectivegatecpm.com" # Domínio mais genérico para cobrir tudo
+    ]
+    
+    csp = [
+        f"default-src 'self'",
+        f"script-src {' '.join(script_sources)}",
+        f"frame-src {' '.join(frame_sources)}",
+        f"connect-src *", # Permite qualquer conexão (útil para ads)
+        f"style-src 'self' 'unsafe-inline'", # Permite estilos inline
+        f"img-src 'self' data:" # Permite imagens do próprio domínio e data URIs
+    ]
+    
+    response.headers['Content-Security-Policy'] = '; '.join(csp)
+    return response
+# ############# FIM DA NOVA ALTERAÇÃO #############
 
 
 if __name__ == '__main__':
