@@ -94,10 +94,9 @@
     <h1>Parabéns!</h1>
     <p>Seu bônus foi liberado com sucesso. Aproveite seu conteúdo exclusivo abaixo 👇</p>
 
-    <a href="https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81" target="_blank" class="btn">
+    <a href="https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81" target="_blank" class="btn" id="botao-acesso">
       ACESSAR AGORA
     </a>
-
     <div class="banner-bonus">
       <script type="text/javascript">
         atOptions = {
@@ -115,5 +114,19 @@
   </div>
 
   <script type='text/javascript' src='//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js'></script>
-</body>
+
+  <script>
+    window.onload = function() {
+      const botaoAcesso = document.getElementById('botao-acesso');
+      const urlParams = new URLSearchParams(window.location.search);
+      const destinoFinal = urlParams.get('destino');
+
+      // Se um "destino" foi passado na URL, atualiza o link do botão
+      if (destinoFinal) {
+        botaoAcesso.href = destinoFinal;
+      }
+      // Se não, o botão mantém o link padrão que está no HTML.
+    };
+  </script>
+  </body>
 </html>
