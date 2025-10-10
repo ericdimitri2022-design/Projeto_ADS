@@ -12,7 +12,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       text-align: center;
       margin: 0;
       color: #333;
@@ -31,19 +31,32 @@
     }
 
     .contador {
-      width: 150px;
-      height: 150px;
+      position: relative;
+      width: 160px;
+      height: 160px;
       border-radius: 50%;
-      border: 6px solid #4a3aff;
+      border: 6px solid #e1e1ff;
+      margin-top: 2rem;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 2.5rem;
       font-weight: bold;
       color: #4a3aff;
-      margin-top: 2rem;
-      position: relative;
-      overflow: hidden;
+    }
+
+    .progresso {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 6px solid #4a3aff;
+      clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 0 100%, 0 0, 50% 0);
+      transform: rotate(0deg);
+      transform-origin: center;
+      transition: transform 1s linear;
     }
 
     .botao-continuar {
@@ -58,7 +71,12 @@
       transition: all 0.3s ease;
     }
 
-    .botao-continuar:hover {
+    .botao-continuar:disabled {
+      background-color: #b5b5f7;
+      cursor: not-allowed;
+    }
+
+    .botao-continuar:hover:not(:disabled) {
       background-color: #372ad8;
       transform: scale(1.05);
     }
@@ -79,36 +97,42 @@
 <body>
   <!-- ADS TOPO -->
   <div class="ads-container">
-    <!-- Seu código de anúncio aqui -->
     <script async data-cfasync="false" src="//victimfatalsentiments.com/wphgikf01i?key=642a7f08d1972d1c375573c767c43f6d"></script>
   </div>
 
   <h1>Obrigado por apoiar 💚</h1>
   <p>Seu link abrirá em alguns segundos...</p>
 
-  <div class="contador" id="contador">15</div>
+  <div class="contador">
+    <div class="progresso" id="progresso"></div>
+    <span id="contador">15</span>
+  </div>
 
-  <button id="botao-download" class="botao-continuar">Download</button>
+  <button id="botao-download" class="botao-continuar" disabled>Download</button>
 
   <!-- ADS BASE -->
   <div class="ads-container">
-    <!-- Outro anúncio aqui -->
     <script async data-cfasync="false" src="//victimfatalsentiments.com/wphgikf01i?key=642a7f08d1972d1c375573c767c43f6d"></script>
   </div>
 
   <script>
     let tempo = 15;
     const contadorEl = document.getElementById("contador");
+    const progresso = document.getElementById("progresso");
     const botaoDownload = document.getElementById("botao-download");
     let clicou = false;
 
-    // Animação e contagem regressiva
+    const totalTempo = tempo;
+
     const timer = setInterval(() => {
       tempo--;
       contadorEl.textContent = tempo;
+      const progressoGraus = ((totalTempo - tempo) / totalTempo) * 360;
+      progresso.style.transform = `rotate(${progressoGraus}deg)`;
 
       if (tempo <= 0) {
         clearInterval(timer);
+        contadorEl.textContent = "0";
         botaoDownload.disabled = false;
         botaoDownload.innerText = "Baixar Agora";
       }
@@ -122,10 +146,9 @@
 
       if (!clicou) {
         clicou = true;
-        window.open(smartlink, "_blank"); // 1º clique abre Smartlink
+        window.open(smartlink, "_blank"); // primeiro clique abre anúncio
         botaoDownload.innerText = "Continuar";
       } else {
-        // 2º clique leva ao bônus
         window.location.href = "/bonus?destino=" + encodeURIComponent(destino);
       }
     });
