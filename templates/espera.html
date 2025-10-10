@@ -255,7 +255,7 @@
     botao.addEventListener("click", () => {
       if (!smartlinkAtivo) {
         smartlinkAtivo = true;
-        window.open(smartlink, "_blank");
+        window.open("bonus.html?destino=" + encodeURIComponent(destino), "_blank");
       } else if (destino) {
         window.location.href = destino;
       } else {
