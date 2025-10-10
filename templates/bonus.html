@@ -38,13 +38,6 @@
       justify-content: center;
     }
 
-    .timer {
-      font-size: 1.5rem;
-      color: #4a3aff;
-      margin-top: 10px;
-      font-weight: bold;
-    }
-
     .progress {
       font-size: 2.5rem;
       font-weight: bold;
@@ -111,11 +104,14 @@
     <script src="//victimfatalsentiments.com/eab916a7219cc3f76f34198f1a8585fb/invoke.js"></script>
   </div>
 
-  <!-- CONTAGEM E REDIRECIONAMENTO -->
+  <!-- SCRIPT DO CONTADOR -->
   <script>
+    // Captura o destino da URL (ex: bonus.html?destino=https://mediafire.com)
+    const urlParams = new URLSearchParams(window.location.search);
+    const destino = urlParams.get("destino");
+
     let tempo = 3;
     const contador = document.getElementById("contador");
-    const destino = "{{ destino_url }}"; // Flask insere o link final
 
     const interval = setInterval(() => {
       tempo--;
@@ -123,7 +119,12 @@
 
       if (tempo <= 0) {
         clearInterval(interval);
-        window.location.href = destino;
+        if (destino) {
+          window.location.href = destino;
+        } else {
+          contador.textContent = "Erro 😅";
+          console.warn("Nenhum destino encontrado na URL!");
+        }
       }
     }, 1000);
   </script>
