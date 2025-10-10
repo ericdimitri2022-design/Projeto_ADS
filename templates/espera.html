@@ -66,8 +66,8 @@
     .btn:hover {
       background: #16a34a;
     }
-    
-    /* 馃敶 NOVO ESTILO: Para o bot茫o quando estiver desativado */
+
+    /* 🔴 NOVO ESTILO: Para o botão quando estiver desativado */
     .btn:disabled {
         background: #9ca3af; /* Cinza */
         cursor: not-allowed;
@@ -161,7 +161,7 @@
     <button id="botao" class="btn" disabled>CONTINUAR PARA O DOWNLOAD</button>
     
     <p id="adblock-notice" style="display: none; color: #ef4444; font-size: 14px; margin-top: 10px; font-weight: 500;">
-        Para liberar o bot茫o, por favor, desative seu AdBlock.
+        Para liberar o botão, por favor, desative seu AdBlock.
     </p>
 
     <div class="banner-native">
@@ -169,22 +169,22 @@
       <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
     </div>
 
-    <p class="info">鈿狅笍 Clique em qualquer lugar da p谩gina para liberar seu link mais r谩pido!</p>
+    <p class="info">🔔 Clique em qualquer lugar da página para liberar seu link mais rápido!</p>
 
-    <footer>漏 2025 EricDfpXproads. Todos os direitos reservados.</footer>
+    <footer>© 2025 EricDfpXproads. Todos os direitos reservados.</footer>
   </div>
 
   <script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
 
   <script>
-    // --- ELEMENTOS DA P脕GINA ---
+    // --- ELEMENTOS DA PÁGINA ---
     const circle = document.getElementById("circle");
     const botao = document.getElementById("botao");
     const titulo = document.getElementById("titulo");
     const subtexto = document.getElementById("subtexto");
     const adblockNotice = document.getElementById("adblock-notice");
 
-    // --- VARI脕VEIS DE CONTROLE ---
+    // --- VARIÁVEIS DE CONTROLE ---
     const urlParams = new URLSearchParams(window.location.search);
     const destino = urlParams.get('destino');
     const smartlink = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
@@ -192,7 +192,7 @@
     let smartlinkAtivo = false;
     let contadorFinalizado = false;
 
-    // --- L脫GICA DO ADBLOCK ---
+    // --- LÓGICA DO ADBLOCK ---
     function checkAdBlock() {
         const isca = document.createElement('div');
         isca.className = 'ad-banner banner-ad ad-container';
@@ -207,26 +207,22 @@
         return isAdBlockerActive;
     }
     
-    // Fun莽茫o que decide se o bot茫o deve estar ativo ou n茫o
+    // Função que decide se o botão deve estar ativo ou não
     function updateButtonState() {
         if (checkAdBlock()) {
-            // AdBlock EST脕 ATIVO
             botao.disabled = true;
-            // Mostra o aviso apenas se o contador j谩 terminou
-            if(contadorFinalizado) {
+            if (contadorFinalizado) {
                adblockNotice.style.display = 'block';
             }
         } else {
-            // AdBlock N脙O EST脕 ATIVO
             adblockNotice.style.display = 'none';
-            // Ativa o bot茫o apenas se o contador j谩 terminou
             if (contadorFinalizado) {
                 botao.disabled = false;
             }
         }
     }
 
-    // --- L脫GICA DO CONTADOR ---
+    // --- LÓGICA DO CONTADOR ---
     const intervaloContador = setInterval(() => {
       contador--;
       const progresso = (100 - (contador * (100 / 15)));
@@ -235,23 +231,21 @@
 
       if (contador <= 0) {
         clearInterval(intervaloContador);
-        contadorFinalizado = true; // Avisa que o contador terminou
+        contadorFinalizado = true;
 
         circle.style.display = "none";
-        botao.classList.add("show"); // Mostra o bot茫o
-        titulo.textContent = "Seu link est谩 pronto!";
+        botao.classList.add("show");
+        titulo.textContent = "Seu link está pronto!";
         subtexto.textContent = "Clique abaixo para continuar.";
         
-        // Agora, a fun莽茫o de verifica莽茫o do AdBlock vai cuidar de habilitar o bot茫o
         updateButtonState(); 
       }
     }, 1000);
 
-    // --- VERIFICA脟脙O CONT脥NUA DO ADBLOCK ---
-    // A cada 2 segundos, verifica o status do AdBlock e atualiza o bot茫o
+    // --- VERIFICAÇÃO CONTÍNUA DO ADBLOCK ---
     setInterval(updateButtonState, 2000);
 
-    // --- A脟脮ES DE CLIQUE E AN脷NCIOS ---
+    // --- AÇÕES DE CLIQUE E ANÚNCIOS ---
     botao.addEventListener("click", () => {
       if (!smartlinkAtivo) {
         smartlinkAtivo = true;
@@ -259,11 +253,11 @@
       } else if (destino) {
         window.location.href = destino;
       } else {
-        alert("Link de destino n茫o encontrado!");
+        alert("Link de destino não encontrado!");
       }
     });
 
-    // Fun莽茫o do Popunder ao clicar fora do bot茫o (j谩 estava no seu c贸digo)
+    // Popunder ao clicar fora do botão
     document.addEventListener("click", (e) => {
       if (!e.target.closest("#botao")) {
         const pop = document.createElement("script");
@@ -272,7 +266,7 @@
       }
     });
 
-    // A fun莽茫o do Social Bar n茫o precisa de altera莽茫o
+    // Social Bar
     function carregarSocialBar() {
       if (!document.getElementById("social-bar-script")) {
         const s = document.createElement("script");
