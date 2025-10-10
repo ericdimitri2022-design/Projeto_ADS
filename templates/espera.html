@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Apoie o criador 💰</title>
+  <title>Aguarde...</title>
   <style>
     body {
       background: #f9fafb;
@@ -11,121 +11,286 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       height: 100vh;
-      text-align: center;
       margin: 0;
-      color: #333;
+      padding-top: 80px;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 30px 25px;
+      border-radius: 16px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      transition: all 0.4s ease;
     }
 
     h1 {
-      font-size: 1.8rem;
-      color: #4a3aff;
-      margin-bottom: 0.5rem;
+      color: #4f46e5;
+      margin-bottom: 10px;
+      font-size: 22px;
+      transition: opacity 0.5s ease;
     }
 
     p {
-      color: #666;
-      margin-top: 0;
-      font-size: 1rem;
+      color: #333;
+      margin-bottom: 15px;
+      font-size: 15px;
     }
 
-    .contador {
-      width: 150px;
-      height: 150px;
+    .btn {
+      background: #22c55e;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: none;
+      transform: translateY(10px);
+      opacity: 0;
+    }
+
+    .btn.show {
+      display: inline-block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .btn:hover {
+      background: #16a34a;
+    }
+    
+    /* 馃敶 NOVO ESTILO: Para o bot茫o quando estiver desativado */
+    .btn:disabled {
+        background: #9ca3af; /* Cinza */
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+
+    .btn:disabled:hover {
+        background: #9ca3af; /* Remove o efeito hover quando desativado */
+    }
+
+    .banner-fixo {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      background: #fff;
+      border-radius: 10px;
+      padding: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      width: 320px;
+      height: 50px;
+    }
+
+    .banner-native {
+      margin-top: 20px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .info {
+      color: #2563eb;
+      font-size: 14px;
+      margin-top: 20px;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 15px;
+      font-size: 13px;
+      color: #aaa;
+      text-align: center;
+    }
+
+    .circle {
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
-      border: 6px solid #4a3aff;
+      background: conic-gradient(#4f46e5 calc(var(--progress)*1%), #e5e7eb 0);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: #4a3aff;
-      margin-top: 2rem;
-      position: relative;
+      font-size: 32px;
+      font-weight: 600;
+      color: #4f46e5;
+      margin: 20px auto;
+      transition: background 0.4s linear;
+      box-shadow: 0 0 15px rgba(79,70,229,0.3);
+      animation: pulse 1.5s infinite ease-in-out;
     }
 
-    .botao-continuar {
-      background-color: #4a3aff;
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 10px;
-      font-size: 1.1rem;
-      margin-top: 1.5rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .botao-continuar:hover {
-      background-color: #372ad8;
-      transform: scale(1.05);
-    }
-
-    .ads-container {
-      margin-top: 1.5rem;
-      max-width: 90%;
-    }
-
-    @media (max-width: 600px) {
-      iframe, ins {
-        max-width: 100% !important;
-        height: auto !important;
-      }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px rgba(79,70,229,0.3); }
+      50% { box-shadow: 0 0 20px rgba(79,70,229,0.5); }
+      100% { box-shadow: 0 0 10px rgba(79,70,229,0.3); }
     }
   </style>
 </head>
 <body>
-  <!-- ADS TOPO -->
-  <div class="ads-container">
-    <script async data-cfasync="false" src="//victimfatalsentiments.com/wphgikf01i?key=642a7f08d1972d1c375573c767c43f6d"></script>
+
+  <div class="banner-fixo">
+    <script type="text/javascript">
+      atOptions = {
+        'key' : '5aed398ecdebf38696b5a0131d685b5b',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/5aed398ecdebf38696b5a0131d685b5b/invoke.js"></script>
   </div>
 
-  <h1>Obrigado por apoiar 💚</h1>
-  <p>Seu link abrirá em alguns segundos...</p>
+  <div class="card">
+    <h1 id="titulo">Preparando seu link...</h1>
+    <p id="subtexto">Por favor, aguarde um instante.</p>
 
-  <div class="contador" id="contador">15</div>
+    <div id="circle" class="circle" style="--progress:0">15</div>
 
-  <button id="botao-download" class="botao-continuar" disabled>Download</button>
+    <button id="botao" class="btn" disabled>CONTINUAR PARA O DOWNLOAD</button>
+    
+    <p id="adblock-notice" style="display: none; color: #ef4444; font-size: 14px; margin-top: 10px; font-weight: 500;">
+        Para liberar o bot茫o, por favor, desative seu AdBlock.
+    </p>
 
-  <!-- ADS BASE -->
-  <div class="ads-container">
-    <script async data-cfasync="false" src="//victimfatalsentiments.com/wphgikf01i?key=642a7f08d1972d1c375573c767c43f6d"></script>
+    <div class="banner-native">
+      <script async="async" data-cfasync="false" src="//pl27806509.effectivegatecpm.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
+      <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
+    </div>
+
+    <p class="info">鈿狅笍 Clique em qualquer lugar da p谩gina para liberar seu link mais r谩pido!</p>
+
+    <footer>漏 2025 EricDfpXproads. Todos os direitos reservados.</footer>
   </div>
+
+  <script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
 
   <script>
-    let tempo = 15;
-    const contadorEl = document.getElementById("contador");
-    const botaoDownload = document.getElementById("botao-download");
-    let clicou = false;
+    // --- ELEMENTOS DA P脕GINA ---
+    const circle = document.getElementById("circle");
+    const botao = document.getElementById("botao");
+    const titulo = document.getElementById("titulo");
+    const subtexto = document.getElementById("subtexto");
+    const adblockNotice = document.getElementById("adblock-notice");
 
-    // Contagem regressiva
-    const timer = setInterval(() => {
-      tempo--;
-      contadorEl.textContent = tempo;
+    // --- VARI脕VEIS DE CONTROLE ---
+    const urlParams = new URLSearchParams(window.location.search);
+    const destino = urlParams.get('destino');
+    const smartlink = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
+    let contador = 15;
+    let smartlinkAtivo = false;
+    let contadorFinalizado = false;
 
-      if (tempo <= 0) {
-        clearInterval(timer);
-        botaoDownload.disabled = false;
-        botaoDownload.innerText = "Baixar Agora";
+    // --- L脫GICA DO ADBLOCK ---
+    function checkAdBlock() {
+        const isca = document.createElement('div');
+        isca.className = 'ad-banner banner-ad ad-container';
+        isca.style.position = 'absolute';
+        isca.style.height = '1px';
+        isca.style.width = '1px';
+        isca.style.left = '-9999px';
+        isca.style.top = '-9999px';
+        document.body.appendChild(isca);
+        const isAdBlockerActive = isca.offsetHeight === 0;
+        document.body.removeChild(isca);
+        return isAdBlockerActive;
+    }
+    
+    // Fun莽茫o que decide se o bot茫o deve estar ativo ou n茫o
+    function updateButtonState() {
+        if (checkAdBlock()) {
+            // AdBlock EST脕 ATIVO
+            botao.disabled = true;
+            // Mostra o aviso apenas se o contador j谩 terminou
+            if(contadorFinalizado) {
+               adblockNotice.style.display = 'block';
+            }
+        } else {
+            // AdBlock N脙O EST脕 ATIVO
+            adblockNotice.style.display = 'none';
+            // Ativa o bot茫o apenas se o contador j谩 terminou
+            if (contadorFinalizado) {
+                botao.disabled = false;
+            }
+        }
+    }
+
+    // --- L脫GICA DO CONTADOR ---
+    const intervaloContador = setInterval(() => {
+      contador--;
+      const progresso = (100 - (contador * (100 / 15)));
+      circle.style.setProperty("--progress", progresso);
+      circle.textContent = contador;
+
+      if (contador <= 0) {
+        clearInterval(intervaloContador);
+        contadorFinalizado = true; // Avisa que o contador terminou
+
+        circle.style.display = "none";
+        botao.classList.add("show"); // Mostra o bot茫o
+        titulo.textContent = "Seu link est谩 pronto!";
+        subtexto.textContent = "Clique abaixo para continuar.";
+        
+        // Agora, a fun莽茫o de verifica莽茫o do AdBlock vai cuidar de habilitar o bot茫o
+        updateButtonState(); 
       }
     }, 1000);
 
-    // Clique do botão
-    botaoDownload.addEventListener("click", () => {
-      if (botaoDownload.disabled) return;
+    // --- VERIFICA脟脙O CONT脥NUA DO ADBLOCK ---
+    // A cada 2 segundos, verifica o status do AdBlock e atualiza o bot茫o
+    setInterval(updateButtonState, 2000);
 
-      const destino = "{{ destino_url }}"; // será substituído no backend
-      const smartlink = "https://victimfatalsentiments.com/wphgikf01i?key=642a7f08d1972d1c375573c767c43f6d";
-
-      if (!clicou) {
-        clicou = true;
-        window.open(smartlink, "_blank"); // primeiro clique abre o smartlink
-        botaoDownload.innerText = "Continuar";
+    // --- A脟脮ES DE CLIQUE E AN脷NCIOS ---
+    botao.addEventListener("click", () => {
+      if (!smartlinkAtivo) {
+        smartlinkAtivo = true;
+        window.open("/bonus?destino=" + encodeURIComponent(destino), "_blank");
+      } else if (destino) {
+        window.location.href = destino;
       } else {
-        // segundo clique leva ao bônus
-        window.location.href = "/bonus?destino=" + encodeURIComponent(destino);
+        alert("Link de destino n茫o encontrado!");
       }
+    });
+
+    // Fun莽茫o do Popunder ao clicar fora do bot茫o (j谩 estava no seu c贸digo)
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest("#botao")) {
+        const pop = document.createElement("script");
+        pop.src = "//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js";
+        document.body.appendChild(pop);
+      }
+    });
+
+    // A fun莽茫o do Social Bar n茫o precisa de altera莽茫o
+    function carregarSocialBar() {
+      if (!document.getElementById("social-bar-script")) {
+        const s = document.createElement("script");
+        s.src = "//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js";
+        s.id = "social-bar-script";
+        document.body.appendChild(s);
+      }
+    }
+    window.addEventListener("load", () => {
+      setTimeout(carregarSocialBar, 800);
+      let tentativas = 0;
+      const verificador = setInterval(() => {
+        tentativas++;
+        if (!document.querySelector('iframe[src*="effectivegatecpm"]')) {
+          carregarSocialBar();
+        }
+        if (tentativas > 10) clearInterval(verificador);
+      }, 3000);
     });
   </script>
 </body>
