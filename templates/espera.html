@@ -238,6 +238,29 @@
       }
     });
   </script>
+<style>
+  /* Efeito de fade suave */
+  #btnLiberar {
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+  }
+  #btnLiberar.mostrar {
+    opacity: 1;
+  }
+</style>
 
+<script>
+  // Função pra revelar o botão suavemente no final do contador
+  document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("btnLiberar");
+    if (!btn) return;
+
+    // Quando o contador terminar, mostra o botão suavemente
+    setTimeout(() => {
+      btn.classList.add("mostrar");
+    }, 15000); // mesmo tempo do contador (15s)
+  });
+</script>
+  
 </body>
 </html>
