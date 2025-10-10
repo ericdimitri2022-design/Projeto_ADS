@@ -1,4 +1,4 @@
-# app.py (VERSÃO FINAL COM CSP MELHORADO PARA ANÚNCIOS)
+# app.py (VERSÃO FINAL COM PERMISSÃO TOTAL PARA IMAGENS)
 
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 
@@ -38,11 +38,8 @@ def pagina_bonus():
     
     return render_template('bonus.html', destino=destino)
 
-# ############# INÍCIO DA ALTERAÇÃO MELHORADA #############
 @app.after_request
 def add_security_headers(response):
-    # Usamos '*' para permitir todos os subdomínios das redes de anúncios.
-    # Esta é uma abordagem mais robusta.
     csp_policy = {
         'default-src': ["'self'"],
         'script-src': [
@@ -56,27 +53,28 @@ def add_security_headers(response):
             '*.highperformanceformat.com',
             '*.effectivegatecpm.com'
         ],
+        # ############# INÍCIO DA ALTERAÇÃO FINAL #############
+        # Alteramos 'img-src' para permitir imagens de QUALQUER LUGAR ('*')
+        # Isso é necessário para os anúncios funcionarem corretamente.
         'img-src': [
             "'self'",
             'data:',
-            '*.highperformanceformat.com',
-            '*.effectivegatecpm.com'
+            '*' # O curinga '*' permite qualquer domínio.
         ],
+        # ############# FIM DA ALTERAÇÃO FINAL #############
         'style-src': [
             "'self'",
             "'unsafe-inline'",
             '*.highperformanceformat.com',
             '*.effectivegatecpm.com'
         ],
-        'connect-src': ['*'] # Permite qualquer conexão, muito importante para ads
+        'connect-src': ['*']
     }
     
-    # Monta a string final do CSP
     csp_string = "; ".join([f"{key} {' '.join(values)}" for key, values in csp_policy.items()])
     
     response.headers['Content-Security-Policy'] = csp_string
     return response
-# ############# FIM DA ALTERAÇÃO MELHORADA #############
 
 
 if __name__ == '__main__':
