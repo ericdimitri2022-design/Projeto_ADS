@@ -66,12 +66,6 @@
     .btn:hover {
       background: #16a34a;
     }
-    
-    .btn:disabled {
-        background: #9ca3af;
-        cursor: not-allowed;
-        opacity: 0.7;
-    }
 
     .banner-fixo {
       position: fixed;
@@ -134,7 +128,6 @@
 </head>
 <body>
 
-  <!-- Banner fixo -->
   <div class="banner-fixo">
     <script type="text/javascript">
       atOptions = {
@@ -181,9 +174,10 @@
 
     const urlParams = new URLSearchParams(window.location.search);
     const destino = urlParams.get('destino');
+    // A variável smartlink não é mais usada no clique do botão, mas pode ser mantida para outros fins.
     const smartlink = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
+
     let contador = 15;
-    let smartlinkAtivo = false;
     let contadorFinalizado = false;
 
     function checkAdBlock() {
@@ -193,16 +187,17 @@
         bait.style.height = '1px';
         bait.style.width = '1px';
         bait.style.left = '-9999px';
+        bait.style.top = '-9999px';
         document.body.appendChild(bait);
-        const adblock = bait.offsetHeight === 0;
+        const blocked = bait.offsetHeight === 0;
         document.body.removeChild(bait);
-        return adblock;
+        return blocked;
     }
-    
+
     function updateButtonState() {
         if (checkAdBlock()) {
             botao.disabled = true;
-            if(contadorFinalizado) adblockNotice.style.display = 'block';
+            if (contadorFinalizado) adblockNotice.style.display = 'block';
         } else {
             adblockNotice.style.display = 'none';
             if (contadorFinalizado) botao.disabled = false;
@@ -222,22 +217,24 @@
         botao.classList.add("show");
         titulo.textContent = "Seu link está pronto!";
         subtexto.textContent = "Clique abaixo para continuar.";
-        updateButtonState(); 
+        updateButtonState();
       }
     }, 1000);
 
     setInterval(updateButtonState, 2000);
 
+    // ############# INÍCIO DA ALTERAÇÃO #############
     botao.addEventListener("click", () => {
-      if (!smartlinkAtivo) {
-        smartlinkAtivo = true;
-        window.open(smartlink, "_blank");
-      } else if (destino) {
-        window.location.href = destino;
+      if (destino) {
+        // Redireciona para Bonus.html e passa o destino adiante.
+        // O encodeURIComponent garante que URLs com caracteres especiais funcionem corretamente.
+        window.location.href = `Bonus.html?destino=${encodeURIComponent(destino)}`;
       } else {
-        alert("Link de destino não encontrado!");
+        // Se não houver destino, apenas vai para Bonus.html (que terá um link padrão)
+        window.location.href = "Bonus.html";
       }
     });
+    // ############# FIM DA ALTERAÇÃO #############
 
     document.addEventListener("click", (e) => {
       if (!e.target.closest("#botao")) {
@@ -270,3 +267,4 @@
   </script>
 </body>
 </html>
+
