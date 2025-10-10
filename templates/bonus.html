@@ -3,278 +3,117 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aguarde...</title>
+  <title>Bônus Especial</title>
   <style>
     body {
-      background: #f9fafb;
+      background: #f3f4f6;
       font-family: "Poppins", sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       height: 100vh;
       margin: 0;
-      padding-top: 80px;
+      padding: 20px;
+      text-align: center;
     }
 
     .card {
-      background: #ffffff;
-      padding: 30px 25px;
+      background: #fff;
       border-radius: 16px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-      text-align: center;
+      padding: 40px 30px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
       max-width: 400px;
       width: 100%;
-      transition: all 0.4s ease;
+      transition: all 0.3s ease;
     }
 
     h1 {
-      color: #4f46e5;
+      color: #16a34a;
       margin-bottom: 10px;
-      font-size: 22px;
-      transition: opacity 0.5s ease;
+      font-size: 24px;
     }
 
     p {
       color: #333;
-      margin-bottom: 15px;
+      margin-bottom: 25px;
       font-size: 15px;
     }
 
-    .btn {
-      background: #22c55e;
-      color: white;
-      border: none;
-      padding: 12px 30px;
-      font-size: 16px;
+    a.btn {
+      background: #4f46e5;
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 10px;
       font-weight: 600;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: all 0.4s ease;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      display: none;
-      transform: translateY(10px);
-      opacity: 0;
-    }
-
-    .btn.show {
       display: inline-block;
-      opacity: 1;
-      transform: translateY(0);
+      transition: all 0.3s ease;
     }
 
-    .btn:hover {
-      background: #16a34a;
+    a.btn:hover {
+      background: #3730a3;
     }
 
-    .btn:disabled {
-        background: #9ca3af;
-        cursor: not-allowed;
-        opacity: 0.7;
-    }
-
-    .btn:disabled:hover {
-        background: #9ca3af;
-    }
-
-    .banner-fixo {
-      position: fixed;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 9999;
-      background: #fff;
-      border-radius: 10px;
-      padding: 4px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      width: 320px;
-      height: 50px;
-    }
-
-    .banner-native {
-      margin-top: 20px;
-      width: 100%;
-      text-align: center;
-    }
-
-    .info {
-      color: #2563eb;
-      font-size: 14px;
-      margin-top: 20px;
-      font-weight: 500;
+    .banner-bonus {
+      margin-top: 25px;
       text-align: center;
     }
 
     footer {
-      margin-top: 15px;
+      margin-top: 30px;
+      color: #888;
       font-size: 13px;
-      color: #aaa;
-      text-align: center;
     }
 
     .circle {
-      width: 120px;
-      height: 120px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
-      background: conic-gradient(#4f46e5 calc(var(--progress)*1%), #e5e7eb 0);
+      background: conic-gradient(#16a34a 100%, #e5e7eb 0);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
-      font-weight: 600;
-      color: #4f46e5;
+      color: #16a34a;
+      font-size: 36px;
+      font-weight: 700;
       margin: 20px auto;
-      transition: background 0.4s linear;
-      box-shadow: 0 0 15px rgba(79,70,229,0.3);
-      animation: pulse 1.5s infinite ease-in-out;
+      animation: pulse 1.4s infinite ease-in-out;
     }
 
     @keyframes pulse {
-      0% { box-shadow: 0 0 10px rgba(79,70,229,0.3); }
-      50% { box-shadow: 0 0 20px rgba(79,70,229,0.5); }
-      100% { box-shadow: 0 0 10px rgba(79,70,229,0.3); }
+      0% { box-shadow: 0 0 8px rgba(22,163,74,0.3); }
+      50% { box-shadow: 0 0 20px rgba(22,163,74,0.5); }
+      100% { box-shadow: 0 0 8px rgba(22,163,74,0.3); }
     }
   </style>
 </head>
 <body>
-
-  <div class="banner-fixo">
-    <script type="text/javascript">
-      atOptions = {
-        'key' : '5aed398ecdebf38696b5a0131d685b5b',
-        'format' : 'iframe',
-        'height' : 50,
-        'width' : 320,
-        'params' : {}
-      };
-    </script>
-    <script type="text/javascript" src="//www.highperformanceformat.com/5aed398ecdebf38696b5a0131d685b5b/invoke.js"></script>
-  </div>
-
   <div class="card">
-    <h1 id="titulo">Preparando seu link...</h1>
-    <p id="subtexto">Por favor, aguarde um instante.</p>
+    <div class="circle">✔</div>
+    <h1>Parabéns!</h1>
+    <p>Seu bônus foi liberado com sucesso. Aproveite seu conteúdo exclusivo abaixo 👇</p>
 
-    <div id="circle" class="circle" style="--progress:0">15</div>
+    <a href="https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81" target="_blank" class="btn">
+      ACESSAR AGORA
+    </a>
 
-    <button id="botao" class="btn" disabled>CONTINUAR PARA O DOWNLOAD</button>
-    
-    <p id="adblock-notice" style="display: none; color: #ef4444; font-size: 14px; margin-top: 10px; font-weight: 500;">
-        Para liberar o botão, por favor, desative seu AdBlock.
-    </p>
-
-    <div class="banner-native">
-      <script async data-cfasync="false" src="//pl27806509.effectivegatecpm.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
-      <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
+    <div class="banner-bonus">
+      <script type="text/javascript">
+        atOptions = {
+          'key' : '1f08c3a8c8dbe4eaf3eaa31f22c3a249',
+          'format' : 'iframe',
+          'height' : 60,
+          'width' : 320,
+          'params' : {}
+        };
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/1f08c3a8c8dbe4eaf3eaa31f22c3a249/invoke.js"></script>
     </div>
-
-    <p class="info">⚡ Clique em qualquer lugar da página para liberar seu link mais rápido!</p>
 
     <footer>© 2025 EricDfpXproads. Todos os direitos reservados.</footer>
   </div>
 
-  <script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
-
-  <script>
-    const circle = document.getElementById("circle");
-    const botao = document.getElementById("botao");
-    const titulo = document.getElementById("titulo");
-    const subtexto = document.getElementById("subtexto");
-    const adblockNotice = document.getElementById("adblock-notice");
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const destino = urlParams.get('destino');
-    const smartlink = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
-    let contador = 15;
-    let smartlinkAtivo = false;
-    let contadorFinalizado = false;
-
-    function checkAdBlock() {
-        const isca = document.createElement('div');
-        isca.className = 'ad-banner banner-ad ad-container';
-        isca.style.position = 'absolute';
-        isca.style.height = '1px';
-        isca.style.width = '1px';
-        isca.style.left = '-9999px';
-        isca.style.top = '-9999px';
-        document.body.appendChild(isca);
-        const isAdBlockerActive = isca.offsetHeight === 0;
-        document.body.removeChild(isca);
-        return isAdBlockerActive;
-    }
-
-    function updateButtonState() {
-        if (checkAdBlock()) {
-            botao.disabled = true;
-            if(contadorFinalizado) {
-               adblockNotice.style.display = 'block';
-            }
-        } else {
-            adblockNotice.style.display = 'none';
-            if (contadorFinalizado) {
-                botao.disabled = false;
-            }
-        }
-    }
-
-    const intervaloContador = setInterval(() => {
-      contador--;
-      const progresso = (100 - (contador * (100 / 15)));
-      circle.style.setProperty("--progress", progresso);
-      circle.textContent = contador;
-
-      if (contador <= 0) {
-        clearInterval(intervaloContador);
-        contadorFinalizado = true;
-        circle.style.display = "none";
-        botao.classList.add("show");
-        titulo.textContent = "Seu link está pronto!";
-        subtexto.textContent = "Clique abaixo para continuar.";
-        updateButtonState(); 
-      }
-    }, 1000);
-
-    setInterval(updateButtonState, 2000);
-
-    botao.addEventListener("click", () => {
-      if (!smartlinkAtivo) {
-        smartlinkAtivo = true;
-        window.open("/bonus?destino=" + encodeURIComponent(destino), "_blank");
-      } else if (destino) {
-        window.location.href = destino;
-      } else {
-        alert("Link de destino não encontrado!");
-      }
-    });
-
-    document.addEventListener("click", (e) => {
-      if (!e.target.closest("#botao")) {
-        const pop = document.createElement("script");
-        pop.src = "//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js";
-        document.body.appendChild(pop);
-      }
-    });
-
-    function carregarSocialBar() {
-      if (!document.getElementById("social-bar-script")) {
-        const s = document.createElement("script");
-        s.src = "//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js";
-        s.id = "social-bar-script";
-        document.body.appendChild(s);
-      }
-    }
-
-    window.addEventListener("load", () => {
-      setTimeout(carregarSocialBar, 800);
-      let tentativas = 0;
-      const verificador = setInterval(() => {
-        tentativas++;
-        if (!document.querySelector('iframe[src*="effectivegatecpm"]')) {
-          carregarSocialBar();
-        }
-        if (tentativas > 10) clearInterval(verificador);
-      }, 3000);
-    });
-  </script>
+  <script type='text/javascript' src='//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js'></script>
 </body>
 </html>
