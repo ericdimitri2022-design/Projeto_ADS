@@ -66,6 +66,17 @@
     .btn:hover {
       background: #16a34a;
     }
+    
+    /* 🔴 NOVO ESTILO: Para o botão quando estiver desativado */
+    .btn:disabled {
+        background: #9ca3af; /* Cinza */
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+
+    .btn:disabled:hover {
+        background: #9ca3af; /* Remove o efeito hover quando desativado */
+    }
 
     .banner-fixo {
       position: fixed;
@@ -102,7 +113,6 @@
       text-align: center;
     }
 
-    /* 🟣 Contador Circular com Animação Suave */
     .circle {
       width: 120px;
       height: 120px;
@@ -129,7 +139,6 @@
 </head>
 <body>
 
-  <!-- 🟢 Banner Fixo Topo -->
   <div class="banner-fixo">
     <script type="text/javascript">
       atOptions = {
@@ -143,17 +152,18 @@
     <script type="text/javascript" src="//www.highperformanceformat.com/5aed398ecdebf38696b5a0131d685b5b/invoke.js"></script>
   </div>
 
-  <!-- 🧩 Conteúdo Principal -->
   <div class="card">
     <h1 id="titulo">Preparando seu link...</h1>
     <p id="subtexto">Por favor, aguarde um instante.</p>
 
-    <!-- Contador Circular -->
     <div id="circle" class="circle" style="--progress:0">15</div>
 
     <button id="botao" class="btn" disabled>CONTINUAR PARA O DOWNLOAD</button>
+    
+    <p id="adblock-notice" style="display: none; color: #ef4444; font-size: 14px; margin-top: 10px; font-weight: 500;">
+        Para liberar o botão, por favor, desative seu AdBlock.
+    </p>
 
-    <!-- 🔵 Banner Native -->
     <div class="banner-native">
       <script async="async" data-cfasync="false" src="//pl27806509.effectivegatecpm.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
       <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
@@ -164,11 +174,105 @@
     <footer>© 2025 EricDfpXproads. Todos os direitos reservados.</footer>
   </div>
 
-  <!-- 🔥 Popunder Script -->
   <script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
 
   <script>
-    // 🚀 Social Bar com fallback
+    // --- ELEMENTOS DA PÁGINA ---
+    const circle = document.getElementById("circle");
+    const botao = document.getElementById("botao");
+    const titulo = document.getElementById("titulo");
+    const subtexto = document.getElementById("subtexto");
+    const adblockNotice = document.getElementById("adblock-notice");
+
+    // --- VARIÁVEIS DE CONTROLE ---
+    const urlParams = new URLSearchParams(window.location.search);
+    const destino = urlParams.get('destino');
+    const smartlink = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
+    let contador = 15;
+    let smartlinkAtivo = false;
+    let contadorFinalizado = false;
+
+    // --- LÓGICA DO ADBLOCK ---
+    function checkAdBlock() {
+        const isca = document.createElement('div');
+        isca.className = 'ad-banner banner-ad ad-container';
+        isca.style.position = 'absolute';
+        isca.style.height = '1px';
+        isca.style.width = '1px';
+        isca.style.left = '-9999px';
+        isca.style.top = '-9999px';
+        document.body.appendChild(isca);
+        const isAdBlockerActive = isca.offsetHeight === 0;
+        document.body.removeChild(isca);
+        return isAdBlockerActive;
+    }
+    
+    // Função que decide se o botão deve estar ativo ou não
+    function updateButtonState() {
+        if (checkAdBlock()) {
+            // AdBlock ESTÁ ATIVO
+            botao.disabled = true;
+            // Mostra o aviso apenas se o contador já terminou
+            if(contadorFinalizado) {
+               adblockNotice.style.display = 'block';
+            }
+        } else {
+            // AdBlock NÃO ESTÁ ATIVO
+            adblockNotice.style.display = 'none';
+            // Ativa o botão apenas se o contador já terminou
+            if (contadorFinalizado) {
+                botao.disabled = false;
+            }
+        }
+    }
+
+    // --- LÓGICA DO CONTADOR ---
+    const intervaloContador = setInterval(() => {
+      contador--;
+      const progresso = (100 - (contador * (100 / 15)));
+      circle.style.setProperty("--progress", progresso);
+      circle.textContent = contador;
+
+      if (contador <= 0) {
+        clearInterval(intervaloContador);
+        contadorFinalizado = true; // Avisa que o contador terminou
+
+        circle.style.display = "none";
+        botao.classList.add("show"); // Mostra o botão
+        titulo.textContent = "Seu link está pronto!";
+        subtexto.textContent = "Clique abaixo para continuar.";
+        
+        // Agora, a função de verificação do AdBlock vai cuidar de habilitar o botão
+        updateButtonState(); 
+      }
+    }, 1000);
+
+    // --- VERIFICAÇÃO CONTÍNUA DO ADBLOCK ---
+    // A cada 2 segundos, verifica o status do AdBlock e atualiza o botão
+    setInterval(updateButtonState, 2000);
+
+    // --- AÇÕES DE CLIQUE E ANÚNCIOS ---
+    botao.addEventListener("click", () => {
+      if (!smartlinkAtivo) {
+        smartlinkAtivo = true;
+        window.open(smartlink, "_blank");
+      } else if (destino) {
+        window.location.href = destino;
+      } else {
+        alert("Link de destino não encontrado!");
+      }
+    });
+
+    // Função do Popunder ao clicar fora do botão (já estava no seu código)
+    document.addEventListener("click", (e) => {
+      if (!e.target.closest("#botao")) {
+        const pop = document.createElement("script");
+        pop.src = "//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js";
+        document.body.appendChild(pop);
+      }
+    });
+
+    // A função do Social Bar não precisa de alteração
     function carregarSocialBar() {
       if (!document.getElementById("social-bar-script")) {
         const s = document.createElement("script");
@@ -177,7 +281,6 @@
         document.body.appendChild(s);
       }
     }
-
     window.addEventListener("load", () => {
       setTimeout(carregarSocialBar, 800);
       let tentativas = 0;
@@ -189,78 +292,6 @@
         if (tentativas > 10) clearInterval(verificador);
       }, 3000);
     });
-
-    // 💥 Popunder ao clicar fora do botão
-    document.addEventListener("click", (e) => {
-      if (!e.target.closest("#botao")) {
-        const pop = document.createElement("script");
-        pop.src = "//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js";
-        document.body.appendChild(pop);
-      }
-    });
-
-    // ⏳ Contador Circular Suave
-    const urlParams = new URLSearchParams(window.location.search);
-    const destino = urlParams.get('destino');
-    const smartlink = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
-
-    let contador = 15;
-    const circle = document.getElementById("circle");
-    const botao = document.getElementById("botao");
-    const titulo = document.getElementById("titulo");
-    const subtexto = document.getElementById("subtexto");
-    let smartlinkAtivo = false;
-
-    const intervalo = setInterval(() => {
-      contador--;
-      const progresso = (100 - (contador * (100/15)));
-      circle.style.setProperty("--progress", progresso);
-      circle.textContent = contador;
-
-      if (contador <= 0) {
-        clearInterval(intervalo);
-        circle.style.display = "none";
-        botao.classList.add("show");
-        botao.disabled = false;
-        titulo.textContent = "Seu link está pronto!";
-        subtexto.textContent = "Clique abaixo para continuar.";
-      }
-    }, 1000);
-
-    botao.addEventListener("click", () => {
-      if (!smartlinkAtivo) {
-        smartlinkAtivo = true;
-        window.open(smartlink, "_blank");
-      } else if (destino) {
-        window.location.href = destino;
-      } else {
-        alert("Link de destino não encontrado!");
-      }
-    });
   </script>
-<style>
-  /* Efeito de fade suave */
-  #btnLiberar {
-    opacity: 0;
-    transition: opacity 0.8s ease-in-out;
-  }
-  #btnLiberar.mostrar {
-    opacity: 1;
-  }
-</style>
-
-<script>
-  // Função pra revelar o botão suavemente no final do contador
-  document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("btnLiberar");
-    if (!btn) return;
-
-    // Quando o contador terminar, mostra o botão suavemente
-    setTimeout(() => {
-      btn.classList.add("mostrar");
-    }, 15000); // mesmo tempo do contador (15s)
-  });
-</script>
-  
 </body>
 </html>
