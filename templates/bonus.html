@@ -3,67 +3,69 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Apoie o criador 💰</title>
+  <title>Bônus em Instantes 🎁</title>
   <style>
     body {
-      background: #f9fafb;
       font-family: "Poppins", sans-serif;
+      background: #f9fafb;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
-      height: 100vh;
-      margin: 0;
-      padding-top: 80px;
-      text-align: center;
-    }
-
-    .card {
-      background: #ffffff;
-      padding: 30px 25px;
-      border-radius: 16px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-      max-width: 400px;
-      width: 100%;
+      min-height: 100vh;
     }
 
     h1 {
-      color: #4f46e5;
-      margin-bottom: 10px;
-      font-size: 22px;
+      color: #4a3aff;
+      margin-top: 2rem;
+      font-size: 1.8rem;
     }
 
     p {
-      color: #333;
-      margin-bottom: 15px;
-      font-size: 15px;
+      color: #666;
+      font-size: 1rem;
+      margin: 0.5rem 0 1.5rem 0;
     }
 
-    .banner {
-      width: 100%;
-      text-align: center;
-      margin: 10px 0;
+    .ads-container {
+      margin: 10px auto;
+      max-width: 90%;
+      display: flex;
+      justify-content: center;
     }
 
-    .circle {
-      width: 120px;
-      height: 120px;
+    .timer {
+      font-size: 1.5rem;
+      color: #4a3aff;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .progress {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #4a3aff;
+      border: 6px solid #4a3aff;
       border-radius: 50%;
-      background: conic-gradient(#4f46e5 calc(var(--progress)*1%), #e5e7eb 0);
+      width: 150px;
+      height: 150px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px;
-      font-weight: 600;
-      color: #4f46e5;
       margin: 20px auto;
-      transition: background 0.5s linear;
     }
 
     footer {
-      margin-top: 20px;
-      font-size: 13px;
-      color: #999;
+      margin-top: auto;
+      width: 100%;
+      padding: 10px 0;
+      text-align: center;
+      background-color: #f1f1f1;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
     }
 
     @media (max-width: 600px) {
@@ -75,56 +77,74 @@
   </style>
 </head>
 <body>
+  <h1>Preparando seu bônus 🎁</h1>
+  <p>Aguarde um instante enquanto tudo carrega...</p>
 
-  <!-- 🔝 Banner superior -->
-  <div class="banner">
+  <!-- ADS TOPO -->
+  <div class="ads-container">
     <script type="text/javascript">
       atOptions = {
-        'key' : '5aed398ecdebf38696b5a0131d685b5b',
+        'key' : 'ffaf6c7d1c1141271f0c6cf5ee5bd221',
         'format' : 'iframe',
-        'height' : 50,
-        'width' : 320,
+        'height' : 300,
+        'width' : 160,
         'params' : {}
       };
     </script>
-    <script type="text/javascript" src="//www.highperformanceformat.com/5aed398ecdebf38696b5a0131d685b5b/invoke.js"></script>
+    <script src="//victimfatalsentiments.com/ffaf6c7d1c1141271f0c6cf5ee5bd221/invoke.js"></script>
   </div>
 
-  <div class="card">
-    <h1>Obrigado por apoiar 💚</h1>
-    <p>Seu link abrirá em alguns segundos...</p>
+  <!-- CONTADOR -->
+  <div class="progress" id="contador">3</div>
 
-    <div id="circle" class="circle" style="--progress:0">5</div>
-
-    <!-- Banner adicional -->
-    <div class="banner">
-      <script async="async" data-cfasync="false" src="//pl27806509.effectivegatecpm.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
-      <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
-    </div>
-
-    <footer>© 2025 EricDfpXproads — todos os direitos reservados.</footer>
+  <!-- ADS MEIO -->
+  <div class="ads-container">
+    <script type="text/javascript">
+      atOptions = {
+        'key' : 'eab916a7219cc3f76f34198f1a8585fb',
+        'format' : 'iframe',
+        'height' : 600,
+        'width' : 160,
+        'params' : {}
+      };
+    </script>
+    <script src="//victimfatalsentiments.com/eab916a7219cc3f76f34198f1a8585fb/invoke.js"></script>
   </div>
 
+  <!-- CONTAGEM E REDIRECIONAMENTO -->
   <script>
-    // Pega o destino do link (?destino=)
-    const urlParams = new URLSearchParams(window.location.search);
-    const destino = urlParams.get('destino') || "https://google.com"; // fallback
+    let tempo = 3;
+    const contador = document.getElementById("contador");
+    const destino = "{{ destino_url }}"; // Flask insere o link final
 
-    let contador = 5;
-    const circle = document.getElementById("circle");
+    const interval = setInterval(() => {
+      tempo--;
+      contador.textContent = tempo;
 
-    const intervalo = setInterval(() => {
-      contador--;
-      const progresso = (100 - (contador * 20));
-      circle.style.setProperty("--progress", progresso);
-      circle.textContent = contador;
-
-      if (contador <= 0) {
-        clearInterval(intervalo);
+      if (tempo <= 0) {
+        clearInterval(interval);
         window.location.href = destino;
       }
     }, 1000);
   </script>
 
+  <!-- ADS RODAPÉ -->
+  <footer>
+    <div class="ads-container">
+      <script type="text/javascript">
+        atOptions = {
+          'key' : 'ffaf6c7d1c1141271f0c6cf5ee5bd221',
+          'format' : 'iframe',
+          'height' : 300,
+          'width' : 160,
+          'params' : {}
+        };
+      </script>
+      <script src="//victimfatalsentiments.com/ffaf6c7d1c1141271f0c6cf5ee5bd221/invoke.js"></script>
+    </div>
+  </footer>
+
+  <!-- SOCIAL BAR -->
+  <script src='//victimfatalsentiments.com/01/81/75/0181758b919925fc16429ef442fcd016.js'></script>
 </body>
 </html>
