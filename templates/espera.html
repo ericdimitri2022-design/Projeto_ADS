@@ -12,7 +12,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
+      height: 100vh;
       text-align: center;
       margin: 0;
       color: #333;
@@ -31,32 +31,18 @@
     }
 
     .contador {
-      position: relative;
-      width: 160px;
-      height: 160px;
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
-      border: 6px solid #e1e1ff;
-      margin-top: 2rem;
+      border: 6px solid #4a3aff;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 2.5rem;
       font-weight: bold;
       color: #4a3aff;
-    }
-
-    .progresso {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 6px solid #4a3aff;
-      clip-path: polygon(50% 50%, 50% 0, 100% 0, 100% 100%, 0 100%, 0 0, 50% 0);
-      transform: rotate(0deg);
-      transform-origin: center;
-      transition: transform 1s linear;
+      margin-top: 2rem;
+      position: relative;
     }
 
     .botao-continuar {
@@ -71,12 +57,7 @@
       transition: all 0.3s ease;
     }
 
-    .botao-continuar:disabled {
-      background-color: #b5b5f7;
-      cursor: not-allowed;
-    }
-
-    .botao-continuar:hover:not(:disabled) {
+    .botao-continuar:hover {
       background-color: #372ad8;
       transform: scale(1.05);
     }
@@ -103,10 +84,7 @@
   <h1>Obrigado por apoiar 💚</h1>
   <p>Seu link abrirá em alguns segundos...</p>
 
-  <div class="contador">
-    <div class="progresso" id="progresso"></div>
-    <span id="contador">15</span>
-  </div>
+  <div class="contador" id="contador">15</div>
 
   <button id="botao-download" class="botao-continuar" disabled>Download</button>
 
@@ -118,37 +96,34 @@
   <script>
     let tempo = 15;
     const contadorEl = document.getElementById("contador");
-    const progresso = document.getElementById("progresso");
     const botaoDownload = document.getElementById("botao-download");
     let clicou = false;
 
-    const totalTempo = tempo;
-
+    // Contagem regressiva
     const timer = setInterval(() => {
       tempo--;
       contadorEl.textContent = tempo;
-      const progressoGraus = ((totalTempo - tempo) / totalTempo) * 360;
-      progresso.style.transform = `rotate(${progressoGraus}deg)`;
 
       if (tempo <= 0) {
         clearInterval(timer);
-        contadorEl.textContent = "0";
         botaoDownload.disabled = false;
         botaoDownload.innerText = "Baixar Agora";
       }
     }, 1000);
 
+    // Clique do botão
     botaoDownload.addEventListener("click", () => {
       if (botaoDownload.disabled) return;
 
-      const destino = "{{ destino_url }}";
+      const destino = "{{ destino_url }}"; // será substituído no backend
       const smartlink = "https://victimfatalsentiments.com/wphgikf01i?key=642a7f08d1972d1c375573c767c43f6d";
 
       if (!clicou) {
         clicou = true;
-        window.open(smartlink, "_blank"); // primeiro clique abre anúncio
+        window.open(smartlink, "_blank"); // primeiro clique abre o smartlink
         botaoDownload.innerText = "Continuar";
       } else {
+        // segundo clique leva ao bônus
         window.location.href = "/bonus?destino=" + encodeURIComponent(destino);
       }
     });
