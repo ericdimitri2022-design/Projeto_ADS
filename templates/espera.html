@@ -222,15 +222,17 @@
 
     setInterval(updateButtonState, 2000);
 
+    // ############# INÍCIO DA ALTERAÇÃO FINAL #############
     botao.addEventListener("click", () => {
       if (destino) {
-        // CORREÇÃO: Aponta para a pasta correta e nome de arquivo correto
-        window.location.href = `templates/bonus.html?destino=${encodeURIComponent(destino)}`;
+        // CORREÇÃO: Aponta para a ROTA /bonus, e não para o arquivo.
+        window.location.href = `/bonus?destino=${encodeURIComponent(destino)}`;
       } else {
-        // CORREÇÃO: Aponta para a pasta correta e nome de arquivo correto
-        window.location.href = "templates/bonus.html";
+        // CORREÇÃO: Aponta para a ROTA /bonus.
+        window.location.href = "/bonus";
       }
     });
+    // ############# FIM DA ALTERAÇÃO FINAL #############
 
     document.addEventListener("click", (e) => {
       if (!e.target.closest("#botao")) {
