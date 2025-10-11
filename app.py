@@ -1,10 +1,9 @@
-# app.py (VERSÃO FINAL E SEGURA)
+# app.py (Usando a política de segurança que você forneceu)
 
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 
 app = Flask(__name__)
 
-# ... (suas rotas continuam exatamente iguais) ...
 @app.route('/sw.js')
 def serve_sw():
     return send_from_directory(app.root_path, 'sw.js')
@@ -32,25 +31,25 @@ def pagina_bonus():
 
 @app.after_request
 def add_security_headers(response):
-    # Política de segurança final, permitindo todos os seus domínios de anúncio
+    # ESTA É A POLÍTICA DE SEGURANÇA QUE VOCÊ ENVIOU
     csp_policy = {
         'default-src': ["'self'"],
         'script-src': [
             "'self'",
             "'unsafe-inline'",
-            '*.highperformanceformat.com',  # Domínio da página de espera
-            '*.effectivegatecpm.com',       # Domínio da página de espera
-            '*.victimfatalsentiments.com'   # Domínio da página de bônus
+            'https://*.highperformanceformat.com',
+            'https://*.effectivegatecpm.com',
+            'https://*.victimfatalsentiments.com'
         ],
         'frame-src': [
             "'self'",
-            '*.highperformanceformat.com',
-            '*.effectivegatecpm.com',
-            '*.victimfatalsentiments.com'
+            'https://*.highperformanceformat.com',
+            'https://*.effectivegatecpm.com',
+            'https://*.victimfatalsentiments.com'
         ],
-        'img-src': ["'self'", 'data:', '*'],
+        'img-src': ["'self'", 'data:', 'https://*', '*'],
         'style-src': ["'self'", "'unsafe-inline'"],
-        'connect-src': ['*']
+        'connect-src': ['https://*.victimfatalsentiments.com', '*']
     }
     
     csp_string = "; ".join([f"{key} {' '.join(values)}" for key, values in csp_policy.items()])
