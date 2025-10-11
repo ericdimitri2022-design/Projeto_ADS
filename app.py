@@ -1,9 +1,10 @@
-# app.py (Usando a política de segurança que você forneceu)
+# app.py (VERSÃO FINAL DE TESTE - POLÍTICA SEMI-ABERTA)
 
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 
 app = Flask(__name__)
 
+# ... (suas rotas não mudam e continuam corretas) ...
 @app.route('/sw.js')
 def serve_sw():
     return send_from_directory(app.root_path, 'sw.js')
@@ -31,26 +32,26 @@ def pagina_bonus():
 
 @app.after_request
 def add_security_headers(response):
-    # ESTA É A POLÍTICA DE SEGURANÇA QUE VOCÊ ENVIOU
+    # ############# INÍCIO DA POLÍTICA DE TESTE SEMI-ABERTA #############
+    # Esta política permite que a maioria dos recursos venha de qualquer lugar.
+    # É o nosso teste final para confirmar que o CSP é a causa.
     csp_policy = {
         'default-src': ["'self'"],
         'script-src': [
             "'self'",
             "'unsafe-inline'",
-            'https://*.highperformanceformat.com',
-            'https://*.effectivegatecpm.com',
-            'https://*.victimfatalsentiments.com'
+            "'unsafe-eval'",
+            '*'  # Permite scripts de qualquer domínio
         ],
         'frame-src': [
             "'self'",
-            'https://*.highperformanceformat.com',
-            'https://*.effectivegatecpm.com',
-            'https://*.victimfatalsentiments.com'
+            '*'  # Permite iframes de qualquer domínio
         ],
-        'img-src': ["'self'", 'data:', 'https://*', '*'],
+        'img-src': ["'self'", 'data:', '*'],
         'style-src': ["'self'", "'unsafe-inline'"],
-        'connect-src': ['https://*.victimfatalsentiments.com', '*']
+        'connect-src': ['*'] # Permite conexões com qualquer servidor
     }
+    # ############# FIM DA POLÍTICA DE TESTE #############
     
     csp_string = "; ".join([f"{key} {' '.join(values)}" for key, values in csp_policy.items()])
     response.headers['Content-Security-Policy'] = csp_string
