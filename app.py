@@ -1,4 +1,4 @@
-# app.py (VERSÃO DE TESTE COM CSP PERMISSIVO)
+# app.py (VERSÃO FINAL E SEGURA)
 
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 
@@ -32,22 +32,26 @@ def pagina_bonus():
 
 @app.after_request
 def add_security_headers(response):
-    # ############# INÍCIO DA ALTERAÇÃO DE TESTE #############
-    # Para diagnosticar, estamos permitindo scripts de QUALQUER LUGAR ('*').
-    # Isso é temporário e apenas para este teste.
+    # Política de segurança final, permitindo todos os seus domínios de anúncio
     csp_policy = {
         'default-src': ["'self'"],
         'script-src': [
             "'self'",
             "'unsafe-inline'",
-            '*'  # O curinga '*' permite qualquer domínio.
+            '*.highperformanceformat.com',  # Domínio da página de espera
+            '*.effectivegatecpm.com',       # Domínio da página de espera
+            '*.victimfatalsentiments.com'   # Domínio da página de bônus
         ],
-        'frame-src': ["'self'", '*'], # Também permitindo frames de qualquer lugar
+        'frame-src': [
+            "'self'",
+            '*.highperformanceformat.com',
+            '*.effectivegatecpm.com',
+            '*.victimfatalsentiments.com'
+        ],
         'img-src': ["'self'", 'data:', '*'],
         'style-src': ["'self'", "'unsafe-inline'"],
         'connect-src': ['*']
     }
-    # ############# FIM DA ALTERAÇÃO DE TESTE #############
     
     csp_string = "; ".join([f"{key} {' '.join(values)}" for key, values in csp_policy.items()])
     response.headers['Content-Security-Policy'] = csp_string
