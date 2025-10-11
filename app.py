@@ -1,5 +1,3 @@
-# app.py (VERSÃO FINAL COM PERMISSÃO TOTAL PARA IMAGENS)
-
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 
 app = Flask(__name__)
@@ -45,29 +43,18 @@ def add_security_headers(response):
         'script-src': [
             "'self'",
             "'unsafe-inline'",
-            '*.highperformanceformat.com',
-            '*.effectivegatecpm.com'
+            '*.highperformanceformat.com',  # Domínio da página de espera
+            '*.effectivegatecpm.com',       # Domínio da página de espera
+            '*.victimfatalsentiments.com'   # <<<< ADICIONADO DOMÍNIO NOVO DA PÁGINA BÔNUS
         ],
         'frame-src': [
             "'self'",
             '*.highperformanceformat.com',
-            '*.effectivegatecpm.com'
+            '*.effectivegatecpm.com',
+            '*.victimfatalsentiments.com'   # <<<< ADICIONADO DOMÍNIO NOVO DA PÁGINA BÔNUS
         ],
-        # ############# INÍCIO DA ALTERAÇÃO FINAL #############
-        # Alteramos 'img-src' para permitir imagens de QUALQUER LUGAR ('*')
-        # Isso é necessário para os anúncios funcionarem corretamente.
-        'img-src': [
-            "'self'",
-            'data:',
-            '*' # O curinga '*' permite qualquer domínio.
-        ],
-        # ############# FIM DA ALTERAÇÃO FINAL #############
-        'style-src': [
-            "'self'",
-            "'unsafe-inline'",
-            '*.highperformanceformat.com',
-            '*.effectivegatecpm.com'
-        ],
+        'img-src': ["'self'", 'data:', '*'],
+        'style-src': ["'self'", "'unsafe-inline'"],
         'connect-src': ['*']
     }
     
