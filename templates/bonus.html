@@ -3,22 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bônus Especial</title>
+  <title>Bônus Especial - Teste</title>
   <style>
+    /* Estilos da página de bônus (não precisa alterar) */
     body { background: #f3f4f6; font-family: "Poppins", sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; text-align: center; box-sizing: border-box; }
-    .card { background: #fff; border-radius: 16px; padding: 30px 25px; box-shadow: 0 3px 15px rgba(0,0,0,0.1); max-width: 450px; width: 100%; }
-    h1 { color: #16a34a; margin-bottom: 10px; font-size: 24px; }
-    p { color: #333; margin-bottom: 25px; font-size: 15px; }
-    a.btn { background: #4f46e5; color: #fff; text-decoration: none; padding: 12px 28px; border-radius: 10px; font-weight: 600; display: inline-block; transition: background-color 0.3s ease; }
-    a.btn:hover { background: #3730a3; }
-    .ads-container {
-        margin-top: 25px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 15px; /* Espaço entre os banners */
-        flex-wrap: wrap; /* Permite que os banners quebrem a linha em telas pequenas */
-    }
+    .card { background: #fff; border-radius: 16px; padding: 40px 30px; box-shadow: 0 3px 15px rgba(0,0,0,0.1); max-width: 400px; width: 100%; }
+    h1 { color: #16a34a; }
+    a.btn { background: #4f46e5; color: #fff; text-decoration: none; padding: 12px 28px; border-radius: 10px; font-weight: 600; display: inline-block; }
   </style>
 </head>
 <body>
@@ -26,34 +17,6 @@
     <h1>Parabéns!</h1>
     <p>Seu bônus foi liberado. Aproveite seu conteúdo exclusivo abaixo 👇</p>
     <a href="#" target="_blank" class="btn" id="botao-acesso">ACESSAR AGORA</a>
-    
-    <div class="ads-container">
-        <div>
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '92e70a8fd20e5cc31f5dafa4aca3674e',
-                    'format' : 'iframe',
-                    'height' : 250,
-                    'width' : 300,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//victimfatalsentiments.com/92e70a8fd20e5cc31f5dafa4aca3674e/invoke.js"></script>
-        </div>
-
-        <div>
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : 'ffaf6c7d1c1141271f0c6cf5ee5bd221',
-                    'format' : 'iframe',
-                    'height' : 300,
-                    'width' : 160,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//victimfatalsentiments.com/ffaf6c7d1c1141271f0c6cf5ee5bd221/invoke.js"></script>
-        </div>
-    </div>
   </div>
 
   <script type='text/javascript' src='//victimfatalsentiments.com/01/81/75/0181758b919925fc16429ef442fcd016.js'></script>
@@ -63,8 +26,7 @@
       const botaoAcesso = document.getElementById('botao-acesso');
       const urlParams = new URLSearchParams(window.location.search);
       const destinoFinal = urlParams.get('destino');
-      // Lembre-se de colocar um link padrão aqui caso o 'destino' não seja passado
-      const linkPadrao = "https://www.google.com"; 
+      const linkPadrao = "https://www.google.com"; // Coloque seu link padrão aqui
       
       botaoAcesso.href = destinoFinal ? destinoFinal : linkPadrao;
     };
