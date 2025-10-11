@@ -5,101 +5,55 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Bônus Especial</title>
   <style>
-    body {
-      background: #f3f4f6;
-      font-family: "Poppins", sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      padding: 20px;
-      text-align: center;
+    body { background: #f3f4f6; font-family: "Poppins", sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px; text-align: center; box-sizing: border-box; }
+    .card { background: #fff; border-radius: 16px; padding: 30px 25px; box-shadow: 0 3px 15px rgba(0,0,0,0.1); max-width: 450px; width: 100%; }
+    h1 { color: #16a34a; margin-bottom: 10px; font-size: 24px; }
+    p { color: #333; margin-bottom: 25px; font-size: 15px; }
+    a.btn { background: #4f46e5; color: #fff; text-decoration: none; padding: 12px 28px; border-radius: 10px; font-weight: 600; display: inline-block; transition: background-color 0.3s ease; }
+    a.btn:hover { background: #3730a3; }
+    .ads-container {
+        margin-top: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 15px; /* Espaço entre os banners */
+        flex-wrap: wrap; /* Permite que os banners quebrem a linha em telas pequenas */
     }
-    .card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 40px 30px;
-      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
-      max-width: 400px;
-      width: 100%;
-      transition: all 0.3s ease;
-    }
-    h1 {
-      color: #16a34a;
-      margin-bottom: 10px;
-      font-size: 24px;
-    }
-    p {
-      color: #333;
-      margin-bottom: 25px;
-      font-size: 15px;
-    }
-    a.btn {
-      background: #4f46e5;
-      color: #fff;
-      text-decoration: none;
-      padding: 12px 28px;
-      border-radius: 10px;
-      font-weight: 600;
-      display: inline-block;
-      transition: all 0.3s ease;
-    }
-    a.btn:hover {
-      background: #3730a3;
-    }
-    footer {
-      margin-top: 30px;
-      color: #888;
-      font-size: 13px;
-    }
-    .success-animation { margin: 20px auto; }
-    .checkmark { width: 100px; height: 100px; border-radius: 50%; display: block; stroke-width: 3; stroke: #16a34a; stroke-miterlimit: 10; box-shadow: inset 0px 0px 0px #16a34a; animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both; }
-    .checkmark__circle { stroke-dasharray: 166; stroke-dashoffset: 166; stroke-width: 3; stroke-miterlimit: 10; stroke: #16a34a; fill: #fff; animation: stroke .6s cubic-bezier(0.65, 0, 0.45, 1) forwards; }
-    .checkmark__check { transform-origin: 50% 50%; stroke-dasharray: 48; stroke-dashoffset: 48; animation: stroke .3s cubic-bezier(0.65, 0, 0.45, 1) .8s forwards; }
-    @keyframes stroke { 100% { stroke-dashoffset: 0; } }
-    @keyframes scale { 0%, 100% { transform: none; } 50% { transform: scale3d(1.1, 1.1, 1); } }
-    @keyframes fill { 100% { box-shadow: inset 0px 0px 0px 50px #16a34a; } }
-    .banner-bonus, .native-bar { margin-top: 25px; text-align: center; }
   </style>
 </head>
 <body>
   <div class="card">
-    
-    <div class="success-animation">
-      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-      </svg>
-    </div>
-
     <h1>Parabéns!</h1>
-    <p>Seu bônus foi liberado com sucesso. Aproveite seu conteúdo exclusivo abaixo 👇</p>
+    <p>Seu bônus foi liberado. Aproveite seu conteúdo exclusivo abaixo 👇</p>
+    <a href="#" target="_blank" class="btn" id="botao-acesso">ACESSAR AGORA</a>
+    
+    <div class="ads-container">
+        <div>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '92e70a8fd20e5cc31f5dafa4aca3674e',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//victimfatalsentiments.com/92e70a8fd20e5cc31f5dafa4aca3674e/invoke.js"></script>
+        </div>
 
-    <div class="native-bar">
-      <script async="async" data-cfasync="false" src="//victimfatalsentiments.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
-      <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
+        <div>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : 'ffaf6c7d1c1141271f0c6cf5ee5bd221',
+                    'format' : 'iframe',
+                    'height' : 300,
+                    'width' : 160,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//victimfatalsentiments.com/ffaf6c7d1c1141271f0c6cf5ee5bd221/invoke.js"></script>
+        </div>
     </div>
-
-    <a href="#" target="_blank" class="btn" id="botao-acesso">
-      ACESSAR AGORA
-    </a>
-
-    <div class="banner-bonus">
-      <script type="text/javascript">
-        atOptions = {
-          'key' : '5aed398ecdebf38696b5a0131d685b5b',
-          'format' : 'iframe',
-          'height' : 50,
-          'width' : 320,
-          'params' : {}
-        };
-      </script>
-      <script type="text/javascript" src="//victimfatalsentiments.com/5aed398ecdebf38696b5a0131d685b5b/invoke.js"></script>
-    </div>
-
-    <footer>© 2025 EricDfpXproads. Todos os direitos reservados.</footer>
   </div>
 
   <script type='text/javascript' src='//victimfatalsentiments.com/01/81/75/0181758b919925fc16429ef442fcd016.js'></script>
@@ -109,14 +63,10 @@
       const botaoAcesso = document.getElementById('botao-acesso');
       const urlParams = new URLSearchParams(window.location.search);
       const destinoFinal = urlParams.get('destino');
-      // Link padrão caso não haja destino na URL
-      const linkPadrao = "https://victimfatalsentiments.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
+      // Lembre-se de colocar um link padrão aqui caso o 'destino' não seja passado
+      const linkPadrao = "https://www.google.com"; 
       
-      if (destinoFinal) {
-        botaoAcesso.href = destinoFinal;
-      } else {
-        botaoAcesso.href = linkPadrao;
-      }
+      botaoAcesso.href = destinoFinal ? destinoFinal : linkPadrao;
     };
   </script>
 </body>
