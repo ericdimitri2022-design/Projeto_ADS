@@ -1,4 +1,4 @@
-# app.py (VERSÃO FINAL COM PERMISSÃO TOTAL PARA IMAGENS)
+# app.py (VERSÃO FINAL COM CSP ABRANGENTE PARA ANÚNCIOS)
 
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 
@@ -34,42 +34,41 @@ def pagina_espera():
 def pagina_bonus():
     destino = request.args.get('destino')
     if not destino:
-        return redirect(url_for('home'))
+        pass 
     
     return render_template('bonus.html', destino=destino)
 
 @app.after_request
 def add_security_headers(response):
+    # ############# INÍCIO DA ALTERAÇÃO FINAL #############
+    # Adicionamos 'worker-src' e 'child-src' para máxima compatibilidade com anúncios
     csp_policy = {
         'default-src': ["'self'"],
         'script-src': [
             "'self'",
             "'unsafe-inline'",
-            '*.highperformanceformat.com',
-            '*.effectivegatecpm.com'
+            '*.victimfatalsentiments.com'
         ],
         'frame-src': [
             "'self'",
-            '*.highperformanceformat.com',
-            '*.effectivegatecpm.com'
+            '*.victimfatalsentiments.com'
         ],
-        # ############# INÍCIO DA ALTERAÇÃO FINAL #############
-        # Alteramos 'img-src' para permitir imagens de QUALQUER LUGAR ('*')
-        # Isso é necessário para os anúncios funcionarem corretamente.
         'img-src': [
             "'self'",
             'data:',
-            '*' # O curinga '*' permite qualquer domínio.
+            '*' # Permite imagens de qualquer lugar
         ],
-        # ############# FIM DA ALTERAÇÃO FINAL #############
         'style-src': [
             "'self'",
             "'unsafe-inline'",
-            '*.highperformanceformat.com',
-            '*.effectivegatecpm.com'
+            '*.victimfatalsentiments.com'
         ],
-        'connect-src': ['*']
+        'connect-src': ['*'],
+        # Novas diretivas para ajudar os anúncios a funcionar
+        'worker-src': ["'self'", 'blob:'],
+        'child-src': ["'self'", 'blob:']
     }
+    # ############# FIM DA ALTERAÇÃO FINAL #############
     
     csp_string = "; ".join([f"{key} {' '.join(values)}" for key, values in csp_policy.items()])
     
@@ -79,3 +78,4 @@ def add_security_headers(response):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
