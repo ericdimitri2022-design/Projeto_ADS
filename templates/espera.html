@@ -2,9 +2,10 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aguarde um momento...</title>
   
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <title>Aguarde um momento...</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   
   <script>window.adBlockerActive = true;</script>
@@ -46,43 +47,36 @@
     <footer>© 2025 EricDfpXproads. Todos os direitos reservados.</footer>
   </div>
   <script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
-
   <script>
+    // O JavaScript da sua página continua o mesmo
     document.addEventListener('DOMContentLoaded', () => {
         const bannerFixo = document.getElementById('banner-fixo-ads');
-        
-        // ##### LÓGICA DE DETECÇÃO DUPLA #####
         setTimeout(() => {
             const containerEscondido = bannerFixo.offsetHeight < 10;
-            const scriptBloqueado = window.adBlockerActive; // Esta variável vem da isca
-
+            const scriptBloqueado = window.adBlockerActive;
             if (containerEscondido || scriptBloqueado) {
                 console.log("AdBlocker DETECTADO!", {containerEscondido, scriptBloqueado});
                 document.getElementById('adblock-modal').style.display = 'flex';
             }
         }, 500);
-
-        // O resto do código continua igual
         function carregarNoticiasDaAPI() {
             const apiKey = '76f6c27aa4214115aa6a9e9552c5e27f';
             const url = `https://newsapi.org/v2/top-headlines?country=br&pageSize=20&apiKey=${apiKey}`;
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === "ok" && data.articles.length > 0) {
-                        const noticia = data.articles[Math.floor(Math.random() * data.articles.length)];
-                        document.getElementById('conteudo-titulo').textContent = noticia.title;
-                        document.getElementById('conteudo-texto').textContent = noticia.description || "Clique no card para ler a matéria completa.";
-                        document.getElementById('conteudo-fonte').textContent = `Fonte: ${noticia.source.name}`;
-                        const areaConteudo = document.getElementById('area-conteudo');
-                        areaConteudo.style.display = 'block';
-                        areaConteudo.style.cursor = 'pointer';
-                        areaConteudo.onclick = () => { window.open(noticia.url, '_blank'); };
-                    }
-                }).catch(error => {
-                    console.error("Erro ao buscar notícias:", error);
-                    document.getElementById('area-conteudo').style.display = 'none';
-                });
+            fetch(url).then(response => response.json()).then(data => {
+                if (data.status === "ok" && data.articles.length > 0) {
+                    const noticia = data.articles[Math.floor(Math.random() * data.articles.length)];
+                    document.getElementById('conteudo-titulo').textContent = noticia.title;
+                    document.getElementById('conteudo-texto').textContent = noticia.description || "Clique no card para ler a matéria completa.";
+                    document.getElementById('conteudo-fonte').textContent = `Fonte: ${noticia.source.name}`;
+                    const areaConteudo = document.getElementById('area-conteudo');
+                    areaConteudo.style.display = 'block';
+                    areaConteudo.style.cursor = 'pointer';
+                    areaConteudo.onclick = () => { window.open(noticia.url, '_blank'); };
+                }
+            }).catch(error => {
+                console.error("Erro ao buscar notícias:", error);
+                document.getElementById('area-conteudo').style.display = 'none';
+            });
         }
         carregarNoticiasDaAPI();
         const circle = document.getElementById("circle");
@@ -115,5 +109,9 @@
         });
     });
   </script>
+
+  <script src="//cdn.jsdelivr.net/npm/eruda"></script>
+  <script>eruda.init();</script>
+
 </body>
 </html>
