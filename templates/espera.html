@@ -4,9 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Aguarde um momento...</title>
-  
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-  </head>
+</head>
 <body>
   
   <div class="adblock-modal-overlay" id="adblock-modal">
@@ -50,22 +49,20 @@
     document.addEventListener('DOMContentLoaded', () => {
         const bannerFixo = document.getElementById('banner-fixo-ads');
         
-        // ##### LÓGICA DE DETECÇÃO FINAL E ROBUSTA #####
+        // Lógica de Detecção Final e Robusta
         setTimeout(() => {
             const containerEscondido = bannerFixo.offsetHeight < 10;
-            // Verifica se o container está visível, mas VAZIO (sem iframes ou ins de anúncios)
             const containerVazio = !bannerFixo.querySelector('iframe') && !bannerFixo.querySelector('ins');
 
-            // Se o container foi escondido OU se ele está visível mas vazio, acione o modal!
             if (containerEscondido || containerVazio) {
                 console.log("AdBlocker DETECTADO!", {containerEscondido, containerVazio});
                 document.getElementById('adblock-modal').style.display = 'flex';
             } else {
                 console.log("AdBlocker não detectado.");
             }
-        }, 1500); // Aumentamos o tempo para 1.5s para dar chance dos anúncios carregarem
+        }, 1500);
 
-        // O resto do código continua igual...
+        // O resto do código
         function carregarNoticiasDaAPI() {
             const apiKey = '76f6c27aa4214115aa6a9e9552c5e27f';
             const url = `https://newsapi.org/v2/top-headlines?country=br&pageSize=20&apiKey=${apiKey}`;
