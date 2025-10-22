@@ -4,7 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aguarde um momento...</title>
-  </head>
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
 <body>
   
   <div class="adblock-modal-overlay" id="adblock-modal">
@@ -59,6 +62,7 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // O restante do JavaScript continua exatamente o mesmo
         const bannerFixo = document.getElementById('banner-fixo-ads');
         setTimeout(() => {
             if (bannerFixo.offsetHeight < 10) {
@@ -67,7 +71,7 @@
         }, 500);
 
         function carregarNoticiasDaAPI() {
-            const apiKey = '76f6c27aa4214115aa6a9e9552c5e27f'; // Sua chave da API
+            const apiKey = '76f6c27aa4214115aa6a9e9552c5e27f';
             const url = `https://newsapi.org/v2/top-headlines?country=br&pageSize=20&apiKey=${apiKey}`;
 
             fetch(url)
