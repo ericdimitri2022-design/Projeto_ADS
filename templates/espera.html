@@ -18,12 +18,14 @@
           <a class="adblock-refresh-button" onclick="location.reload()">Atualizar Página</a>
       </div>
   </div>
+
   <div class="banner-fixo" id="banner-fixo-ads">
     <script type="text/javascript">
       atOptions = { 'key' : '5aed398ecdebf38696b5a0131d685b5b', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
     </script>
     <script type="text/javascript" src="//www.highperformanceformat.com/5aed398ecdebf38696b5a0131d685b5b/invoke.js"></script>
   </div>
+
   <div class="card">
     <h1 id="titulo">Preparando seu link...</h1>
     <p id="subtexto">Enquanto isso, leia uma notícia:</p>
@@ -40,17 +42,24 @@
     </div>
     <footer>© 2025 EricDfpXproads. Todos os direitos reservados.</footer>
   </div>
+
   <script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
+  
   <script>
     document.addEventListener('DOMContentLoaded', () => {
         const bannerFixo = document.getElementById('banner-fixo-ads');
+        
         setTimeout(() => {
             const containerEscondido = bannerFixo.offsetHeight < 10;
             const containerVazio = !bannerFixo.querySelector('iframe') && !bannerFixo.querySelector('ins');
             if (containerEscondido || containerVazio) {
+                console.log("AdBlocker DETECTADO!", {containerEscondido, containerVazio});
                 document.getElementById('adblock-modal').style.display = 'flex';
+            } else {
+                console.log("AdBlocker não detectado.");
             }
         }, 1500);
+
         function carregarNoticiasDaAPI() {
             const apiKey = '76f6c27aa4214115aa6a9e9552c5e27f';
             const url = `https://newsapi.org/v2/top-headlines?country=br&pageSize=20&apiKey=${apiKey}`;
@@ -95,9 +104,6 @@
         });
     });
   </script>
-
-  <script src="//cdn.jsdelivr.net/npm/eruda"></script>
-  <script>eruda.init();</script>
 
 </body>
 </html>
