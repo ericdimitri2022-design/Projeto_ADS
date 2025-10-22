@@ -10,7 +10,7 @@
       font-family: "Poppins", sans-serif;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align: items-center;
       justify-content: flex-start;
       height: 100vh;
       margin: 0;
@@ -87,14 +87,6 @@
       text-align: center;
     }
 
-    .info {
-      color: #2563eb;
-      font-size: 14px;
-      margin-top: 20px;
-      font-weight: 500;
-      text-align: center;
-    }
-
     footer {
       margin-top: 15px;
       font-size: 13px;
@@ -125,7 +117,6 @@
       100% { box-shadow: 0 0 10px rgba(79,70,229,0.3); }
     }
     
-    /* --- INÍCIO: ESTILOS DO MODAL ADBLOCK --- */
     .adblock-modal-overlay {
         position: fixed;
         top: 0;
@@ -136,7 +127,7 @@
         display: none;
         justify-content: center;
         align-items: center;
-        z-index: 10000; /* Z-index mais alto para ficar sobre o banner-fixo */
+        z-index: 10000;
         padding: 15px;
         backdrop-filter: blur(5px);
     }
@@ -202,7 +193,35 @@
     .adblock-refresh-button:hover {
         background-color: #4338ca;
     }
-    /* --- FIM: ESTILOS DO MODAL ADBLOCK --- */
+    
+    /* Estilos para o novo card de conteúdo */
+    .conteudo-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        padding: 15px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        text-align: left;
+        background-color: #f9fafb;
+    }
+    .conteudo-card h3 {
+        margin: 0 0 8px 0;
+        font-size: 16px;
+        color: #4f46e5;
+        line-height: 1.4;
+    }
+    .conteudo-card p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #333;
+    }
+    .conteudo-card small {
+        font-size: 12px;
+        color: #9ca3af;
+        margin-top: 8px;
+        display: block;
+    }
 
   </style>
 </head>
@@ -220,7 +239,9 @@
           <a class="adblock-refresh-button" onclick="location.reload()">Atualizar Página</a>
       </div>
   </div>
-  <div class="banner-fixo" id="banner-fixo-ads"> <script type="text/javascript">
+
+  <div class="banner-fixo" id="banner-fixo-ads">
+    <script type="text/javascript">
       atOptions = {
         'key' : '5aed398ecdebf38696b5a0131d685b5b',
         'format' : 'iframe',
@@ -234,16 +255,22 @@
 
   <div class="card">
     <h1 id="titulo">Preparando seu link...</h1>
-    <p id="subtexto">Por favor, aguarde um instante.</p>
+    <p id="subtexto">Enquanto isso, leia uma notícia:</p>
 
     <div id="circle" class="circle" style="--progress:0">15</div>
+    
+    <div id="area-conteudo" class="conteudo-card" style="display: none;">
+        <h3 id="conteudo-titulo">Carregando notícia...</h3>
+        <p id="conteudo-texto"></p>
+        <small id="conteudo-fonte"></small>
+    </div>
 
-    <button id="botao" class="btn">CONTINUAR PARA O DOWNLOAD</button> <div class="banner-native">
+    <button id="botao" class="btn">CONTINUAR PARA O DOWNLOAD</button>
+    
+    <div class="banner-native">
       <script async="async" data-cfasync="false" src="//pl27806509.effectivegatecpm.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
       <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
     </div>
-
-    <p class="info">⚡ Clique em qualquer lugar da página para liberar seu link mais rápido!</p>
 
     <footer>© 2025 EricDfpXproads. Todos os direitos reservados.</footer>
   </div>
@@ -252,28 +279,47 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- INÍCIO: NOVA VERIFICAÇÃO DE ADBLOCK (MÉTODO ROBUSTO) ---
         const bannerFixo = document.getElementById('banner-fixo-ads');
         setTimeout(() => {
             if (bannerFixo.offsetHeight < 10) {
-                console.log("AdBlocker DETECTADO! O banner fixo foi escondido.");
                 document.getElementById('adblock-modal').style.display = 'flex';
-            } else {
-                console.log("AdBlocker não detectado.");
             }
         }, 500);
-        // --- FIM: NOVA VERIFICAÇÃO DE ADBLOCK ---
+
+        function carregarNoticiasDaAPI() {
+            const apiKey = '76f6c27aa4214115aa6a9e9552c5e27f'; // Sua chave da API
+            const url = `https://newsapi.org/v2/top-headlines?country=br&pageSize=20&apiKey=${apiKey}`;
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "ok" && data.articles.length > 0) {
+                        const noticia = data.articles[Math.floor(Math.random() * data.articles.length)];
+                        
+                        document.getElementById('conteudo-titulo').textContent = noticia.title;
+                        document.getElementById('conteudo-texto').textContent = noticia.description || "Clique no card para ler a matéria completa.";
+                        document.getElementById('conteudo-fonte').textContent = `Fonte: ${noticia.source.name}`;
+                        
+                        const areaConteudo = document.getElementById('area-conteudo');
+                        areaConteudo.style.display = 'block';
+                        areaConteudo.style.cursor = 'pointer';
+                        areaConteudo.onclick = () => { window.open(noticia.url, '_blank'); };
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro ao buscar notícias:", error);
+                    document.getElementById('area-conteudo').style.display = 'none';
+                });
+        }
+
+        carregarNoticiasDaAPI();
 
         const circle = document.getElementById("circle");
         const botao = document.getElementById("botao");
         const titulo = document.getElementById("titulo");
         const subtexto = document.getElementById("subtexto");
-
         const urlParams = new URLSearchParams(window.location.search);
         const destino = urlParams.get('destino');
-        // A variável smartlink não estava sendo usada, então pode ser removida se desejar.
-        // const smartlink = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
-
         let contador = 15;
 
         const intervalo = setInterval(() => {
@@ -285,6 +331,7 @@
           if (contador <= 0) {
             clearInterval(intervalo);
             circle.style.display = "none";
+            document.getElementById('area-conteudo').style.display = 'none'; // Opcional: esconde a notícia
             botao.classList.add("show");
             titulo.textContent = "Seu link está pronto!";
             subtexto.textContent = "Clique abaixo para continuar.";
@@ -299,34 +346,6 @@
           }
         });
 
-        // Este script abre um pop-under em qualquer clique na página
-        document.addEventListener("click", (e) => {
-          if (!e.target.closest("#botao")) {
-            const pop = document.createElement("script");
-            pop.src = "//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js";
-            document.body.appendChild(pop);
-          }
-        });
-
-        function carregarSocialBar() {
-          if (!document.getElementById("social-bar-script")) {
-            const s = document.createElement("script");
-            s.src = "//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js";
-            s.id = "social-bar-script";
-            document.body.appendChild(s);
-          }
-        }
-
-        // A lógica de carregamento do social bar foi movida para dentro do DOMContentLoaded
-        setTimeout(carregarSocialBar, 800);
-        let tentativas = 0;
-        const verificador = setInterval(() => {
-          tentativas++;
-          if (!document.querySelector('iframe[src*="effectivegatecpm"]')) {
-            carregarSocialBar();
-          }
-          if (tentativas > 10) clearInterval(verificador);
-        }, 3000);
     });
   </script>
 </body>
