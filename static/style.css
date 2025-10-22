@@ -1,4 +1,4 @@
-/* static/style.css (VERSÃO CORRIGIDA) */
+/* static/style.css (VERSÃO COMPLETA E ATUALIZADA) */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 :root {
@@ -36,7 +36,6 @@ h1 {
 .footer {
     margin-top: 2rem; font-size: 0.9rem; color: var(--light-text-color);
 }
-/* AQUI ESTÁ A MUDANÇA PRINCIPAL */
 .botao-continuar {
     display: inline-block; /* Faz o botão ser visível por padrão */
     padding: 1rem 2rem;
@@ -54,7 +53,6 @@ h1 {
     background-color: #28b87a;
     transform: translateY(-2px);
 }
-/* Estilo para o Anúncio de Rodapé Fixo */
 .sticky-footer-ad {
     position: fixed;
     bottom: 0;
@@ -66,10 +64,120 @@ h1 {
     box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
     z-index: 1000;
 }
-/* --- Responsividade para anúncios em telas pequenas --- */
 @media (max-width: 600px) {
   iframe, ins {
     max-width: 100% !important;
     height: auto !important;
   }
+}
+
+/* =================================================================== */
+/* == CÓDIGO ADICIONAL PARA ADBLOCK E NOTÍCIAS                      == */
+/* =================================================================== */
+
+/* --- ESTILOS DO MODAL ADBLOCK --- */
+.adblock-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 15px;
+    backdrop-filter: blur(5px);
+}
+
+.adblock-modal-content {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    animation: fadeInModal 0.5s ease-out;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.adblock-modal-content .icon {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 15px auto;
+    background-color: #fee2e2;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ef4444;
+}
+
+.adblock-modal-content .icon svg {
+    width: 35px;
+    height: 35px;
+}
+
+.adblock-modal-content h2 {
+    font-size: 1.7em;
+    color: #111827;
+    margin: 0 0 10px 0;
+}
+
+.adblock-modal-content p {
+    color: #4b5563;
+    font-size: 1.0em;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.adblock-refresh-button {
+    display: inline-block;
+    background-color: #4f46e5;
+    color: #ffffff;
+    padding: 12px 30px;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.adblock-refresh-button:hover {
+    background-color: #4338ca;
+}
+
+/* Estilos para o card de conteúdo de notícias */
+.conteudo-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: left;
+    background-color: #f9fafb;
+}
+.conteudo-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    color: #4f46e5;
+    line-height: 1.4;
+}
+.conteudo-card p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+}
+.conteudo-card small {
+    font-size: 12px;
+    color: #9ca3af;
+    margin-top: 8px;
+    display: block;
 }
