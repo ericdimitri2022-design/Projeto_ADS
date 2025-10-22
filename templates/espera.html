@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aguarde...</title>
+  <title>Aguarde um momento...</title>
   <style>
     body {
       background: #f9fafb;
@@ -124,12 +124,103 @@
       50% { box-shadow: 0 0 20px rgba(79,70,229,0.5); }
       100% { box-shadow: 0 0 10px rgba(79,70,229,0.3); }
     }
+    
+    /* --- INÍCIO: ESTILOS DO MODAL ADBLOCK --- */
+    .adblock-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.75);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000; /* Z-index mais alto para ficar sobre o banner-fixo */
+        padding: 15px;
+        backdrop-filter: blur(5px);
+    }
+    
+    .adblock-modal-content {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 16px;
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        animation: fadeInModal 0.5s ease-out;
+    }
+
+    @keyframes fadeInModal {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    
+    .adblock-modal-content .icon {
+        width: 70px;
+        height: 70px;
+        margin: 0 auto 15px auto;
+        background-color: #fee2e2;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #ef4444;
+    }
+    
+    .adblock-modal-content .icon svg {
+        width: 35px;
+        height: 35px;
+    }
+
+    .adblock-modal-content h2 {
+        font-size: 1.7em;
+        color: #111827;
+        margin: 0 0 10px 0;
+    }
+    
+    .adblock-modal-content p {
+        color: #4b5563;
+        font-size: 1.0em;
+        line-height: 1.6;
+        margin-bottom: 25px;
+    }
+    
+    .adblock-refresh-button {
+        display: inline-block;
+        background-color: #4f46e5;
+        color: #ffffff;
+        padding: 12px 30px;
+        border-radius: 10px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+    
+    .adblock-refresh-button:hover {
+        background-color: #4338ca;
+    }
+    /* --- FIM: ESTILOS DO MODAL ADBLOCK --- */
+
   </style>
 </head>
 <body>
-
-  <div class="banner-fixo">
-    <script type="text/javascript">
+  
+  <div class="adblock-modal-overlay" id="adblock-modal">
+      <div class="adblock-modal-content">
+          <div class="icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.936 2.5L21.5 8.064V15.936L15.936 21.5H8.064L2.5 15.936V8.064L8.064 2.5H15.936ZM15 17H9V19H15V17ZM15 5H9V15H15V5Z"></path></svg>
+          </div>
+          <h2>AdBlocker Detectado!</h2>
+          <p>
+              Para continuar e liberar seu link, por favor, desative seu bloqueador de anúncios e atualize a página.
+          </p>
+          <a class="adblock-refresh-button" onclick="location.reload()">Atualizar Página</a>
+      </div>
+  </div>
+  <div class="banner-fixo" id="banner-fixo-ads"> <script type="text/javascript">
       atOptions = {
         'key' : '5aed398ecdebf38696b5a0131d685b5b',
         'format' : 'iframe',
@@ -147,13 +238,7 @@
 
     <div id="circle" class="circle" style="--progress:0">15</div>
 
-    <button id="botao" class="btn" disabled>CONTINUAR PARA O DOWNLOAD</button>
-    
-    <p id="adblock-notice" style="display: none; color: #ef4444; font-size: 14px; margin-top: 10px; font-weight: 500;">
-        Para liberar o botão, por favor, desative seu AdBlock.
-    </p>
-
-    <div class="banner-native">
+    <button id="botao" class="btn">CONTINUAR PARA O DOWNLOAD</button> <div class="banner-native">
       <script async="async" data-cfasync="false" src="//pl27806509.effectivegatecpm.com/fc9e45b5ad616584db5c86a8934458a0/invoke.js"></script>
       <div id="container-fc9e45b5ad616584db5c86a8934458a0"></div>
     </div>
@@ -166,101 +251,82 @@
   <script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
 
   <script>
-    const circle = document.getElementById("circle");
-    const botao = document.getElementById("botao");
-    const titulo = document.getElementById("titulo");
-    const subtexto = document.getElementById("subtexto");
-    const adblockNotice = document.getElementById("adblock-notice");
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- INÍCIO: NOVA VERIFICAÇÃO DE ADBLOCK (MÉTODO ROBUSTO) ---
+        const bannerFixo = document.getElementById('banner-fixo-ads');
+        setTimeout(() => {
+            if (bannerFixo.offsetHeight < 10) {
+                console.log("AdBlocker DETECTADO! O banner fixo foi escondido.");
+                document.getElementById('adblock-modal').style.display = 'flex';
+            } else {
+                console.log("AdBlocker não detectado.");
+            }
+        }, 500);
+        // --- FIM: NOVA VERIFICAÇÃO DE ADBLOCK ---
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const destino = urlParams.get('destino');
-    const smartlink = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
+        const circle = document.getElementById("circle");
+        const botao = document.getElementById("botao");
+        const titulo = document.getElementById("titulo");
+        const subtexto = document.getElementById("subtexto");
 
-    let contador = 15;
-    let contadorFinalizado = false;
+        const urlParams = new URLSearchParams(window.location.search);
+        const destino = urlParams.get('destino');
+        // A variável smartlink não estava sendo usada, então pode ser removida se desejar.
+        // const smartlink = "https://www.effectivegatecpm.com/t9qgb4wne?key=e2f2ef1a78fa505cacbba37ab8d66d81";
 
-    function checkAdBlock() {
-        const bait = document.createElement('div');
-        bait.className = 'ad-banner banner-ad ad-container';
-        bait.style.position = 'absolute';
-        bait.style.height = '1px';
-        bait.style.width = '1px';
-        bait.style.left = '-9999px';
-        bait.style.top = '-9999px';
-        document.body.appendChild(bait);
-        const blocked = bait.offsetHeight === 0;
-        document.body.removeChild(bait);
-        return blocked;
-    }
+        let contador = 15;
 
-    function updateButtonState() {
-        if (checkAdBlock()) {
-            botao.disabled = true;
-            if (contadorFinalizado) adblockNotice.style.display = 'block';
-        } else {
-            adblockNotice.style.display = 'none';
-            if (contadorFinalizado) botao.disabled = false;
+        const intervalo = setInterval(() => {
+          contador--;
+          const progresso = (100 - (contador * (100 / 15)));
+          circle.style.setProperty("--progress", progresso);
+          circle.textContent = contador;
+
+          if (contador <= 0) {
+            clearInterval(intervalo);
+            circle.style.display = "none";
+            botao.classList.add("show");
+            titulo.textContent = "Seu link está pronto!";
+            subtexto.textContent = "Clique abaixo para continuar.";
+          }
+        }, 1000);
+
+        botao.addEventListener("click", () => {
+          if (destino) {
+            window.location.href = `/bonus?destino=${encodeURIComponent(destino)}`;
+          } else {
+            window.location.href = "/bonus";
+          }
+        });
+
+        // Este script abre um pop-under em qualquer clique na página
+        document.addEventListener("click", (e) => {
+          if (!e.target.closest("#botao")) {
+            const pop = document.createElement("script");
+            pop.src = "//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js";
+            document.body.appendChild(pop);
+          }
+        });
+
+        function carregarSocialBar() {
+          if (!document.getElementById("social-bar-script")) {
+            const s = document.createElement("script");
+            s.src = "//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js";
+            s.id = "social-bar-script";
+            document.body.appendChild(s);
+          }
         }
-    }
 
-    const intervalo = setInterval(() => {
-      contador--;
-      const progresso = (100 - (contador * (100 / 15)));
-      circle.style.setProperty("--progress", progresso);
-      circle.textContent = contador;
-
-      if (contador <= 0) {
-        clearInterval(intervalo);
-        contadorFinalizado = true;
-        circle.style.display = "none";
-        botao.classList.add("show");
-        titulo.textContent = "Seu link está pronto!";
-        subtexto.textContent = "Clique abaixo para continuar.";
-        updateButtonState();
-      }
-    }, 1000);
-
-    setInterval(updateButtonState, 2000);
-
-    // ############# INÍCIO DA ALTERAÇÃO FINAL #############
-    botao.addEventListener("click", () => {
-      if (destino) {
-        // CORREÇÃO: Aponta para a ROTA /bonus, e não para o arquivo.
-        window.location.href = `/bonus?destino=${encodeURIComponent(destino)}`;
-      } else {
-        // CORREÇÃO: Aponta para a ROTA /bonus.
-        window.location.href = "/bonus";
-      }
-    });
-    // ############# FIM DA ALTERAÇÃO FINAL #############
-
-    document.addEventListener("click", (e) => {
-      if (!e.target.closest("#botao")) {
-        const pop = document.createElement("script");
-        pop.src = "//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js";
-        document.body.appendChild(pop);
-      }
-    });
-
-    function carregarSocialBar() {
-      if (!document.getElementById("social-bar-script")) {
-        const s = document.createElement("script");
-        s.src = "//pl27813082.effectivegatecpm.com/01/81/75/0181758b919925fc16429ef442fcd016.js";
-        s.id = "social-bar-script";
-        document.body.appendChild(s);
-      }
-    }
-
-    window.addEventListener("load", () => {
-      setTimeout(carregarSocialBar, 800);
-      let tentativas = 0;
-      const verificador = setInterval(() => {
-        tentativas++;
-        if (!document.querySelector('iframe[src*="effectivegatecpm"]')) {
-          carregarSocialBar();
-        }
-        if (tentativas > 10) clearInterval(verificador);
-      }, 3000);
+        // A lógica de carregamento do social bar foi movida para dentro do DOMContentLoaded
+        setTimeout(carregarSocialBar, 800);
+        let tentativas = 0;
+        const verificador = setInterval(() => {
+          tentativas++;
+          if (!document.querySelector('iframe[src*="effectivegatecpm"]')) {
+            carregarSocialBar();
+          }
+          if (tentativas > 10) clearInterval(verificador);
+        }, 3000);
     });
   </script>
 </body>
