@@ -55,36 +55,78 @@
     document.addEventListener('DOMContentLoaded', () => {
         const bannerFixo = document.getElementById('banner-fixo-ads');
         
-        // ##### LÓGICA DE DETECÇÃO TRIPLA (FINAL BOSS) #####
         setTimeout(() => {
-            // Teste 1: O container foi escondido pelo AdBlock?
             const containerEscondido = bannerFixo.offsetHeight < 10;
-            
-            // Teste 2: O nosso script-isca foi bloqueado?
             const scriptBloqueado = window.adBlockerActive;
-            
-            // Teste 3: O container está visível, mas vazio (o anúncio real foi bloqueado)?
             const containerVazio = !bannerFixo.querySelector('iframe') && !bannerFixo.querySelector('ins');
 
-            // Se QUALQUER UM dos testes for verdadeiro, acione o modal!
             if (containerEscondido || scriptBloqueado || containerVazio) {
                 console.log("AdBlocker DETECTADO!", {containerEscondido, scriptBloqueado, containerVazio});
                 document.getElementById('adblock-modal').style.display = 'flex';
             } else {
                 console.log("AdBlocker não detectado.");
             }
-        }, 1500); // Usamos 1.5s para dar tempo do anúncio real tentar carregar
+        }, 1500);
 
-        // O resto do seu código, que já está funcionando bem, continua aqui...
-        const carregarNoticias = async () => { /* ... sua função de notícias ... */ };
-        carregarNoticias();
-        const fetchFromNewsAPI = async () => { const apiKey = '76f6c27aa4214115aa6a9e9552c5e27f'; const url = `https://newsapi.org/v2/top-headlines?country=br&pageSize=10&apiKey=${apiKey}`; const response = await fetch(url); if (!response.ok) throw new Error(`NewsAPI falhou com status: ${response.status}`); const data = await response.json(); const article = data.articles[Math.floor(Math.random() * data.articles.length)]; return { title: article.title, description: article.description || "Clique para ler a matéria completa.", source: `Fonte: ${article.source.name}`, url: article.url }; };
-        const fetchFromGNews = async () => { const apiKey = 'c9cf618948f565395e7dadae66637268'; const url = `https://gnews.io/api/v4/top-headlines?country=br&lang=pt&max=10&apikey=${apiKey}`; const response = await fetch(url); if (!response.ok) throw new Error(`GNews falhou com status: ${response.status}`); const data = await response.json(); const article = data.articles[Math.floor(Math.random() * data.articles.length)]; return { title: article.title, description: article.description || "Clique para ler a matéria completa.", source: `Fonte: ${article.source.name}`, url: article.url }; };
+        // --- Suas chaves de API ---
+        const NEWS_API_KEY = '76f6c27aa4214115aa6a9e9552c5e27f';
+        const GNEWS_API_KEY = 'c9cf618948f565395e7dadae66637268';
+
+        // --- Nossos "Trabalhadores" de notícias ---
+        const fetchFromNewsAPI = async () => { const url = `https://newsapi.org/v2/top-headlines?country=br&pageSize=10&apiKey=${NEWS_API_KEY}`; const response = await fetch(url); if (!response.ok) throw new Error(`NewsAPI falhou com status: ${response.status}`); const data = await response.json(); const article = data.articles[Math.floor(Math.random() * data.articles.length)]; return { title: article.title, description: article.description || "Clique para ler a matéria completa.", source: `Fonte: ${article.source.name}`, url: article.url }; };
+        const fetchFromGNews = async () => { const url = `https://gnews.io/api/v4/top-headlines?country=br&lang=pt&max=10&apikey=${GNEWS_API_KEY}`; const response = await fetch(url); if (!response.ok) throw new Error(`GNews falhou com status: ${response.status}`); const data = await response.json(); const article = data.articles[Math.floor(Math.random() * data.articles.length)]; return { title: article.title, description: article.description || "Clique para ler a matéria completa.", source: `Fonte: ${article.source.name}`, url: article.url }; };
         const fetchFromG1RSS = async () => { const rssUrl = 'https://g1.globo.com/rss/g1/'; const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`; const response = await fetch(apiUrl); if (!response.ok) throw new Error("RSS2JSON (G1) falhou"); const data = await response.json(); const item = data.items[Math.floor(Math.random() * data.items.length)]; return { title: item.title, description: item.description.replace(/<[^>]*>?/gm, '').substring(0, 200) + '...', source: "Fonte: G1 (via RSS)", url: item.link }; };
-        async function carregarNoticias() { let sources = [fetchFromNewsAPI, fetchFromGNews, fetchFromG1RSS]; sources.sort(() => Math.random() - 0.5); for (const fetchFunction of sources) { try { const noticia = await fetchFunction(); document.getElementById('conteudo-titulo').textContent = noticia.title; document.getElementById('conteudo-texto').textContent = noticia.description; document.getElementById('conteudo-fonte').textContent = noticia.source; const areaConteudo = document.getElementById('area-conteudo'); areaConteudo.style.display = 'block'; areaConteudo.style.cursor = 'pointer'; areaConteudo.onclick = () => { window.open(noticia.url, '_blank'); }; return; } catch (error) { console.error(`Falha ao buscar de uma fonte: ${error.message}`); } } console.error("Todas as fontes de notícias falharam."); };
         
-        const circle = document.getElementById("circle"); const botao = document.getElementById("botao"); const titulo = document.getElementById("titulo"); const subtexto = document.getElementById("subtexto"); const urlParams = new URLSearchParams(window.location.search); const destino = urlParams.get('destino'); let contador = 15; const intervalo = setInterval(() => { contador--; const progresso = (100 - (contador * (100 / 15))); circle.style.setProperty("--progress", progresso); circle.textContent = contador; if (contador <= 0) { clearInterval(intervalo); circle.style.display = "none"; document.getElementById('area-conteudo').style.display = 'none'; botao.classList.add("show"); titulo.textContent = "Seu link está pronto!"; subtexto.textContent = "Clique abaixo para continuar."; } }, 1000);
-        botao.addEventListener("click", () => { if (destino) { window.location.href = `/bonus?destino=${encodeURIComponent(destino)}`; } else { window.location.href = "/bonus"; } });
+        // --- O "Gerente" Inteligente (versão corrigida, sem duplicatas) ---
+        const carregarNoticias = async () => {
+            let sources = [fetchFromNewsAPI, fetchFromGNews, fetchFromG1RSS];
+            sources.sort(() => Math.random() - 0.5);
+            for (const fetchFunction of sources) {
+                try {
+                    const noticia = await fetchFunction();
+                    document.getElementById('conteudo-titulo').textContent = noticia.title;
+                    document.getElementById('conteudo-texto').textContent = noticia.description;
+                    document.getElementById('conteudo-fonte').textContent = noticia.source;
+                    const areaConteudo = document.getElementById('area-conteudo');
+                    areaConteudo.style.display = 'block';
+                    areaConteudo.style.cursor = 'pointer';
+                    areaConteudo.onclick = () => { window.open(noticia.url, '_blank'); };
+                    return;
+                } catch (error) {
+                    console.error(`Falha ao buscar de uma fonte: ${error.message}`);
+                }
+            }
+            console.error("Todas as fontes de notícias falharam.");
+        };
+        
+        carregarNoticias();
+
+        // --- Lógica do contador ---
+        const circle = document.getElementById("circle");
+        const botao = document.getElementById("botao");
+        const titulo = document.getElementById("titulo");
+        const subtexto = document.getElementById("subtexto");
+        const urlParams = new URLSearchParams(window.location.search);
+        const destino = urlParams.get('destino');
+        let contador = 15;
+        const intervalo = setInterval(() => {
+          contador--;
+          const progresso = (100 - (contador * (100 / 15)));
+          circle.style.setProperty("--progress", progresso);
+          circle.textContent = contador;
+          if (contador <= 0) {
+            clearInterval(intervalo);
+            circle.style.display = "none";
+            document.getElementById('area-conteudo').style.display = 'none';
+            botao.classList.add("show");
+            titulo.textContent = "Seu link está pronto!";
+            subtexto.textContent = "Clique abaixo para continuar.";
+          }
+        }, 1000);
+        botao.addEventListener("click", () => {
+          if (destino) { window.location.href = `/bonus?destino=${encodeURIComponent(destino)}`; } 
+          else { window.location.href = "/bonus"; }
+        });
     });
   </script>
 </body>
