@@ -2,16 +2,11 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-
   <title>Aguarde um momento...</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   
-  <script>window.adBlockerActive = true;</script>
-  <script src="{{ url_for('static', filename='advert.js') }}"></script>
-
-</head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
 <body>
   
   <div class="adblock-modal-overlay" id="adblock-modal">
@@ -24,12 +19,14 @@
           <a class="adblock-refresh-button" onclick="location.reload()">Atualizar Página</a>
       </div>
   </div>
+
   <div class="banner-fixo" id="banner-fixo-ads">
     <script type="text/javascript">
       atOptions = { 'key' : '5aed398ecdebf38696b5a0131d685b5b', 'format' : 'iframe', 'height' : 50, 'width' : 320, 'params' : {} };
     </script>
     <script type="text/javascript" src="//www.highperformanceformat.com/5aed398ecdebf38696b5a0131d685b5b/invoke.js"></script>
   </div>
+
   <div class="card">
     <h1 id="titulo">Preparando seu link...</h1>
     <p id="subtexto">Enquanto isso, leia uma notícia:</p>
@@ -46,19 +43,29 @@
     </div>
     <footer>© 2025 EricDfpXproads. Todos os direitos reservados.</footer>
   </div>
+
   <script type='text/javascript' src='//pl27806574.effectivegatecpm.com/5c/d9/9e/5cd99e5c3ffff1cc40d62cb9be9886f7.js'></script>
+  
   <script>
-    // O JavaScript da sua página continua o mesmo
     document.addEventListener('DOMContentLoaded', () => {
         const bannerFixo = document.getElementById('banner-fixo-ads');
+        
+        // ##### LÓGICA DE DETECÇÃO FINAL E ROBUSTA #####
         setTimeout(() => {
             const containerEscondido = bannerFixo.offsetHeight < 10;
-            const scriptBloqueado = window.adBlockerActive;
-            if (containerEscondido || scriptBloqueado) {
-                console.log("AdBlocker DETECTADO!", {containerEscondido, scriptBloqueado});
+            // Verifica se o container está visível, mas VAZIO (sem iframes ou ins de anúncios)
+            const containerVazio = !bannerFixo.querySelector('iframe') && !bannerFixo.querySelector('ins');
+
+            // Se o container foi escondido OU se ele está visível mas vazio, acione o modal!
+            if (containerEscondido || containerVazio) {
+                console.log("AdBlocker DETECTADO!", {containerEscondido, containerVazio});
                 document.getElementById('adblock-modal').style.display = 'flex';
+            } else {
+                console.log("AdBlocker não detectado.");
             }
-        }, 500);
+        }, 1500); // Aumentamos o tempo para 1.5s para dar chance dos anúncios carregarem
+
+        // O resto do código continua igual...
         function carregarNoticiasDaAPI() {
             const apiKey = '76f6c27aa4214115aa6a9e9552c5e27f';
             const url = `https://newsapi.org/v2/top-headlines?country=br&pageSize=20&apiKey=${apiKey}`;
@@ -66,17 +73,14 @@
                 if (data.status === "ok" && data.articles.length > 0) {
                     const noticia = data.articles[Math.floor(Math.random() * data.articles.length)];
                     document.getElementById('conteudo-titulo').textContent = noticia.title;
-                    document.getElementById('conteudo-texto').textContent = noticia.description || "Clique no card para ler a matéria completa.";
+                    document.getElementById('conteudo-texto').textContent = noticia.description || "Clique para ler a matéria completa.";
                     document.getElementById('conteudo-fonte').textContent = `Fonte: ${noticia.source.name}`;
                     const areaConteudo = document.getElementById('area-conteudo');
                     areaConteudo.style.display = 'block';
                     areaConteudo.style.cursor = 'pointer';
                     areaConteudo.onclick = () => { window.open(noticia.url, '_blank'); };
                 }
-            }).catch(error => {
-                console.error("Erro ao buscar notícias:", error);
-                document.getElementById('area-conteudo').style.display = 'none';
-            });
+            }).catch(error => { console.error("Erro ao buscar notícias:", error); });
         }
         carregarNoticiasDaAPI();
         const circle = document.getElementById("circle");
@@ -101,17 +105,10 @@
           }
         }, 1000);
         botao.addEventListener("click", () => {
-          if (destino) {
-            window.location.href = `/bonus?destino=${encodeURIComponent(destino)}`;
-          } else {
-            window.location.href = "/bonus";
-          }
+          if (destino) { window.location.href = `/bonus?destino=${encodeURIComponent(destino)}`; } 
+          else { window.location.href = "/bonus"; }
         });
     });
   </script>
-
-  <script src="//cdn.jsdelivr.net/npm/eruda"></script>
-  <script>eruda.init();</script>
-
 </body>
 </html>
