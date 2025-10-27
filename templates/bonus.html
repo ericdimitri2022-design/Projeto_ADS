@@ -32,10 +32,29 @@
     window.onload = function() {
       const botaoAcesso = document.getElementById('botao-acesso');
       const urlParams = new URLSearchParams(window.location.search);
-      const destinoFinal = urlParams.get('destino');
-      const linkPadrao = "https://www.google.com"; // Lembre-se de colocar um link padrão aqui
+      const destinoParam = urlParams.get('destino'); // Pega o parâmetro (pode ser Base64 ou URL)
+      const linkPadrao = "https://www.google.com"; 
       
-      botaoAcesso.href = destinoFinal ? destinoFinal : linkPadrao;
+      let linkFinal = linkPadrao; // Começa com o padrão
+
+      if (destinoParam) {
+          try {
+              // Tenta decodificar como Base64
+              linkFinal = atob(destinoParam);
+              // Verifica se o resultado parece uma URL válida (opcional, mas bom)
+              if (!linkFinal.startsWith('http://') && !linkFinal.startsWith('https://')) {
+                  console.warn("Resultado da decodificação Base64 não parece uma URL válida:", linkFinal);
+                  linkFinal = destinoParam; // Volta a usar o parâmetro original se a decodificação falhar
+              }
+          } catch(e) {
+              // Se atob falhar, assume que já era uma URL normal
+              console.log("Parâmetro 'destino' não é Base64, usando como URL direta.");
+              linkFinal = destinoParam; 
+          }
+      }
+      
+      // Define o link final no botão
+      botaoAcesso.href = linkFinal;
     };
   </script>
 </body>
